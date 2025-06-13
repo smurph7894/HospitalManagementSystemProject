@@ -1,3 +1,11 @@
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using System;
+using System.Data;
+
 namespace HospitalManagementSystemAPI
 {
     public class Program
@@ -13,6 +21,23 @@ namespace HospitalManagementSystemAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
+
+            // *** SQL CONNECTIONS *** //
+            // EF SQL Connection
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer_EF")));
+            //ADO.NET Connection
+            builder.Services.AddTransient<IDbConnection>(sp => 
+                new SqlConnection(builder.Configuration.GetConnectionString("SqlServerADO")));
+
+            // *** MONGO CONNECTIONS *** //
+            // MongoDB Connection
+            builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("Mongo"));
+            builder.Services.AddSingleton<IMongoClient>(sp =>
+                new MongoClient(sp.GetRequiredService<IOptions<MongoSettings>>().Value.ConnectionString));
+            builder.Services.AddScoped(sp =>
+                sp.GetRequiredService<IMongoClient>()
+                    .GetDatabase(sp.GetRequiredService<IOptions<MongoSettings>>().Value.DatabaseName));
 
             var app = builder.Build();
 

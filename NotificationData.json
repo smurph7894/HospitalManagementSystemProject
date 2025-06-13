@@ -1,2 +1,2 @@
-[{"userId": ObjectId, "type": "AppointmentChanged", "payload": {}, "isRead": True, "createdAt": "2024-05-01T00:00:00Z"},
+[{"UserId": ObjectId, "type": "AppointmentChanged", "Payload": {}, "isRead": True, "CreatedAt": "2024-05-01T00:00:00Z"},
 ]

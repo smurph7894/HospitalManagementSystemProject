@@ -1,3 +1,2 @@
-[{"Date": "2024-05-01T00:00:00Z", "CityName": "New York", "Temperature": 20},
-
+[{"Username": "username", "Email": "jsmith@email.com", "Password": "abc123", "Roles": ["Doctor", "Admin"] "Permissions": ["ScheduleAppt", "viewReports", ...],  Profile: {"FullName": "John Smith", "Phone": 1234567890, "Address": "111 1st st, Seattle, WA 98101"}, "CreatedAt": "2024-05-01T00:00:00Z", "UpdatedAt": "2024-05-01T00:00:00Z" },
 ]
