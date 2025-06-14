@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HospitalManagementSystemAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HospitalManagementSystemAPI.Models
 {
@@ -7,7 +8,7 @@ namespace HospitalManagementSystemAPI.Models
         public int DepartmentId { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 2)] // Added MinimumLength property  
+        [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
 
         [StringLength(500)]

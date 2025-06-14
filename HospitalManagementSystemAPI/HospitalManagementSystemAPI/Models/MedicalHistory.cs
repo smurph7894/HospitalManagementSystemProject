@@ -9,7 +9,7 @@ namespace HospitalManagementSystemAPI.Models
         public int HistoryId { get; set; }
 
         [Required]
-        public int PatientId { get; set; }
+        public int PatientId { get; set; } // Foreign key to Patient
 
         [Required]
         [StringLength(200)] 
