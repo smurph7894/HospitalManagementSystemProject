@@ -3,11 +3,13 @@
     "Username": "dr.john",
     "Email": "dr.john@email.com",
     "Password": "abc123",
-    "Role": "Doctor",
-    "Permissions": ["Patients", "Appointments", "Vitals", "Reports", "Inventory"],
-    "FullName": "Dr. John Smith",
-    "Phone": "1234567890",
-    "Address": "Seattle, WA",
+    "Roles": ["Doctor"],
+    "Permissions": ["ScheduleApp", "ViewMedicalHistory", "ManageInventory", "AccessReports", "ViewVitals"],
+    "Profile": {
+      "FullName": "Dr. John Smith",
+      "Phone": "1234567890",
+      "Address": "Seattle, WA"
+    },
     "CreatedAt": "2024-05-01T00:00:00Z",
     "UpdatedAt": "2024-05-01T00:00:00Z"
   },
@@ -15,11 +17,13 @@
     "Username": "nurse.anna",
     "Email": "nurse.anna@email.com",
     "Password": "abc456",
-    "Role": "Nurse",
-    "Permissions": ["Patients", "Vitals", "Appointments"],
-    "FullName": "Anna Lopez",
-    "Phone": "1234567891",
-    "Address": "Seattle, WA",
+    "Roles": ["Nurse"],
+    "Permissions": ["ViewMedicalHistory", "ViewVitals", "ManageAdmissions"],
+    "Profile": {
+      "FullName": "Anna Lopez",
+      "Phone": "1234567891",
+      "Address": "Seattle, WA"
+    },
     "CreatedAt": "2024-05-01T00:00:00Z",
     "UpdatedAt": "2024-05-01T00:00:00Z"
   },
@@ -27,11 +31,13 @@
     "Username": "admin.jane",
     "Email": "admin.jane@email.com",
     "Password": "abc789",
-    "Role": "Admin",
-    "Permissions": ["Users", "Reports", "Inventory"],
-    "FullName": "Jane Doe",
-    "Phone": "1234567892",
-    "Address": "Seattle, WA",
+    "Roles": ["Administrator"],
+    "Permissions": ["ManageStaff", "ManageInventory", "AccessReports", "ManageUsers", "ManageDepartments"],
+    "Profile": {
+      "FullName": "Jane Doe",
+      "Phone": "1234567892",
+      "Address": "Seattle, WA"
+    },
     "CreatedAt": "2024-05-01T00:00:00Z",
     "UpdatedAt": "2024-05-01T00:00:00Z"
   },
@@ -39,11 +45,13 @@
     "Username": "patient.bob",
     "Email": "patient.bob@email.com",
     "Password": "abc321",
-    "Role": "Patient",
-    "Permissions": ["MyRecords", "Appointments"],
-    "FullName": "Bob Brown",
-    "Phone": "1234567893",
-    "Address": "Seattle, WA",
+    "Roles": ["Patient"],
+    "Permissions": ["ScheduleApp", "ViewMedicalHistory"],
+    "Profile": {
+      "FullName": "Bob Brown",
+      "Phone": "1234567893",
+      "Address": "Seattle, WA"
+    },
     "CreatedAt": "2024-05-01T00:00:00Z",
     "UpdatedAt": "2024-05-01T00:00:00Z"
   }
