@@ -57,6 +57,8 @@ namespace HospitalManagementSystemClient
             //shows the form object stored in the variable registerForm
             registerForm.ShowDialog();
 
+            this.Show(); // Bring back login form when registration closes
+
         }
 
       
