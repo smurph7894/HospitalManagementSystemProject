@@ -1,5 +1,3 @@
-create database HospitalManagementDB;
-
 use HospitalManagementDB;
 
 CREATE TABLE dbo.Patients (
@@ -48,7 +46,7 @@ CREATE TABLE dbo.Staff(
 	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	UpdatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT FK_Staff_Departments
-		FOREIGN KEY(DepartmentId) Reference dbo.Departments(DepartmentId)
+		FOREIGN KEY(DepartmentId) REFERENCES dbo.Departments(DepartmentId)
 );
 
 CREATE TABLE dbo.Appointments (
@@ -147,8 +145,5 @@ CREATE TABLE dbo.ReportsHistory (
         FOREIGN KEY(GeneratedBy) REFERENCES dbo.Staff(StaffId)
 );
 
--- Insert sample data into Locations table
-INSERT INTO Locations (CityName, Latitude, Longitude) VALUES ('New York', 40.7128, -74.0060);
 
-{"CreatedAt": "2024-05-01T00:00:00Z", "UpdatedAt": "2024-05-01T00:00:00Z", "Permissions": "Admin", "Username": "username", "Password": "abc123", "firstName": "John", "LastName": "Smith", "DOB": "2024-05-01T00:00:00Z", "Position": "Admin"},
-]
+

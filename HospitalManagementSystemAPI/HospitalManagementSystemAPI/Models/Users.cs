@@ -1,6 +1,17 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.Security;
 using System.Text.Json.Serialization;
+//Nyambura Note: 
+// This Users.cs model was originally created for use in the API project, 
+// but due to framework compatibility limitations between the API (.NET Core) 
+// and the Client (WinForms, .NET Framework), it could not be referenced directly.
+//
+// A separate, simplified version of the Users model was recreated in the Client project
+// to enable user authentication via MongoDB. 
+//
+// This file can be deleted or retained only for reference or future integration 
+// if both projects are unified under a compatible .NET framework.
+
 
 namespace HospitalManagementSystemAPI.Models
 {
@@ -37,13 +48,17 @@ namespace HospitalManagementSystemAPI.Models
         [BsonElement("Username"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public string Username { get; set; }
 
+        [BsonElement("Email"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
+        public string Email { get; set; }
+
         [BsonElement("Password"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public string Password { get; set; }
 
-        [BsonElement("Roles"), BsonRepresentation(MongoDB.Bson.BsonType.Array)]
+
+        [BsonElement("Roles"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public List<Role> Roles { get; set; }
 
-        [BsonElement("Permissions"), BsonRepresentation(MongoDB.Bson.BsonType.Array)]
+        [BsonElement("Permissions"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public List<Permission> Permissions { get; set; }
 
         [BsonElement("Profile")]
