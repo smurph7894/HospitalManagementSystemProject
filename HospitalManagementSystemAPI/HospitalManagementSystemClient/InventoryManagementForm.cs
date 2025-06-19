@@ -360,6 +360,17 @@ namespace HospitalManagementSystemClient
             nup_reorderLevel.Value = nup_reorderLevel.Minimum;
 
         }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+           
+            // Pass the full Users object to the Dashboard form (or Form1)
+            var dashBoardForm = new DashBoardForm(_loggedInUser);
+            dashBoardForm.Show();
+
+        }
     }
 
     //Inventory Model with Validation attributes

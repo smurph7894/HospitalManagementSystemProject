@@ -4,6 +4,7 @@ namespace HospitalManagementSystemAPI.Models
 {
     public class Admission
     {
+        [Key]
         public int AdmissionId { get; set; }
 
         [Required]

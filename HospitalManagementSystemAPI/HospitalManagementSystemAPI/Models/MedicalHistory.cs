@@ -6,6 +6,7 @@ namespace HospitalManagementSystemAPI.Models
 {
     public class MedicalHistory
     {
+        [Key]
         public int HistoryId { get; set; }
 
         [Required]

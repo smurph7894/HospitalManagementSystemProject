@@ -14,6 +14,7 @@ namespace HospitalManagementSystemAPI.Models
 
     public class Vitals
     {
+        [Key]
         public int VitalId { get; set; }
         [Required]
         public int PatientId { get; set; }
