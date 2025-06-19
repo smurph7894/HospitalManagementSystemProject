@@ -56,14 +56,14 @@
             // 
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 16;
-            this.listBox.Location = new System.Drawing.Point(318, 130);
+            this.listBox.Location = new System.Drawing.Point(53, 130);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(120, 84);
+            this.listBox.Size = new System.Drawing.Size(695, 292);
             this.listBox.TabIndex = 2;
             // 
             // btn_send
             // 
-            this.btn_send.Location = new System.Drawing.Point(114, 164);
+            this.btn_send.Location = new System.Drawing.Point(513, 69);
             this.btn_send.Name = "btn_send";
             this.btn_send.Size = new System.Drawing.Size(75, 23);
             this.btn_send.TabIndex = 3;

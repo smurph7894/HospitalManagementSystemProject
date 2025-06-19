@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using System;
 using System.Data;
 
+
 namespace HospitalManagementSystemAPI
 {
     public class Program
@@ -22,11 +23,12 @@ namespace HospitalManagementSystemAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
-            // *** SQL CONNECTIONS *** //
+            // *** SQL CONNECTIONS 
             // EF SQL Connection
-            //Nyamburas: Had to comment this code so that i could test Login and registrtaion form 06/17/2025
-            //builder.Services.AddDbContext<AppDbContext>(options =>
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer_EF")));
+            
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer_EF")));
             //ADO.NET Connection
             builder.Services.AddTransient<IDbConnection>(sp => 
                 new SqlConnection(builder.Configuration.GetConnectionString("SqlServerADO")));
