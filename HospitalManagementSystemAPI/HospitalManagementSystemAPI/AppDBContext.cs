@@ -10,7 +10,7 @@ namespace HospitalManagementSystemAPI
         public DbSet<Appointment> Appointment { get; set; }
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<InventoryItem> inventoryItems { get; set; }
+        public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
         public DbSet<MedicalHistory> MedicalHistories { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -20,9 +20,43 @@ namespace HospitalManagementSystemAPI
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Product>()
-            //    .Property(e => e.Price)
-            //    .HasPrecision(10, 2);
+            //Admissions
+            modelBuilder.Entity<Admission>()
+                .Property(e => e.AdmittedAt).HasConversion(
+                    v => v,
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            modelBuilder.Entity<Admission>()
+                .Property(e => e.DischargedAt).HasConversion(
+                    v => v,
+                    v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : (DateTime?)null);
+
+            modelBuilder.Entity<Admission>()
+                .Property(e => e.DischargeBy).HasConversion(
+                   v => v,
+                   v => !v.HasValue ? (int?)null : v.Value);
+
+            //Appointments - duration default handled in Appointment class
+            modelBuilder.Entity<Appointment>()
+                .Property(e => e.ScheduledAt).HasConversion(
+                    v => v,
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            modelBuilder.Entity<Appointment>()
+                .Property(e => e.CreatedAt).HasConversion(
+                    v => v,
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            modelBuilder.Entity<Appointment>()
+                .Property(e => e.UpdatedAt).HasConversion(
+                    v => v,
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            //Beds
+            modelBuilder.Entity<Bed>()
+                .Property(e => e.CreatedAt).HasConversion(
+                    v => v,
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
         }
     }
 }
