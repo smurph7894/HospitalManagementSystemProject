@@ -26,7 +26,7 @@ namespace HospitalManagementSystemAPI.Models
         public int PerformedBy { get; set; } // ID of the staff member who performed the transaction
 
         [Required]
-        public DateTime TransactionDateTime { get; set; } = DateTime.Now;
+        public DateTime TransactionDate { get; set; } = DateTime.Now;
 
         [StringLength(500, ErrorMessage = "Remarks cannot exceed 500 characters.")]
         public string Remarks { get; set; }
