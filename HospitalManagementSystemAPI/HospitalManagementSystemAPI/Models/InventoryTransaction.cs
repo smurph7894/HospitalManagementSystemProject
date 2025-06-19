@@ -11,6 +11,7 @@ namespace HospitalManagementSystemAPI.Models
 
     public class InventoryTransaction
     {
+        [Key]
         public int TransactionId { get; set; }
 
         [Required] 

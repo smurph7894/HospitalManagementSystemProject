@@ -5,6 +5,8 @@ namespace HospitalManagementSystemAPI
 {
     public class AppDbContext : DbContext
     {
+        internal readonly object InventoryItems;
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Admission> Admissions { get; set; }
         public DbSet<Appointment> Appointment { get; set; }
