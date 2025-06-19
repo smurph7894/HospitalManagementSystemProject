@@ -216,6 +216,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DashBoardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DashBoardForm.Designer.cs">
+      <DependentUpon>DashBoardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,7 +246,6 @@
       <DependentUpon>InventoryManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MongoDbService.cs" />
-    <Compile Include="PermissionHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterForm.cs">
@@ -250,6 +255,9 @@
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Users.cs" />
+    <EmbeddedResource Include="DashBoardForm.resx">
+      <DependentUpon>DashBoardForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

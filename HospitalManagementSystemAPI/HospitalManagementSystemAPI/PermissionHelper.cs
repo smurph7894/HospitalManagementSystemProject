@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using HospitalManagementSystemClient.Models;
+using HospitalManagementSystemAPI.Models;
 
 
-namespace HospitalManagementSystemClient
+namespace HospitalManagementSystemAPI
 {
     public static class PermissionHelper
     {
         public static List<Permission> GetPermissionsForRole(Role role)
         {
-            List<Permission> permissions = new List<Permission>();
+            var permissions = new List<Permission>();
 
             switch (role)
             {
@@ -43,6 +43,21 @@ namespace HospitalManagementSystemClient
             }
 
             return permissions;
+        }
+
+        //Aggregate permissions from multiple roles
+        public static List<Permission> GetPermissionsForRoles(List<Role> roles)
+        {
+            var permissions = new HashSet<Permission>();
+            foreach (var role in roles)
+            {
+                var rolePerms = GetPermissionsForRole(role);
+                foreach (var perm in rolePerms)
+                {
+                    permissions.Add(perm);
+                }
+            }
+            return new List<Permission>(permissions);
         }
     }
 }
