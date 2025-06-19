@@ -4,6 +4,7 @@ namespace HospitalManagementSystemAPI.Models
 {
     public class ReportsHistory
     {
+        [Key]
         public int ReportId { get; set; }
 
         [Required]

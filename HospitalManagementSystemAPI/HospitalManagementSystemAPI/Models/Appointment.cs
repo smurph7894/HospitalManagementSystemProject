@@ -12,6 +12,7 @@ namespace HospitalManagementSystemAPI.Models
     }
     public class Appointment
     {
+        [Key]
         public int AppointmentId { get; set; }
 
         [Required]

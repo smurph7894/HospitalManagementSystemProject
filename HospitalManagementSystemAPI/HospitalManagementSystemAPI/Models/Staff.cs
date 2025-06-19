@@ -4,6 +4,7 @@ namespace HospitalManagementSystemAPI.Models
 {
     public class Staff
     {
+        [Key]
         public int StaffId { get; set; }
 
         [StringLength(24)]

@@ -24,7 +24,7 @@ namespace HospitalManagementSystemAPI.Controllers
         [HttpGet("all")]
         public async Task<ActionResult>GetInventory()
         {
-            var inventory = await _context.inventoryItems.ToListAsync();
+            var inventory = await _context.InventoryItems.ToListAsync();
             return Ok(inventory);
         }
 
@@ -33,7 +33,7 @@ namespace HospitalManagementSystemAPI.Controllers
         public async Task<IActionResult> AddInventory([FromBody] InventoryItem item)
         {
             item.UpdatedAt = DateTime.UtcNow;
-            _context.inventoryItems.Add(item);
+            _context.InventoryItems.Add(item);
             await _context.SaveChangesAsync();
 
             await _hubContext.Clients.All.SendAsync("ReceiveInventoryUpdate", item);
@@ -46,7 +46,7 @@ namespace HospitalManagementSystemAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateItem(int id, [FromBody] InventoryItem updatedItem)
         {
-            var item = await _context.inventoryItems.FindAsync(id);
+            var item = await _context.InventoryItems.FindAsync(id);
             if (item == null)
                 return NotFound();
 
@@ -67,11 +67,11 @@ namespace HospitalManagementSystemAPI.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteItem(int id)
         {
-            var item = await _context.inventoryItems.FindAsync(id);
+            var item = await _context.InventoryItems.FindAsync(id);
             if (item == null)
                 return NotFound();
 
-            _context.inventoryItems.Remove(item);
+            _context.InventoryItems.Remove(item);
             await _context.SaveChangesAsync();
             await _hubContext.Clients.All.SendAsync("ReceiveInventoryDeletion", item);
 

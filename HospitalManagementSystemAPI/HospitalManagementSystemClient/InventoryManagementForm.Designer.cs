@@ -185,6 +185,7 @@
             this.btn_back.TabIndex = 7;
             this.btn_back.Text = "Back";
             this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
             // btn_signout
             // 

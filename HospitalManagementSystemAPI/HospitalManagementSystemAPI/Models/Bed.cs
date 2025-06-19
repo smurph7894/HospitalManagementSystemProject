@@ -11,6 +11,7 @@ namespace HospitalManagementSystemAPI.Models
     }
     public class Bed
     {
+        [Key]
         public int BedId { get; set; }
 
         [Required]
