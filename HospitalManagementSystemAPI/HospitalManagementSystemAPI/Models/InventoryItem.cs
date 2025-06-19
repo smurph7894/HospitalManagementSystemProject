@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace HospitalManagementSystemAPI.Models;
 
 public class InventoryItem
 {
+    [Key]
     public int ItemId { get; set; }
 
     [Required]
