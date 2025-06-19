@@ -34,7 +34,7 @@ namespace HospitalManagementSystemAPI.Models
     {
         Doctor,
         Nurse,
-        AdmininistrativeStaff,
+        AdministrativeStaff,
         Patient,
         Administrator
     }

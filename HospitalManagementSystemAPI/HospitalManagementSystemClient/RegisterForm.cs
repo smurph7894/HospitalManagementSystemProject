@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HospitalManagementSystemClient.Models;
 using HospitalManagementSystemClient.Services;
+using Newtonsoft.Json;
 
 //NyamburaS
 
@@ -18,7 +20,7 @@ namespace HospitalManagementSystemClient
     public partial class RegisterForm : Form
     {
         //MongoDb service used to interact with 'userData' collection in HospitalManegemtnDB
-        private MongoDbService _mongoService;
+        private readonly MongoDbService _mongoService;
         public RegisterForm()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace HospitalManagementSystemClient
         }
 
         //Register Button CLick Event
-        private void btn_register_Click(object sender, EventArgs e)
+        private  void btn_register_Click(object sender, EventArgs e)
         {
             //Gathers and trims input fields 
             var username = txb_username.Text.Trim();
@@ -65,29 +67,46 @@ namespace HospitalManagementSystemClient
             //convert the selected item string back to the Role enum
             Role selectedRole = (Role)Enum.Parse(typeof(Role), comboBox_role.SelectedItem.ToString());
 
-            
-
-            //Creates user object from insertion 
-            var newUser = new Users
+            var registrationDto = new
             {
-                Username = txb_username.Text,
+                Username = txb_username.Text.Trim(),
                 Password = txb_password.Text,
                 Email = txb_email.Text.Trim(),
-                Roles = new List<Role> { selectedRole },
-                //assigns permission based on selected role 
-                Permissions = PermissionHelper.GetPermissionsForRole(selectedRole).Distinct().ToList(),
-                Profile = new Profile
+                Roles = new List<string> { selectedRole.ToString() },
+                Profile = new
                 {
                     FullName = txb_fullname.Text,
                     Phone = txb_phone.Text,
                     Address = txb_address.Text
-                },
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                }
             };
 
-            _mongoService.RegisterUser(newUser);
-            MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string json = JsonConvert.SerializeObject(registrationDto); // serialization
+
+            using (var client = new HttpClient())
+            {
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var response = client.PostAsync("https://yourapiurl/api/users/register", content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        string error = response.Content.ReadAsStringAsync().Result;
+                        MessageBox.Show("Registration failed: " + error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
             this.Close(); //closes registration form
         }
 

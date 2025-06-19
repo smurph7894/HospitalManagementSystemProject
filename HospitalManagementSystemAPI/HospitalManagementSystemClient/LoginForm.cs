@@ -20,6 +20,7 @@ namespace HospitalManagementSystemClient
         //login button click event
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //reads and trims user input
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
@@ -33,24 +34,29 @@ namespace HospitalManagementSystemClient
             //attempting to fetch user by their username
             var user = _mongoDbService.FindUserByUsername(username);
 
-            //validating credentials
+            //validating credentials, Checks if user exists and password matches
             if (user != null && user.Password == password)
             {
                 MessageBox.Show($"Welcome {user.Profile.FullName}!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // TODO: Navigate to main dashboard or next form
+                
+                //Declare loggedInUser and pass to dashboard
+                var loggedInUser = user;
+
+                this.Hide();
+
+                // Pass the full Users object to the Dashboard form (or Form1)
+                var dashBoardForm = new DashBoardForm(user);
+                dashBoardForm.Show();
             }
             else
-            {
+            { 
+                //error is shown if authentication fails
                 MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             this.Hide(); //hide the loginform temporarily 
 
-            //Creates a new object from the class called registerForm and name the variable that holds it RegisterForm.
-            InventoryManagementForm inventoryManagementForm = new InventoryManagementForm();
-
-            //shows the form object stored in the variable registerForm
-            inventoryManagementForm.ShowDialog();
+            
         }
 
         //navigating to registration form
