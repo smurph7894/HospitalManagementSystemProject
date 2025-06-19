@@ -1,4 +1,10 @@
-use HospitalManagementDB;
+-- Create Database
+CREATE DATABASE HospitalManagementDB;
+Go
+
+-- Use the created database
+USE HospitalManagementDB;
+Go
 
 CREATE TABLE dbo.Patients (
     PatientId INT PRIMARY KEY IDENTITY,
@@ -16,6 +22,7 @@ CREATE TABLE dbo.Patients (
 	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	UpdatedAt DATETIME NOT NULL DEFAULT GETDATE()
 );
+GO
 
 CREATE TABLE dbo.MedicalHistories (
 	HistoryId INT IDENTITY PRIMARY KEY,
@@ -27,12 +34,14 @@ CREATE TABLE dbo.MedicalHistories (
 	CONSTRAINT FK_MedicalHistories_Patients
 		FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
 );
+GO
 
 CREATE TABLE dbo.Departments (
 	DepartmentID INT IDENTITY PRIMARY KEY,
 	Name NVARCHAR(100) NOT NULL UNIQUE,
 	Description NVARCHAR(500) Null
 );
+GO
 
 CREATE TABLE dbo.Staff(
 	StaffId INT IDENTITY PRIMARY KEY,
@@ -48,6 +57,7 @@ CREATE TABLE dbo.Staff(
 	CONSTRAINT FK_Staff_Departments
 		FOREIGN KEY(DepartmentId) REFERENCES dbo.Departments(DepartmentId)
 );
+GO
 
 CREATE TABLE dbo.Appointments (
     AppointmentId      INT             IDENTITY PRIMARY KEY,
@@ -67,6 +77,7 @@ CREATE TABLE dbo.Appointments (
     CONSTRAINT FK_Appointments_CreatedBy
         FOREIGN KEY(CreatedBy) REFERENCES dbo.Staff(StaffId)
 );
+GO
 
 CREATE TABLE dbo.InventoryItems (
     ItemId             INT             IDENTITY PRIMARY KEY,
@@ -79,6 +90,7 @@ CREATE TABLE dbo.InventoryItems (
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE()
 );
+GO
 
 CREATE TABLE dbo.InventoryTransactions (
     TransactionId      INT             IDENTITY PRIMARY KEY,
@@ -93,6 +105,7 @@ CREATE TABLE dbo.InventoryTransactions (
     CONSTRAINT FK_InvTrans_Staff
         FOREIGN KEY(PerformedBy) REFERENCES dbo.Staff(StaffId)
 );
+GO
 
 CREATE TABLE dbo.Beds (
     BedId          INT             IDENTITY PRIMARY KEY,
@@ -101,6 +114,7 @@ CREATE TABLE dbo.Beds (
     Status         NVARCHAR(20)    NOT NULL,  -- 'Available','Occupied','Maintenance'
     CONSTRAINT UQ_Beds_WardBed UNIQUE (Ward, BedNumber)
 );
+GO
 
 CREATE TABLE dbo.Admissions (
     AdmissionId    INT             IDENTITY PRIMARY KEY,
@@ -119,6 +133,7 @@ CREATE TABLE dbo.Admissions (
     CONSTRAINT FK_Admissions_DischargeBy
         FOREIGN KEY(DischargeBy) REFERENCES dbo.Staff(StaffId)
 );
+GO
 
 CREATE TABLE dbo.Vitals (
     VitalId        INT             IDENTITY PRIMARY KEY,
@@ -133,6 +148,7 @@ CREATE TABLE dbo.Vitals (
     CONSTRAINT FK_Vitals_Staff
         FOREIGN KEY(RecordedBy) REFERENCES dbo.Staff(StaffId)
 );
+GO
 
 CREATE TABLE dbo.ReportsHistory (
     ReportId       INT             IDENTITY PRIMARY KEY,
@@ -144,6 +160,11 @@ CREATE TABLE dbo.ReportsHistory (
     CONSTRAINT FK_Reports_Staff
         FOREIGN KEY(GeneratedBy) REFERENCES dbo.Staff(StaffId)
 );
+GO
 
-
-
+-- Insert dummy data into the Products table
+--INSERT INTO Products (ProductName, Price) VALUES ('Smartphone', 499.99);
+--INSERT INTO Products (ProductName, Price) VALUES ('Laptop', 899.99);
+--INSERT INTO Products (ProductName, Price) VALUES ('Headphones', 99.99);
+--INSERT INTO Products (ProductName, Price) VALUES ('Tablet', 299.99);
+GO
