@@ -44,6 +44,13 @@ namespace HospitalManagementSystemClient
                 MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            this.Hide(); //hide the loginform temporarily 
+
+            //Creates a new object from the class called registerForm and name the variable that holds it RegisterForm.
+            InventoryManagementForm inventoryManagementForm = new InventoryManagementForm();
+
+            //shows the form object stored in the variable registerForm
+            inventoryManagementForm.ShowDialog();
         }
 
         //navigating to registration form

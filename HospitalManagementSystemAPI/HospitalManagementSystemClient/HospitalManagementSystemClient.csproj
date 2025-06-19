@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -126,6 +128,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.Json, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.9.0.6\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.ServerSentEvents, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.ServerSentEvents.9.0.6\lib\net462\System.Net.ServerSentEvents.dll</HintPath>
     </Reference>
@@ -214,11 +219,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HospitalManagementDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalManagementDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryApiService.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryManagementForm.Designer.cs">
+      <DependentUpon>InventoryManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MongoDbService.cs" />
     <Compile Include="PermissionHelper.cs" />
@@ -237,6 +254,9 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InventoryManagementForm.resx">
+      <DependentUpon>InventoryManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -249,6 +269,17 @@
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="HospitalManagementDBDataSet.xsc">
+      <DependentUpon>HospitalManagementDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HospitalManagementDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HospitalManagementDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HospitalManagementDBDataSet.xss">
+      <DependentUpon>HospitalManagementDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
