@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
+
 namespace HospitalManagementSystemAPI
 {
     public class MongoSettings 

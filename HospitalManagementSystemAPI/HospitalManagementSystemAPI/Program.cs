@@ -24,8 +24,9 @@ namespace HospitalManagementSystemAPI
 
             // *** SQL CONNECTIONS *** //
             // EF SQL Connection
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer_EF")));
+            //Nyamburas: Had to comment this code so that i could test Login and registrtaion form 06/17/2025
+            //builder.Services.AddDbContext<AppDbContext>(options =>
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer_EF")));
             //ADO.NET Connection
             builder.Services.AddTransient<IDbConnection>(sp => 
                 new SqlConnection(builder.Configuration.GetConnectionString("SqlServerADO")));
