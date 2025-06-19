@@ -1,26 +1,27 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.AspNetCore.SignalR.Client;
+using HospitalManagementSystemClient.Models;
 
 namespace HospitalManagementSystemClient
 {
     public partial class Form1 : Form
     {
         private HubConnection connection;
-        public Form1()
+        private readonly Users _loggedInUser;
+        public Form1(Users user)
         {
             InitializeComponent();
-            IntializeSignalR();
+            _loggedInUser = user;
+
+            InitializeSignalR();
+
+            this.Text = $"Chat - Logged in as {_loggedInUser.Username}";
+            txtB_user.Text = _loggedInUser.Username;
         }
 
-        private async void IntializeSignalR()
+        private async void InitializeSignalR()
         {
             connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5277/chathub") // Adjust the URL to your API endpoint
@@ -49,7 +50,7 @@ namespace HospitalManagementSystemClient
 
         private async void btn_send_Click(object sender, EventArgs e)
         {
-            string user = txtB_user.Text;
+            string user = _loggedInUser.Username;
             string message = txtB_message.Text;
 
             try

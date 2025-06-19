@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HospitalManagementSystemClient.Models;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -20,13 +21,16 @@ namespace HospitalManagementSystemClient
     public partial class InventoryManagementForm : Form
     {
         private HubConnection connection;
-        private readonly string apiBaseUrl = "http://localhost:5277/api/Inventory"; 
-        public InventoryManagementForm()
+        private readonly string apiBaseUrl = "http://localhost:5277/api/Inventory";
+        private Users _loggedInUser;
+        public InventoryManagementForm(Users user)
         {
             InitializeComponent();
             InitializeGrid();
             InitializeSignalR();
             LoadInventory();
+            _loggedInUser = user;
+
             dgv_Inventory.SelectionChanged += dgv_Inventory_SelectionChanged;
 
 
