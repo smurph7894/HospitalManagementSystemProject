@@ -6,18 +6,6 @@ Go
 USE HospitalManagementDB;
 Go
 
--- Creates the login DEV420_User with password 'abc123'.
-CREATE LOGIN DEV420_User
-WITH PASSWORD = 'abc123';
-GO
-
--- Creates a database user for the login created previously. 
-CREATE USER DEV420_User
-FOR LOGIN DEV420_User;
-GO
-
---Update their permissions to owner in DB security settings
-
 CREATE TABLE dbo.CarePlans (
 	CarePlanId INT IDENTITY PRIMARY KEY,
 	PatientId INT NOT NULL,

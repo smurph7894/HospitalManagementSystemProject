@@ -1,10 +1,11 @@
--- Create Database
-CREATE DATABASE HospitalManagementDB;
-Go
+module.exports = `
+--create DB if missing
+IF DB_ID('HospitalManagementDB') IS NULL
+    CREATE DATABASE HospitalManagementDB;
+GO
 
--- Use the created database
 USE HospitalManagementDB;
-Go
+GO
 
 -- Creates the login DEV420_User with password 'abc123'.
 CREATE LOGIN DEV420_User
@@ -16,8 +17,8 @@ CREATE USER DEV420_User
 FOR LOGIN DEV420_User;
 GO
 
---Update their permissions to owner in DB security settings
-
+IF OBJECT_ID('dbo.CarePlans', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.CarePlans (
 	CarePlanId INT IDENTITY PRIMARY KEY,
 	PatientId INT NOT NULL,
@@ -30,8 +31,11 @@ CREATE TABLE dbo.CarePlans (
 	CONSTRAINT FK_CarePlan_Patients
 		FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.CarePlanUpdates', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.CarePlanUpdates (
 	CarePlanUpdateId INT IDENTITY PRIMARY KEY,
 	CarePlanId INT NOT NULL,
@@ -43,11 +47,14 @@ CREATE TABLE dbo.CarePlanUpdates (
 	CONSTRAINT FK_CarePlanUpdates_Appointments
 		FOREIGN KEY(AppointmentId) REFERENCES dbo.Appointments(AppointmentId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Patients', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Patients (
     PatientId INT PRIMARY KEY IDENTITY,
-	PatientOrgId NVARCHAR(500) NOT NULL, --ID connected to mongoDB
+	PatientOrgId NVARCHAR(500) NOT NULL, 
     FirstName NVARCHAR(100) NOT NULL,
 	LastName NVARCHAR(100) NOT NULL,
     DOB DATE NOT NULL,
@@ -62,15 +69,21 @@ CREATE TABLE dbo.Patients (
 	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	UpdatedAt DATETIME NOT NULL DEFAULT GETDATE()
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Departments', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Departments (
 	DepartmentID INT IDENTITY PRIMARY KEY,
 	Name NVARCHAR(100) NOT NULL UNIQUE,
 	Description NVARCHAR(500) Null
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Staff', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Staff(
 	StaffId INT IDENTITY PRIMARY KEY,
 	UserRef VARCHAR(24) NULL,
@@ -86,17 +99,20 @@ CREATE TABLE dbo.Staff(
 	CONSTRAINT FK_Staff_Departments
 		FOREIGN KEY(DepartmentId) REFERENCES dbo.Departments(DepartmentId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Appointments', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Appointments (
     AppointmentId      INT             IDENTITY PRIMARY KEY,
     PatientId          INT             NOT NULL,
     StaffId            INT             NOT NULL,
     ScheduledAt        DATETIME        NOT NULL,
     DurationMinutes    INT             NULL,
-    Status             NVARCHAR(50)    NOT NULL,  -- e.g. 'Scheduled','Completed','Cancelled'
+    Status             NVARCHAR(50)    NOT NULL, 
     Reason             NVARCHAR(500)   NULL,
-    CreatedBy          INT             NOT NULL,  -- who created the appt
+    CreatedBy          INT             NOT NULL, 
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     CONSTRAINT FK_Appointments_Patients
@@ -106,8 +122,11 @@ CREATE TABLE dbo.Appointments (
     CONSTRAINT FK_Appointments_CreatedBy
         FOREIGN KEY(CreatedBy) REFERENCES dbo.Staff(StaffId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.InventoryItems', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.InventoryItems (
     ItemId             INT             IDENTITY PRIMARY KEY,
     Name               NVARCHAR(200)   NOT NULL,
@@ -119,13 +138,16 @@ CREATE TABLE dbo.InventoryItems (
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE()
 );
+END
 GO
 
+IF OBJECT_ID('dbo.InventoryTransactions', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.InventoryTransactions (
     TransactionId      INT             IDENTITY PRIMARY KEY,
     ItemId             INT             NOT NULL,
     ChangeQuantity     INT             NOT NULL,
-    TransactionType    NVARCHAR(50)    NOT NULL,  -- 'Received','Dispensed','Adjustment'
+    TransactionType    NVARCHAR(50)    NOT NULL, 
     PerformedBy        INT             NOT NULL,
     TransactionDateTime DATETIME       NOT NULL DEFAULT GETDATE(),
     Remarks            NVARCHAR(500)   NULL,
@@ -134,17 +156,23 @@ CREATE TABLE dbo.InventoryTransactions (
     CONSTRAINT FK_InvTrans_Staff
         FOREIGN KEY(PerformedBy) REFERENCES dbo.Staff(StaffId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Beds', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Beds (
     BedId          INT             IDENTITY PRIMARY KEY,
     Ward           NVARCHAR(100)   NOT NULL,
     BedNumber      NVARCHAR(50)    NOT NULL,
-    Status         NVARCHAR(20)    NOT NULL,  -- 'Available','Occupied','Maintenance'
+    Status         NVARCHAR(20)    NOT NULL, 
     CONSTRAINT UQ_Beds_WardBed UNIQUE (Ward, BedNumber)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Admissions', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Admissions (
     AdmissionId    INT             IDENTITY PRIMARY KEY,
     PatientId      INT             NOT NULL,
@@ -162,12 +190,15 @@ CREATE TABLE dbo.Admissions (
     CONSTRAINT FK_Admissions_DischargeBy
         FOREIGN KEY(DischargeBy) REFERENCES dbo.Staff(StaffId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.Vitals', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.Vitals (
     VitalId        INT             IDENTITY PRIMARY KEY,
     PatientId      INT             NOT NULL,
-    VitalType      NVARCHAR(50)    NOT NULL,  -- 'Heart Rate', 'Blood Pressure', etc.
+    VitalType      NVARCHAR(50)    NOT NULL,  
     Value          NVARCHAR(50)    NOT NULL,
     Unit           NVARCHAR(20)    NOT NULL,
     RecordedAt     DATETIME        NOT NULL DEFAULT GETDATE(),
@@ -177,8 +208,11 @@ CREATE TABLE dbo.Vitals (
     CONSTRAINT FK_Vitals_Staff
         FOREIGN KEY(RecordedBy) REFERENCES dbo.Staff(StaffId)
 );
+END
 GO
 
+IF OBJECT_ID('dbo.ReportsHistory', 'U') IS NULL
+BEGIN
 CREATE TABLE dbo.ReportsHistory (
     ReportId       INT             IDENTITY PRIMARY KEY,
     ReportType     NVARCHAR(100)   NOT NULL,
@@ -189,11 +223,6 @@ CREATE TABLE dbo.ReportsHistory (
     CONSTRAINT FK_Reports_Staff
         FOREIGN KEY(GeneratedBy) REFERENCES dbo.Staff(StaffId)
 );
+END
 GO
-
--- Insert dummy data into the Products table
---INSERT INTO Products (ProductName, Price) VALUES ('Smartphone', 499.99);
---INSERT INTO Products (ProductName, Price) VALUES ('Laptop', 899.99);
---INSERT INTO Products (ProductName, Price) VALUES ('Headphones', 99.99);
---INSERT INTO Products (ProductName, Price) VALUES ('Tablet', 299.99);
-GO
+`
