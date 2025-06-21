@@ -18,7 +18,8 @@ namespace HospitalManagementSystemAPI.Models
         public DateTime DOB { get; set; }
 
         [Required]
-        public int Gender { get; set; }
+        [StringLength(1, MinimumLength = 1)] // Added MinimumLength property
+        public char Gender { get; set; }
 
         [StringLength(20, MinimumLength = 10)] // Added MinimumLength property  
         public string Phone { get; set; }
