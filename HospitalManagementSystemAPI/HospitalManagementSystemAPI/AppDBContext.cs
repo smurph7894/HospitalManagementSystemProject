@@ -9,12 +9,12 @@ namespace HospitalManagementSystemAPI
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Admission> Admissions { get; set; }
-        public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
-        public DbSet<CarePlan> MedicalHistories { get; set; }
+        public DbSet<CarePlan> CarePlans { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<ReportsHistory> ReportsHistory { get; set; }
         public DbSet<Staff> Staffs { get; set; }
@@ -80,6 +80,11 @@ namespace HospitalManagementSystemAPI
             //CarePlan
             modelBuilder.Entity<CarePlan>()
                 .Property(e => e.DiagnosisDate).HasConversion(
+                    v => v,
+                    v => v.HasValue? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : (DateTime?)null); 
+
+            modelBuilder.Entity<CarePlan>()
+                .Property(e => e.CreatedAt).HasConversion(
                     v => v,
                     v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 

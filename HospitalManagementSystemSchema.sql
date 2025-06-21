@@ -6,31 +6,14 @@ Go
 USE HospitalManagementDB;
 Go
 
-CREATE TABLE dbo.Patients (
-    PatientId INT PRIMARY KEY IDENTITY,
-    FirstName NVARCHAR(100) NOT NULL,
-	LastName NVARCHAR(100) NOT NULL,
-    DOB DATE NOT NULL,
-	Gender CHAR(1) NOT NULL,
-	Phone NVARCHAR(20) NULL,
-	Email NVARCHAR(255) NULL,
-	Address NVARCHAR(500) NULL,
-	EmergencyContactName NVARCHAR(200) NULL,
-	EmergencyContactPhone NVARCHAR(20) NULL,
-	InsuranceProvider NVARCHAR(200) NULL,
-	InsurancePolicyNumber NVARCHAR(100) NULL,
-	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
-	UpdatedAt DATETIME NOT NULL DEFAULT GETDATE()
-);
-GO
-
 CREATE TABLE dbo.CarePlans (
 	CarePlanId INT IDENTITY PRIMARY KEY,
 	PatientId INT NOT NULL,
 	Condition NVARCHAR(200) NOT NULL,
 	Description NVARCHAR(MAX) NULL,
-	DiagnosisDate DATETIME NOT NULL DEFAULT GETDATE(),
+	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
 	DateResolved DATETIME NULL,
+	DiagnosisDate DATETIME NULL,
 
 	CONSTRAINT FK_CarePlan_Patients
 		FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
@@ -47,6 +30,24 @@ CREATE TABLE dbo.CarePlanUpdates (
 		FOREIGN KEY(CarePlanId) REFERENCES dbo.CarePlans(CarePlanId),
 	CONSTRAINT FK_CarePlanUpdates_Appointments
 		FOREIGN KEY(AppointmentId) REFERENCES dbo.Appointments(AppointmentId)
+);
+GO
+
+CREATE TABLE dbo.Patients (
+    PatientId INT PRIMARY KEY IDENTITY,
+    FirstName NVARCHAR(100) NOT NULL,
+	LastName NVARCHAR(100) NOT NULL,
+    DOB DATE NOT NULL,
+	Gender CHAR(1) NOT NULL,
+	Phone NVARCHAR(20) NULL,
+	Email NVARCHAR(255) NULL,
+	Address NVARCHAR(500) NULL,
+	EmergencyContactName NVARCHAR(200) NULL,
+	EmergencyContactPhone NVARCHAR(20) NULL,
+	InsuranceProvider NVARCHAR(200) NULL,
+	InsurancePolicyNumber NVARCHAR(100) NULL,
+	CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+	UpdatedAt DATETIME NOT NULL DEFAULT GETDATE()
 );
 GO
 

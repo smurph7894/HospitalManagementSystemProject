@@ -18,17 +18,18 @@ namespace HospitalManagementSystemAPI.Models
 
         public List<CarePlanUpdates> CarePlanUpdates { get; set; }
 
-        [Required]
-        public DateTime DiagnosisDate { get; set; } = DateTime.Now;
+        public DateTime? DiagnosisDate { get; set; }
 
         public DateTime? DateResolved { get; set; }
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         //overloaded constructors for CarePlan class for creating care plans with different parameters
-        public CarePlan(int patientId, string condiition, DateTime diagnosisDate)
+        public CarePlan(int patientId, string condiition)
         {
             PatientId = patientId;
             Condition = condiition;
-            DiagnosisDate = diagnosisDate;
+            CreatedAt = DateTime.Now; // Default to current date if not provided
             CarePlanUpdates = new List<CarePlanUpdates>(); // Initialize as an empty list  
         }
 
@@ -39,6 +40,7 @@ namespace HospitalManagementSystemAPI.Models
             Description = description;
             DiagnosisDate = diagnosisDate;
             DateResolved = dateResolved;
+            CreatedAt = DateTime.Now; // Default to current date if not provided
             CarePlanUpdates = new List<CarePlanUpdates>(); // Initialize as an empty list  
         }
     }
