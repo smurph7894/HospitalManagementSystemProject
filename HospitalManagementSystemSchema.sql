@@ -24,15 +24,29 @@ CREATE TABLE dbo.Patients (
 );
 GO
 
-CREATE TABLE dbo.MedicalHistories (
-	HistoryId INT IDENTITY PRIMARY KEY,
+CREATE TABLE dbo.CarePlans (
+	CarePlanId INT IDENTITY PRIMARY KEY,
 	PatientId INT NOT NULL,
 	Condition NVARCHAR(200) NOT NULL,
 	Description NVARCHAR(MAX) NULL,
-	DateRecorded DATETIME NOT NULL DEFAULT GETDATE(),
-	DocumentPath NVARCHAR(500) NUll,
-	CONSTRAINT FK_MedicalHistories_Patients
+	DiagnosisDate DATETIME NOT NULL DEFAULT GETDATE(),
+	DateResolved DATETIME NULL,
+
+	CONSTRAINT FK_CarePlan_Patients
 		FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
+);
+GO
+
+CREATE TABLE dbo.CarePlanUpdates (
+	CarePlanUpdateId INT IDENTITY PRIMARY KEY,
+	CarePlanId INT NOT NULL,
+	AppointmentId INT NOT NULL,
+	Notes NVARCHAR(MAX) NOT NULL,
+
+	CONSTRAINT FK_CarePlanUpdates_CarePlans 
+		FOREIGN KEY(CarePlanId) REFERENCES dbo.CarePlans(CarePlanId),
+	CONSTRAINT FK_CarePlanUpdates_Appointments
+		FOREIGN KEY(AppointmentId) REFERENCES dbo.Appointments(AppointmentId)
 );
 GO
 

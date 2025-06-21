@@ -14,7 +14,7 @@ namespace HospitalManagementSystemAPI
         public DbSet<Department> Departments { get; set; }
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
-        public DbSet<MedicalHistory> MedicalHistories { get; set; }
+        public DbSet<CarePlan> MedicalHistories { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<ReportsHistory> ReportsHistory { get; set; }
         public DbSet<Staff> Staffs { get; set; }
@@ -77,11 +77,18 @@ namespace HospitalManagementSystemAPI
                     v => v,
                     v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
-            //MedicalHistories
-            modelBuilder.Entity<MedicalHistory>()
-                .Property(e => e.DateRecorded).HasConversion(
+            //CarePlan
+            modelBuilder.Entity<CarePlan>()
+                .Property(e => e.DiagnosisDate).HasConversion(
                     v => v,
                     v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            modelBuilder.Entity<CarePlan>()
+                .Property(e => e.DateResolved).HasConversion(
+                    v => v,
+                    v => v.HasValue? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : (DateTime?)null);
+
+            //CarePlanUpdates - none needed
 
             //Patients
             modelBuilder.Entity<Patient>()

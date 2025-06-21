@@ -41,6 +41,8 @@
             this.btn_ManageUsers = new System.Windows.Forms.Button();
             this.lbl_Dashboard = new System.Windows.Forms.Label();
             this.btn_OpenChat = new System.Windows.Forms.Button();
+            this.btn_myInfo = new System.Windows.Forms.Button();
+            this.btn_patientSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ScheduleAppointments
@@ -165,11 +167,31 @@
             this.btn_OpenChat.UseVisualStyleBackColor = true;
             this.btn_OpenChat.Click += new System.EventHandler(this.btn_OpenChat_Click);
             // 
+            // btn_myInfo
+            // 
+            this.btn_myInfo.Location = new System.Drawing.Point(584, 116);
+            this.btn_myInfo.Name = "btn_myInfo";
+            this.btn_myInfo.Size = new System.Drawing.Size(118, 52);
+            this.btn_myInfo.TabIndex = 5;
+            this.btn_myInfo.Text = "My Info";
+            this.btn_myInfo.UseVisualStyleBackColor = true;
+            // 
+            // btn_patientSearch
+            // 
+            this.btn_patientSearch.Location = new System.Drawing.Point(584, 179);
+            this.btn_patientSearch.Name = "btn_patientSearch";
+            this.btn_patientSearch.Size = new System.Drawing.Size(118, 52);
+            this.btn_patientSearch.TabIndex = 6;
+            this.btn_patientSearch.Text = "Patient Search";
+            this.btn_patientSearch.UseVisualStyleBackColor = true;
+            // 
             // DashBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_patientSearch);
+            this.Controls.Add(this.btn_myInfo);
             this.Controls.Add(this.btn_OpenChat);
             this.Controls.Add(this.lbl_Dashboard);
             this.Controls.Add(this.btn_ManageUsers);
@@ -206,5 +228,7 @@
         private System.Windows.Forms.Button btn_ManageUsers;
         private System.Windows.Forms.Label lbl_Dashboard;
         private System.Windows.Forms.Button btn_OpenChat;
+        private System.Windows.Forms.Button btn_myInfo;
+        private System.Windows.Forms.Button btn_patientSearch;
     }
 }
