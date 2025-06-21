@@ -26,6 +26,7 @@ namespace HospitalManagementSystemAPI.Models
         [StringLength(50)]
         public string Value { get; set; }  // e.g., '72 bpm', '120/80 mmHg'
 
+        [Required]
         [StringLength(20)]
         public string Unit { get; set; }  // e.g., 'bpm', 'mmHg'
 

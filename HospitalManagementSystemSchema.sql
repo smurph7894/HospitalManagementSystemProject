@@ -155,7 +155,7 @@ CREATE TABLE dbo.Vitals (
     PatientId      INT             NOT NULL,
     VitalType      NVARCHAR(50)    NOT NULL,  -- 'Heart Rate', 'Blood Pressure', etc.
     Value          NVARCHAR(50)    NOT NULL,
-    Unit           NVARCHAR(20)    NULL,
+    Unit           NVARCHAR(20)    NOT NULL,
     RecordedAt     DATETIME        NOT NULL DEFAULT GETDATE(),
     RecordedBy     INT             NOT NULL,
     CONSTRAINT FK_Vitals_Patients
