@@ -1,18 +1,14 @@
 const sql = require('mssql');
-const sqlMaster = require('mssql');
-const sqlHospital = require('mssql');
 const config = require('./dbConfig');
-const schemaDDL = require('./SqlSchema');
 
 async function ensureSchema() {
-  const pool = await sqlMaster.connect(config.master);
-  // Run each batch separated by "GO"
-  for (let batch of schemaDDL.split(/^GO$/m)) {
-    const trimmed = batch.trim();
-    if (trimmed) await pool.request().batch(trimmed);
+  try{
+    const pool = await sql.connect(config);
   }
-  await pool.close();
-}
+  catch (error){
+    console.error('SQL error', error);
+  }
+};
 
 // Insert into Patients
 async function insertPatient(
@@ -291,20 +287,20 @@ async function insertReportsHistory(
     //   'Check blood pressure and adjust medication'
     // );
 
-    await insertPatient(
-      'abc123456', 
-      'jane', 
-      'smith', 
-      '1992-01-01', 
-      'X',
-      'phone', 
-      'email', 
-      'address',
-      'emergencyContactName',
-      'emergencyContactPhone',
-      'insuranceProvider', 
-      'insurancePolicyNumber'
-    )
+    // await insertPatient(
+    //   'abc123456', 
+    //   'jane', 
+    //   'smith', 
+    //   '1992-01-01', 
+    //   'X',
+    //   'phone', 
+    //   'email', 
+    //   'address',
+    //   'emergencyContactName',
+    //   'emergencyContactPhone',
+    //   'insuranceProvider', 
+    //   'insurancePolicyNumber'
+    // )
   } catch (err) {
     console.error('Error during setup/insert:', err);
   }
