@@ -7,7 +7,6 @@ namespace HospitalManagementSystemAPI.Models
         Available,
         Occupied,
         Maintenance
-
     }
     public class Bed
     {
