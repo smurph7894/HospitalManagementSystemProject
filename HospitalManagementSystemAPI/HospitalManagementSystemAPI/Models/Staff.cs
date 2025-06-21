@@ -7,8 +7,13 @@ namespace HospitalManagementSystemAPI.Models
         [Key]
         public int StaffId { get; set; }
 
+        [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Name { get; set; }
+
+        [Required]
         [StringLength(24)]
-        public string UserRef { get; set; } //unsure if should be int and have ref to User table
+        public string UserRef { get; set; } // Reference to the user in the User table
 
         [Required]
         [StringLength(50)]

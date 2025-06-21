@@ -17,7 +17,7 @@ namespace HospitalManagementSystemAPI
         public DbSet<CarePlan> CarePlans { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<ReportsHistory> ReportsHistory { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Staff> Staff { get; set; }
         public DbSet<Vitals> Vitals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
