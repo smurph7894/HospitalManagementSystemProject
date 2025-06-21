@@ -6,6 +6,8 @@ namespace HospitalManagementSystemAPI.Models
     {
         public int PatientId { get; set; }
 
+        public string PatientOrgId { get; set; } // Id connected to MongoDB for login
+
         [Required]
         [StringLength(100, MinimumLength = 2)] // Added MinimumLength property  
         public string FirstName { get; set; }

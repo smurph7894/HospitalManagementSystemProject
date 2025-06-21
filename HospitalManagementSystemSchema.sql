@@ -35,6 +35,7 @@ GO
 
 CREATE TABLE dbo.Patients (
     PatientId INT PRIMARY KEY IDENTITY,
+	PatientOrgId NVARCHAR(500) NOT NULL, --ID connected to mongoDB
     FirstName NVARCHAR(100) NOT NULL,
 	LastName NVARCHAR(100) NOT NULL,
     DOB DATE NOT NULL,
