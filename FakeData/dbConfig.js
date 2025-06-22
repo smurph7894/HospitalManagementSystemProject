@@ -1,24 +1,25 @@
 // dbConfig.js
+require('dotenv').config();
+
 module.exports = {
   master: {
-    // embed the ODBC driver name you installed
-    connectionString: 
-      "Driver={ODBC Driver 18 for SQL Server};" +
-      "Server=LITTLE_JUICY\\SQLEXPRESS;" +
-      "Database=master;" +
-      "Trusted_Connection=Yes;"+
-      "Encrypt=yes;" +                 
-      "TrustServerCertificate=yes;",
-    driver: 'msnodesqlv8'
+    server:        'LITTLE_JUICY\\SQLEXPRESS',  // server with instance name
+    database:      'master',
+    user:          process.env.DB_USER,
+    password:      process.env.DB_PASS,
+    options: {
+      encrypt:           false,          // disable TLS/SSPI lookups
+      trustServerCertificate: true       // for local development
+    }
   },
   hospital: {
-    connectionString: 
-      "Driver={ODBC Driver 18 for SQL Server};" +
-      "Server=LITTLE-JUICY\\SQLEXPRESS;" +
-      "Database=HospitalManagementDB;" +
-      "Trusted_Connection=Yes;" +
-      "Encrypt=yes;" +
-      "TrustServerCertificate=yes;",
-    driver: 'msnodesqlv8'
+    server:        'LITTLE_JUICY\\SQLEXPRESS',
+    database:      'HospitalManagementDB',
+    user:          process.env.DB_USER,
+    password:      process.env.DB_PASS,
+    options: {
+      encrypt:           false,
+      trustServerCertificate: true
+    }
   }
 };

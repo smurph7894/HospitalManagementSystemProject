@@ -1,11 +1,9 @@
 const sql = require('mssql');
-const sqlMaster = require('mssql');
-const sqlHospital = require('mssql');
 const config = require('./dbConfig');
 const schemaDDL = require('./SqlSchema');
 
 async function ensureSchema() {
-  const pool = await sqlMaster.connect(config.master);
+  const pool = await sql.connect(config.master);
   // Run each batch separated by "GO"
   for (let batch of schemaDDL.split(/^GO$/m)) {
     const trimmed = batch.trim();
@@ -281,15 +279,17 @@ async function insertReportsHistory(
 
 (async () => {
   try {
+    console.log(config.hospital);
+    const pool = await sql.connect(config.hospital);
     // 1) Create DB + tables if missing
-    await ensureSchema();
+    // await ensureSchema();
 
-    // 2) Now that HospitalManagementDB exists, add required tables needed for data
-    // await insertCarePlan(
-    //   123, 
-    //   'Hypertension follow-up', 
-    //   'Check blood pressure and adjust medication'
-    // );
+    // // 2) Now that HospitalManagementDB exists, add required tables needed for data
+    // // await insertCarePlan(
+    // //   123, 
+    // //   'Hypertension follow-up', 
+    // //   'Check blood pressure and adjust medication'
+    // // );
 
     await insertPatient(
       'abc123456', 
@@ -301,7 +301,7 @@ async function insertReportsHistory(
       'email', 
       'address',
       'emergencyContactName',
-      'emergencyContactPhone',
+      'emergency',
       'insuranceProvider', 
       'insurancePolicyNumber'
     )
