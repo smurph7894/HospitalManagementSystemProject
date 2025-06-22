@@ -416,7 +416,7 @@ class DataPopulator {
             const firstName = fullName.shift();
             const lastName = fullName.join(' ') || '';
             const dob = this.generator.getRandomDate(new Date('1940-01-01'), new Date('2010-12-31'));
-            const gender = this.generator.getRandomElement(['M', 'F']);
+            const gender = this.generator.getRandomElement(['M', 'F', 'X']);
             const phone = user.Profile.Phone;
             const email = user.Email;
             const address = user.Profile.Address;
@@ -914,11 +914,6 @@ class DataPopulator {
             await this.populateInventoryTransactions(200);
             await this.populateAdmissions(80);
             await this.populateReportsHistory(100);
-            
-            // Step 6: Populate from JSON data
-            await this.populateNotificationsFromJSON();
-            await this.populateChatRoomsFromJSON();
-            await this.populateChatMessagesFromJSON();
             
             console.log('\n✅ All Data Population Completed Successfully!');
             

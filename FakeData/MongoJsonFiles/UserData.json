@@ -1,12 +1,275 @@
 [
   {
     "_id": {
-      "$oid": "30b1e0aeaa3fbc062c24afe6"
+      "$oid": "f32605beb8d6393efa2f1704"
     },
-    "Username": "patient.christopher",
-    "Email": "christopher.walker@gmail.com",
+    "Username": "patient.daniel",
+    "Email": "daniel.perez@outlook.com",
+    "Password": "abc869",
+    "Roles": [
+      "Patient"
+    ],
+    "Permissions": [
+      "ScheduleApp",
+      "ViewMedicalHistory"
+    ],
+    "Profile": {
+      "FullName": "Daniel Perez",
+      "Phone": "(960) 788-2978",
+      "Address": "8756 First St, Clinton, NY 77834"
+    },
+    "CreatedAt": {
+      "$date": "2024-05-09T20:05:17.079Z"
+    },
+    "UpdatedAt": {
+      "$date": "2025-02-07T05:22:04.935Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Username": "admin.susan",
+    "Email": "susan.parker@yahoo.com",
+    "Password": "abc127",
+    "Roles": [
+      "AdministrativeStaff"
+    ],
+    "Permissions": [
+      "ManageAppointments",
+      "ManageDepartments"
+    ],
+    "Profile": {
+      "FullName": "Susan Parker",
+      "Phone": "(968) 749-4368",
+      "Address": "731 First St, Seattle, GA 45920"
+    },
+    "CreatedAt": {
+      "$date": "2024-12-17T23:33:05.834Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-01-01T22:38:17.260Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Username": "nurse.sandra",
+    "Email": "sandra.davis@hotmail.com",
+    "Password": "abc880",
+    "Roles": [
+      "Nurse"
+    ],
+    "Permissions": [
+      "ViewVitals",
+      "ScheduleApp"
+    ],
+    "Profile": {
+      "FullName": "Sandra Davis",
+      "Phone": "(955) 845-2535",
+      "Address": "3111 Cedar Ln, Madison, FL 59642"
+    },
+    "CreatedAt": {
+      "$date": "2024-12-27T22:38:01.878Z"
+    },
+    "UpdatedAt": {
+      "$date": "2025-01-16T03:15:29.764Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "Username": "nurse.david",
+    "Email": "david.carter@yahoo.com",
+    "Password": "abc950",
+    "Roles": [
+      "Nurse"
+    ],
+    "Permissions": [
+      "ViewVitals",
+      "ScheduleApp"
+    ],
+    "Profile": {
+      "FullName": "David Carter",
+      "Phone": "(707) 231-1888",
+      "Address": "671 Cedar Ln, Seattle, WA 32564"
+    },
+    "CreatedAt": {
+      "$date": "2025-01-05T16:04:24.600Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-08-24T22:39:58.433Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "Username": "nurse.sharon",
+    "Email": "sharon.taylor@aol.com",
+    "Password": "abc447",
+    "Roles": [
+      "Nurse"
+    ],
+    "Permissions": [
+      "ViewVitals",
+      "ScheduleApp"
+    ],
+    "Profile": {
+      "FullName": "Sharon Taylor",
+      "Phone": "(825) 203-2556",
+      "Address": "6885 Main St, Springfield, OH 72620"
+    },
+    "CreatedAt": {
+      "$date": "2025-03-07T21:12:01.490Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-08-09T07:12:28.458Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e9e4a11a881c742ef8b21c31"
+    },
+    "Username": "admin.helen",
+    "Email": "helen.sanchez@yahoo.com",
+    "Password": "abc862",
+    "Roles": [
+      "AdministrativeStaff"
+    ],
+    "Permissions": [
+      "ManageAppointments",
+      "ManageDepartments"
+    ],
+    "Profile": {
+      "FullName": "Helen Sanchez",
+      "Phone": "(742) 787-3065",
+      "Address": "9172 Cedar Ln, Franklin, OH 61440"
+    },
+    "CreatedAt": {
+      "$date": "2024-01-13T18:54:45.775Z"
+    },
+    "UpdatedAt": {
+      "$date": "2025-03-17T17:03:52.801Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Username": "nurse.ronald",
+    "Email": "ronald.diaz@outlook.com",
+    "Password": "abc444",
+    "Roles": [
+      "Nurse"
+    ],
+    "Permissions": [
+      "ViewVitals",
+      "ScheduleApp"
+    ],
+    "Profile": {
+      "FullName": "Ronald Diaz",
+      "Phone": "(586) 460-3814",
+      "Address": "7686 Pine Rd, Jefferson, FL 88544"
+    },
+    "CreatedAt": {
+      "$date": "2024-02-11T17:25:54.594Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-12-20T06:14:51.509Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "baadea69bb97ed634c89206c"
+    },
+    "Username": "admin.carol",
+    "Email": "carol.martin@yahoo.com",
     "Password": "abc520",
     "Roles": [
+      "AdministrativeStaff"
+    ],
+    "Permissions": [
+      "ManageAppointments",
+      "ManageDepartments"
+    ],
+    "Profile": {
+      "FullName": "Carol Martin",
+      "Phone": "(348) 370-1852",
+      "Address": "4943 Oak Ave, Washington, WA 93021"
+    },
+    "CreatedAt": {
+      "$date": "2024-02-02T05:41:38.083Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-04-18T23:47:25.032Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Username": "admin.elizabeth",
+    "Email": "elizabeth.flores@aol.com",
+    "Password": "abc110",
+    "Roles": [
+      "AdministrativeStaff"
+    ],
+    "Permissions": [
+      "ManageAppointments",
+      "ManageDepartments"
+    ],
+    "Profile": {
+      "FullName": "Elizabeth Flores",
+      "Phone": "(796) 346-6989",
+      "Address": "430 Elm St, Georgetown, NC 52179"
+    },
+    "CreatedAt": {
+      "$date": "2025-06-06T09:39:19.802Z"
+    },
+    "UpdatedAt": {
+      "$date": "2024-03-20T09:58:27.970Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Username": "doctor.michael",
+    "Email": "michael.davis@aol.com",
+    "Password": "abc296",
+    "Roles": [
+      "Doctor"
+    ],
+    "Permissions": [
+      "ViewMedicalHistory",
+      "ManageInventory",
+      "AccessReports",
+      "ViewVitals",
+      "ScheduleApp"
+    ],
+    "Profile": {
+      "FullName": "Michael Davis",
+      "Phone": "(704) 990-9821",
+      "Address": "911 Oak Ave, Georgetown, IL 74163"
+    },
+    "CreatedAt": {
+      "$date": "2025-05-17T12:28:26.856Z"
+    },
+    "UpdatedAt": {
+      "$date": "2025-05-23T14:23:51.096Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "Username": "patient.george",
+    "Email": "george.thomas@hotmail.com",
+    "Password": "abc786",
+    "Roles": [
       "Patient"
     ],
     "Permissions": [
@@ -14,24 +277,24 @@
       "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "Christopher Walker",
-      "Phone": "(885) 976-4887",
-      "Address": "9072 Pine Rd, Washington, FL 92826"
+      "FullName": "George Thomas",
+      "Phone": "(221) 533-5585",
+      "Address": "687 Park Ave, Clinton, TX 47745"
     },
     "CreatedAt": {
-      "$date": "2024-12-25T18:15:00.823Z"
+      "$date": "2024-12-09T08:17:42.989Z"
     },
     "UpdatedAt": {
-      "$date": "2024-08-21T22:01:26.609Z"
+      "$date": "2024-08-09T22:17:36.176Z"
     }
   },
   {
     "_id": {
-      "$oid": "5efd6681c1ba894eae791ab0"
+      "$oid": "636dc52cd7ac534a95cde8b7"
     },
-    "Username": "administrator.christopher",
-    "Email": "christopher.adams@aol.com",
-    "Password": "abc922",
+    "Username": "administrator.kevin",
+    "Email": "kevin.miller@hotmail.com",
+    "Password": "abc912",
     "Roles": [
       "Administrator"
     ],
@@ -41,105 +304,24 @@
       "AccessReports"
     ],
     "Profile": {
-      "FullName": "Christopher Adams",
-      "Phone": "(300) 739-3787",
-      "Address": "214 Park Ave, Washington, TX 63622"
+      "FullName": "Kevin Miller",
+      "Phone": "(520) 492-8971",
+      "Address": "6472 First St, Franklin, TX 85510"
     },
     "CreatedAt": {
-      "$date": "2024-09-10T23:38:52.673Z"
+      "$date": "2025-01-17T08:45:54.272Z"
     },
     "UpdatedAt": {
-      "$date": "2024-07-01T02:42:01.880Z"
+      "$date": "2024-08-27T13:04:13.544Z"
     }
   },
   {
     "_id": {
-      "$oid": "02d6f5ca5c1a04f92890857e"
+      "$oid": "b6e7348baf90551fc8224477"
     },
-    "Username": "doctor.karen",
-    "Email": "karen.gomez@aol.com",
-    "Password": "abc170",
-    "Roles": [
-      "Doctor"
-    ],
-    "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
-    ],
-    "Profile": {
-      "FullName": "Karen Gomez",
-      "Phone": "(879) 733-7727",
-      "Address": "2168 Park Ave, Springfield, FL 48200"
-    },
-    "CreatedAt": {
-      "$date": "2025-03-25T03:29:14.410Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-11-11T09:13:06.083Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "e03543283000580ad693235d"
-    },
-    "Username": "admin.sharon",
-    "Email": "sharon.garcia@outlook.com",
-    "Password": "abc942",
-    "Roles": [
-      "AdministrativeStaff"
-    ],
-    "Permissions": [
-      "ManageAppointments",
-      "ManageDepartments"
-    ],
-    "Profile": {
-      "FullName": "Sharon Garcia",
-      "Phone": "(677) 479-1938",
-      "Address": "3081 First St, Jefferson, GA 55102"
-    },
-    "CreatedAt": {
-      "$date": "2025-05-21T03:38:41.359Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-02-06T06:55:45.605Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "696be14e5152ae0f4361e859"
-    },
-    "Username": "admin.david",
-    "Email": "david.jackson@gmail.com",
-    "Password": "abc956",
-    "Roles": [
-      "AdministrativeStaff"
-    ],
-    "Permissions": [
-      "ManageAppointments",
-      "ManageDepartments"
-    ],
-    "Profile": {
-      "FullName": "David Jackson",
-      "Phone": "(630) 424-2363",
-      "Address": "4925 Pine Rd, Seattle, TX 13173"
-    },
-    "CreatedAt": {
-      "$date": "2024-02-24T09:34:31.043Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-06-14T08:59:31.676Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "18e9b73702343ce01196f3ca"
-    },
-    "Username": "patient.susan",
-    "Email": "susan.diaz@hotmail.com",
-    "Password": "abc251",
+    "Username": "patient.kenneth",
+    "Email": "kenneth.hall@gmail.com",
+    "Password": "abc317",
     "Roles": [
       "Patient"
     ],
@@ -148,79 +330,50 @@
       "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "Susan Diaz",
-      "Phone": "(247) 216-7109",
-      "Address": "6580 First St, Georgetown, NC 95568"
+      "FullName": "Kenneth Hall",
+      "Phone": "(765) 574-4702",
+      "Address": "7664 Pine Rd, Georgetown, NC 91495"
     },
     "CreatedAt": {
-      "$date": "2025-06-03T12:32:13.906Z"
+      "$date": "2025-01-23T04:46:53.023Z"
     },
     "UpdatedAt": {
-      "$date": "2024-05-29T06:47:35.586Z"
+      "$date": "2025-05-11T08:09:03.274Z"
     }
   },
   {
     "_id": {
-      "$oid": "626ee94bca893f4885643c8f"
+      "$oid": "f1d9abc7a00830877d00fc27"
     },
-    "Username": "doctor.nancy",
-    "Email": "nancy.robinson@gmail.com",
-    "Password": "abc767",
+    "Username": "patient.karen",
+    "Email": "karen.turner@hotmail.com",
+    "Password": "abc518",
     "Roles": [
-      "Doctor"
+      "Patient"
     ],
     "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
+      "ScheduleApp",
+      "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "Nancy Robinson",
-      "Phone": "(833) 816-4503",
-      "Address": "6505 First St, Georgetown, FL 96171"
+      "FullName": "Karen Turner",
+      "Phone": "(836) 598-9045",
+      "Address": "7179 Main St, Franklin, CA 95821"
     },
     "CreatedAt": {
-      "$date": "2025-03-26T13:39:12.434Z"
+      "$date": "2025-04-21T14:51:31.263Z"
     },
     "UpdatedAt": {
-      "$date": "2025-01-16T03:11:10.289Z"
+      "$date": "2024-12-16T14:07:36.604Z"
     }
   },
   {
     "_id": {
-      "$oid": "4b4d7d27a610900cea31529c"
-    },
-    "Username": "nurse.sarah",
-    "Email": "sarah.turner@gmail.com",
-    "Password": "abc509",
-    "Roles": [
-      "Nurse"
-    ],
-    "Permissions": [
-      "ViewVitals",
-      "ScheduleApp"
-    ],
-    "Profile": {
-      "FullName": "Sarah Turner",
-      "Phone": "(462) 457-9013",
-      "Address": "1494 First St, Franklin, FL 75991"
-    },
-    "CreatedAt": {
-      "$date": "2024-08-26T17:31:22.765Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-04-07T18:38:13.236Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "59964ddea6cd40e1151ead58"
+      "$oid": "f090f6e2b6579072635d4871"
     },
     "Username": "patient.john",
-    "Email": "john.harris@hotmail.com",
-    "Password": "abc759",
+    "Email": "john.hernandez@outlook.com",
+    "Password": "abc821",
     "Roles": [
       "Patient"
     ],
@@ -229,24 +382,24 @@
       "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "John Harris",
-      "Phone": "(483) 536-5924",
-      "Address": "5134 Cedar Ln, Georgetown, PA 91747"
+      "FullName": "John Hernandez",
+      "Phone": "(935) 590-2146",
+      "Address": "5498 Cedar Ln, Jefferson, PA 47231"
     },
     "CreatedAt": {
-      "$date": "2024-07-30T15:14:03.930Z"
+      "$date": "2024-06-05T18:31:59.252Z"
     },
     "UpdatedAt": {
-      "$date": "2024-02-14T23:24:04.029Z"
+      "$date": "2025-03-14T02:20:27.481Z"
     }
   },
   {
     "_id": {
-      "$oid": "d80770025c1a48fbb05f9a4d"
+      "$oid": "64b5f5814ff4342097027d8e"
     },
-    "Username": "patient.thomas",
-    "Email": "thomas.brown@aol.com",
-    "Password": "abc165",
+    "Username": "patient.deborah",
+    "Email": "deborah.phillips@outlook.com",
+    "Password": "abc142",
     "Roles": [
       "Patient"
     ],
@@ -255,111 +408,103 @@
       "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "Thomas Brown",
-      "Phone": "(904) 912-1916",
-      "Address": "4480 Oak Ave, Seattle, GA 22646"
+      "FullName": "Deborah Phillips",
+      "Phone": "(611) 996-7834",
+      "Address": "195 Pine Rd, Seattle, GA 58862"
     },
     "CreatedAt": {
-      "$date": "2024-12-14T19:56:17.570Z"
+      "$date": "2024-02-28T11:25:51.139Z"
     },
     "UpdatedAt": {
-      "$date": "2024-05-13T20:52:15.749Z"
+      "$date": "2024-02-07T17:36:37.049Z"
     }
   },
   {
     "_id": {
-      "$oid": "9b86986b28c5829efb199485"
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
     },
-    "Username": "doctor.carol",
-    "Email": "carol.davis@aol.com",
-    "Password": "abc249",
+    "Username": "administrator.george",
+    "Email": "george.thomas@aol.com",
+    "Password": "abc920",
     "Roles": [
-      "Doctor"
+      "Administrator"
     ],
     "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
+      "ManageUsers",
+      "ManageStaff",
+      "AccessReports"
     ],
     "Profile": {
-      "FullName": "Carol Davis",
-      "Phone": "(973) 637-3595",
-      "Address": "3971 Maple Dr, Georgetown, TX 50168"
+      "FullName": "George Thomas",
+      "Phone": "(357) 832-9233",
+      "Address": "3459 First St, Clinton, OH 54211"
     },
     "CreatedAt": {
-      "$date": "2025-01-25T20:55:27.275Z"
+      "$date": "2024-04-19T13:55:14.087Z"
     },
     "UpdatedAt": {
-      "$date": "2025-02-28T08:59:12.013Z"
+      "$date": "2025-02-24T12:53:11.546Z"
     }
   },
   {
     "_id": {
-      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+      "$oid": "c113db8c7eb970a4f5ce9400"
     },
-    "Username": "doctor.david",
-    "Email": "david.hernandez@yahoo.com",
-    "Password": "abc990",
+    "Username": "patient.jason",
+    "Email": "jason.anderson@hotmail.com",
+    "Password": "abc789",
     "Roles": [
-      "Doctor"
+      "Patient"
     ],
     "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
+      "ScheduleApp",
+      "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "David Hernandez",
-      "Phone": "(551) 739-5728",
-      "Address": "2060 Maple Dr, Washington, IL 31099"
+      "FullName": "Jason Anderson",
+      "Phone": "(981) 600-3880",
+      "Address": "7886 Main St, Washington, TX 30200"
     },
     "CreatedAt": {
-      "$date": "2024-05-19T23:04:25.644Z"
+      "$date": "2025-06-06T23:45:48.295Z"
     },
     "UpdatedAt": {
-      "$date": "2024-03-17T05:47:41.308Z"
+      "$date": "2025-04-16T00:54:26.968Z"
     }
   },
   {
     "_id": {
-      "$oid": "beca806da78eafbc007e84c1"
+      "$oid": "168ee193b19fc3a01357c7e1"
     },
-    "Username": "doctor.barbara",
-    "Email": "barbara.lee@yahoo.com",
-    "Password": "abc319",
+    "Username": "patient.george",
+    "Email": "george.diaz@aol.com",
+    "Password": "abc800",
     "Roles": [
-      "Doctor"
+      "Patient"
     ],
     "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
+      "ScheduleApp",
+      "ViewMedicalHistory"
     ],
     "Profile": {
-      "FullName": "Barbara Lee",
-      "Phone": "(545) 503-1431",
-      "Address": "2400 Park Ave, Franklin, NC 40291"
+      "FullName": "George Diaz",
+      "Phone": "(300) 520-5451",
+      "Address": "5265 Main St, Springfield, CA 25568"
     },
     "CreatedAt": {
-      "$date": "2025-06-05T12:28:15.014Z"
+      "$date": "2024-03-05T07:37:30.347Z"
     },
     "UpdatedAt": {
-      "$date": "2025-01-17T22:20:49.312Z"
+      "$date": "2024-07-02T19:15:48.592Z"
     }
   },
   {
     "_id": {
-      "$oid": "619b41a0b09d69b71e95a819"
+      "$oid": "60a1f702efaa46602f12f64d"
     },
-    "Username": "nurse.betty",
-    "Email": "betty.flores@outlook.com",
-    "Password": "abc426",
+    "Username": "nurse.ruth",
+    "Email": "ruth.lee@yahoo.com",
+    "Password": "abc962",
     "Roles": [
       "Nurse"
     ],
@@ -368,177 +513,15 @@
       "ScheduleApp"
     ],
     "Profile": {
-      "FullName": "Betty Flores",
-      "Phone": "(696) 904-4481",
-      "Address": "8606 First St, Madison, NY 28994"
+      "FullName": "Ruth Lee",
+      "Phone": "(943) 306-8698",
+      "Address": "6295 Pine Rd, Madison, OH 68995"
     },
     "CreatedAt": {
-      "$date": "2024-08-23T07:20:22.107Z"
+      "$date": "2024-05-15T08:07:35.244Z"
     },
     "UpdatedAt": {
-      "$date": "2024-04-20T06:58:25.513Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "d15d3de983a197dda5378879"
-    },
-    "Username": "administrator.mary",
-    "Email": "mary.flores@outlook.com",
-    "Password": "abc111",
-    "Roles": [
-      "Administrator"
-    ],
-    "Permissions": [
-      "ManageUsers",
-      "ManageStaff",
-      "AccessReports"
-    ],
-    "Profile": {
-      "FullName": "Mary Flores",
-      "Phone": "(951) 667-9698",
-      "Address": "4532 Oak Ave, Madison, PA 37929"
-    },
-    "CreatedAt": {
-      "$date": "2025-03-21T19:36:21.971Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-07-22T19:31:37.118Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "fb95d15949ec96f346bfcebd"
-    },
-    "Username": "administrator.charles",
-    "Email": "charles.clark@gmail.com",
-    "Password": "abc597",
-    "Roles": [
-      "Administrator"
-    ],
-    "Permissions": [
-      "ManageUsers",
-      "ManageStaff",
-      "AccessReports"
-    ],
-    "Profile": {
-      "FullName": "Charles Clark",
-      "Phone": "(911) 474-4962",
-      "Address": "5975 Maple Dr, Franklin, FL 27370"
-    },
-    "CreatedAt": {
-      "$date": "2024-07-11T00:52:45.151Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-10-21T03:36:35.616Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "634cd9d4312566ba87c3bd2b"
-    },
-    "Username": "nurse.edward",
-    "Email": "edward.anderson@yahoo.com",
-    "Password": "abc734",
-    "Roles": [
-      "Nurse"
-    ],
-    "Permissions": [
-      "ViewVitals",
-      "ScheduleApp"
-    ],
-    "Profile": {
-      "FullName": "Edward Anderson",
-      "Phone": "(791) 371-6465",
-      "Address": "3445 Oak Ave, Seattle, IL 99141"
-    },
-    "CreatedAt": {
-      "$date": "2024-11-18T21:42:54.764Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-07-09T23:44:55.292Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "01ab69f98f91bf916d76ab09"
-    },
-    "Username": "doctor.charles",
-    "Email": "charles.young@gmail.com",
-    "Password": "abc780",
-    "Roles": [
-      "Doctor"
-    ],
-    "Permissions": [
-      "ViewMedicalHistory",
-      "ManageInventory",
-      "AccessReports",
-      "ViewVitals",
-      "ScheduleApp"
-    ],
-    "Profile": {
-      "FullName": "Charles Young",
-      "Phone": "(338) 576-5791",
-      "Address": "507 Elm St, Jefferson, PA 26154"
-    },
-    "CreatedAt": {
-      "$date": "2024-01-19T00:55:25.366Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-07-15T05:50:08.785Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "87430c2947f97eac20e8aeb7"
-    },
-    "Username": "administrator.matthew",
-    "Email": "matthew.mitchell@yahoo.com",
-    "Password": "abc655",
-    "Roles": [
-      "Administrator"
-    ],
-    "Permissions": [
-      "ManageUsers",
-      "ManageStaff",
-      "AccessReports"
-    ],
-    "Profile": {
-      "FullName": "Matthew Mitchell",
-      "Phone": "(262) 954-6506",
-      "Address": "5947 Oak Ave, Madison, FL 48293"
-    },
-    "CreatedAt": {
-      "$date": "2025-01-08T13:05:54.780Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-04-18T04:42:31.997Z"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "a50ffda4454cb66ae5484add"
-    },
-    "Username": "admin.jennifer",
-    "Email": "jennifer.jones@aol.com",
-    "Password": "abc352",
-    "Roles": [
-      "AdministrativeStaff"
-    ],
-    "Permissions": [
-      "ManageAppointments",
-      "ManageDepartments"
-    ],
-    "Profile": {
-      "FullName": "Jennifer Jones",
-      "Phone": "(456) 933-7094",
-      "Address": "7237 Cedar Ln, Jefferson, PA 16802"
-    },
-    "CreatedAt": {
-      "$date": "2024-12-03T10:36:10.120Z"
-    },
-    "UpdatedAt": {
-      "$date": "2024-12-22T23:29:29.847Z"
+      "$date": "2024-07-25T14:21:30.972Z"
     }
   }
 ]
