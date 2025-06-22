@@ -36,7 +36,7 @@ namespace HospitalManagementSystemAPI.Controllers
         }
 
         // Get: api/patient - gets all patients
-        [HttpGet("All")]
+        [HttpGet("all")]
         public async Task<ActionResult> GetAllPatients()
         {
             try

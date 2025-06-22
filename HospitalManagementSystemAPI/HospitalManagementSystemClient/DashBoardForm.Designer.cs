@@ -175,6 +175,7 @@
             this.btn_myInfo.TabIndex = 5;
             this.btn_myInfo.Text = "My Info";
             this.btn_myInfo.UseVisualStyleBackColor = true;
+            this.btn_myInfo.Click += new System.EventHandler(this.btn_myInfo_Click);
             // 
             // btn_patientSearch
             // 
@@ -184,6 +185,7 @@
             this.btn_patientSearch.TabIndex = 6;
             this.btn_patientSearch.Text = "Patient Search";
             this.btn_patientSearch.UseVisualStyleBackColor = true;
+            this.btn_patientSearch.Click += new System.EventHandler(this.btn_patientSearch_Click);
             // 
             // DashBoardForm
             // 

@@ -25,10 +25,15 @@ namespace HospitalManagementSystemAPI.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         //overloaded constructors for CarePlan class for creating care plans with different parameters
-        public CarePlan(int patientId, string condiition)
+        public CarePlan()
+        {
+            CarePlanUpdates = new List<CarePlanUpdates>();
+        }
+
+        public CarePlan(int patientId, string condition)
         {
             PatientId = patientId;
-            Condition = condiition;
+            Condition = condition;
             CreatedAt = DateTime.Now; // Default to current date if not provided
             CarePlanUpdates = new List<CarePlanUpdates>(); // Initialize as an empty list  
         }

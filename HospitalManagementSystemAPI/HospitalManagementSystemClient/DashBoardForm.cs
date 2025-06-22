@@ -51,6 +51,8 @@ namespace HospitalManagementSystemClient
             btn_ManageBeds.Visible = permissions.Contains("ManageBeds");
             btn_ManageDepartments.Visible = permissions.Contains("ManageDepartments");
             btn_ManageUsers.Visible = permissions.Contains("ManageUsers");
+            btn_patientSearch.Visible = permissions.Contains("ViewVitals");
+            btn_myInfo.Visible = _loggedInUser.Roles.Contains(Role.Patient);
 
             // Chat button is always visible 
             btn_OpenChat.Visible = true;
@@ -90,6 +92,17 @@ namespace HospitalManagementSystemClient
             //var form = new MedicalHistoryForm(_loggedInUser);
             //form.Show();
 
+        }
+
+        private void btn_myInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_patientSearch_Click(object sender, EventArgs e)
+        {
+            var form = new PatientSearchForm(_loggedInUser);
+            form.Show();
         }
     }
 }

@@ -93,6 +93,12 @@ namespace HospitalManagementSystemAPI
                     v => v,
                     v => v.HasValue? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : (DateTime?)null);
 
+            modelBuilder.Entity<CarePlan>()
+               .HasMany(cp => cp.CarePlanUpdates)
+               .WithOne()
+               .HasForeignKey("CarePlanId")
+               .OnDelete(DeleteBehavior.Cascade);
+
             //CarePlanUpdates - none needed
 
             //Patients
