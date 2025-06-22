@@ -96,11 +96,14 @@ namespace HospitalManagementSystemClient
 
         private void btn_myInfo_Click(object sender, EventArgs e)
         {
-
+            //this.Hide();
+            //var form = new MyInfoForm(_loggedInUser);
+            //form.Show();
         }
 
         private void btn_patientSearch_Click(object sender, EventArgs e)
         {
+            this.Hide();
             var form = new PatientSearchForm(_loggedInUser);
             form.Show();
         }

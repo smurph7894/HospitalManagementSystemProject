@@ -14,7 +14,6 @@ namespace HospitalManagementSystemClient
         [STAThread]
         static void Main()
         {
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12; //winForms normally configured to use older version so need to force for API connection - Sarah
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

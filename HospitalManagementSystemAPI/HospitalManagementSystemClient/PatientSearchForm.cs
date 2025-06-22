@@ -20,7 +20,7 @@ namespace HospitalManagementSystemClient
     public partial class PatientSearchForm : Form
     {
         private Users _loggedInUser;
-        private readonly string apiBaseUrl = "https://localhost:5277/api/Patient";
+        private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
         public PatientSearchForm(Users user)
         {
             InitializeComponent();
