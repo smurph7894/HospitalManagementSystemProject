@@ -1,0 +1,1002 @@
+[
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-02-04T12:16:27.228Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-08-25T20:31:34.780Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2025-02-12T21:20:25.425Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2025-06-08T16:47:28.926Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-01-12T22:41:53.118Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2025-02-10T15:15:40.655Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2025-01-06T15:24:02.167Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2025-04-11T08:31:38.405Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2025-04-18T12:26:46.776Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-04-16T02:30:03.049Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-08-04T18:01:10.217Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2025-02-13T13:39:31.544Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2025-03-11T09:15:33.402Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-02-25T17:11:56.609Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-05-18T20:15:15.374Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-03-06T16:04:59.845Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2025-01-30T06:05:47.011Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-11-28T21:34:12.753Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-05-08T19:40:12.150Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "168ee193b19fc3a01357c7e1"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-12-25T20:10:22.031Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2025-02-19T18:36:25.327Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2025-03-22T09:54:22.328Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-10-11T11:25:46.239Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-06-15T11:22:28.493Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-05-19T18:03:33.811Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-11-27T03:05:33.177Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "f090f6e2b6579072635d4871"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2024-01-15T22:52:56.463Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-05-11T08:13:53.322Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-03-30T11:48:17.525Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-10-22T06:58:20.631Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-04-07T20:45:55.976Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-06-02T07:38:06.089Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2025-03-22T23:38:33.106Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2025-03-27T05:26:32.503Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "c113db8c7eb970a4f5ce9400"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2025-03-03T01:52:37.685Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-03-17T04:12:40.070Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-08-01T15:17:24.324Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "c113db8c7eb970a4f5ce9400"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-11-20T14:50:13.909Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-10-31T15:40:19.832Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2024-11-22T17:04:34.407Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2025-03-27T11:44:46.275Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-01-01T22:00:22.678Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-06-10T22:12:48.806Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2025-02-16T09:53:08.115Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-09-05T02:50:36.119Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "c113db8c7eb970a4f5ce9400"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2025-05-21T23:15:05.437Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-02-23T09:41:00.191Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2024-11-23T02:00:45.455Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-10-03T16:03:10.318Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "SenderId": {
+      "$oid": "c113db8c7eb970a4f5ce9400"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-09-05T16:54:20.879Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-09-11T00:36:09.455Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "baadea69bb97ed634c89206c"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-08-20T18:49:55.016Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-02-27T12:11:14.327Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-10-20T15:24:55.424Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2025-06-16T05:32:10.939Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-01-12T07:34:42.344Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "168ee193b19fc3a01357c7e1"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2025-05-28T19:40:21.706Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-08-14T02:40:26.120Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2024-01-15T20:36:49.727Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-03-21T03:10:34.603Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2025-04-16T17:23:22.612Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-10-27T18:08:21.752Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-11-20T04:00:40.275Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-08-22T18:47:21.295Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-04-16T05:08:38.772Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-03-22T03:21:54.511Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-02-16T05:45:45.657Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-08-24T12:39:15.996Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2025-03-03T14:33:55.296Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2024-09-24T21:13:26.534Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2025-02-16T16:37:20.173Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-04-22T04:34:40.357Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2025-01-05T05:39:24.414Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-12-31T23:00:23.243Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "SenderId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-09-30T11:50:23.583Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2024-08-07T01:33:02.362Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2024-04-03T22:30:38.789Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-09-04T10:28:22.919Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "New admission in bed 15",
+    "SentAt": "2024-11-14T11:10:32.446Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-10-18T16:36:03.608Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-08-10T16:50:56.699Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2025-02-28T03:27:44.423Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-09-26T05:50:12.590Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Patient in room 302 needs immediate attention",
+    "SentAt": "2024-06-30T02:20:50.347Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-01-13T01:17:07.717Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-09-26T07:13:40.147Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2024-12-26T22:41:47.204Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2025-04-12T04:40:51.777Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "SenderId": {
+      "$oid": "c113db8c7eb970a4f5ce9400"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-02-09T15:34:30.262Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Vital signs looking stable",
+    "SentAt": "2024-05-21T11:23:36.033Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2025-05-15T05:42:28.353Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "Message": "Family meeting scheduled for 2 PM",
+    "SentAt": "2025-02-18T14:35:29.351Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2024-06-20T20:04:20.063Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "Message": "Lab results are ready for review",
+    "SentAt": "2024-05-02T14:25:00.292Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "SenderId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "Message": "Please update the patient chart",
+    "SentAt": "2024-02-19T21:03:06.673Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "SenderId": {
+      "$oid": "636dc52cd7ac534a95cde8b7"
+    },
+    "Message": "Medication dosage needs adjustment",
+    "SentAt": "2025-06-13T03:31:12.036Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-04-24T08:13:02.789Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "SenderId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "Message": "Surgery scheduled for tomorrow morning",
+    "SentAt": "2024-11-23T02:33:15.623Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Doctor consultation requested",
+    "SentAt": "2024-04-03T08:07:01.946Z"
+  },
+  {
+    "RoomId": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "SenderId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "Message": "Discharge paperwork is ready",
+    "SentAt": "2025-04-30T13:10:27.990Z"
+  }
+]

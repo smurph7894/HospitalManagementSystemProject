@@ -1,0 +1,602 @@
+[
+  {
+    "UserId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Sharon Taylor",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-01-20T22:29:58.395Z"
+  },
+  {
+    "UserId": {
+      "$oid": "c90806f05325c0ff853332e9"
+    },
+    "type": "AppointmentCreated",
+    "Payload": {
+      "message": "AppointmentCreated notification for Susan Parker",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-04-23T11:04:01.458Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for Elizabeth Flores",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-05-21T15:54:09.363Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f090f6e2b6579072635d4871"
+    },
+    "type": "AppointmentCreated",
+    "Payload": {
+      "message": "AppointmentCreated notification for John Hernandez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-06-06T11:51:49.093Z"
+  },
+  {
+    "UserId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Ruth Lee",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-24T12:22:00.744Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Sandra Davis",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-04-16T21:49:47.365Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Sharon Taylor",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-02-24T08:44:24.732Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e9e4a11a881c742ef8b21c31"
+    },
+    "type": "MedicalHistoryUpdated",
+    "Payload": {
+      "message": "MedicalHistoryUpdated notification for Helen Sanchez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-10-27T13:12:53.563Z"
+  },
+  {
+    "UserId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "type": "InventoryItemAdded",
+    "Payload": {
+      "message": "InventoryItemAdded notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-25T09:55:18.715Z"
+  },
+  {
+    "UserId": {
+      "$oid": "baadea69bb97ed634c89206c"
+    },
+    "type": "AdmissionUpdated",
+    "Payload": {
+      "message": "AdmissionUpdated notification for Carol Martin",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-13T04:38:21.353Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Sharon Taylor",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-22T05:58:55.185Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "type": "MedicalHistoryUpdated",
+    "Payload": {
+      "message": "MedicalHistoryUpdated notification for Daniel Perez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-19T01:10:34.567Z"
+  },
+  {
+    "UserId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for David Carter",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-05-11T02:13:04.217Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-05-30T11:37:38.806Z"
+  },
+  {
+    "UserId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "type": "StaffUpdated",
+    "Payload": {
+      "message": "StaffUpdated notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-28T03:13:05.324Z"
+  },
+  {
+    "UserId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for Kenneth Hall",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-22T03:32:08.781Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "type": "BedAssigned",
+    "Payload": {
+      "message": "BedAssigned notification for Michael Davis",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-08T12:19:39.666Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5e29b58d1356d51eb0737b14"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Sandra Davis",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-06-09T23:32:29.479Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for Elizabeth Flores",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-11-09T17:44:27.256Z"
+  },
+  {
+    "UserId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for David Carter",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-01T17:31:16.372Z"
+  },
+  {
+    "UserId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "type": "StaffAdded",
+    "Payload": {
+      "message": "StaffAdded notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-05-17T16:17:02.582Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8804acd75badeb802f9a61b4"
+    },
+    "type": "InventoryItemUpdated",
+    "Payload": {
+      "message": "InventoryItemUpdated notification for Elizabeth Flores",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-13T05:02:00.698Z"
+  },
+  {
+    "UserId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for David Carter",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-17T15:37:50.624Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Karen Turner",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-12T09:57:19.551Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e9e4a11a881c742ef8b21c31"
+    },
+    "type": "PatientRemoved",
+    "Payload": {
+      "message": "PatientRemoved notification for Helen Sanchez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-10T12:26:54.445Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "type": "StaffUpdated",
+    "Payload": {
+      "message": "StaffUpdated notification for Ronald Diaz",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-03T04:39:39.394Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-04T03:30:13.020Z"
+  },
+  {
+    "UserId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Ruth Lee",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-22T16:08:45.411Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f090f6e2b6579072635d4871"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for John Hernandez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-11-10T04:24:14.341Z"
+  },
+  {
+    "UserId": {
+      "$oid": "60a1f702efaa46602f12f64d"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Ruth Lee",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-11-19T10:57:37.683Z"
+  },
+  {
+    "UserId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for Deborah Phillips",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-04-14T01:22:42.855Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "type": "PatientRemoved",
+    "Payload": {
+      "message": "PatientRemoved notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-07T14:02:27.509Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5d3428337f37b8966846fe11"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-31T13:27:45.015Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Karen Turner",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-18T22:09:46.970Z"
+  },
+  {
+    "UserId": {
+      "$oid": "64b5f5814ff4342097027d8e"
+    },
+    "type": "StaffAdded",
+    "Payload": {
+      "message": "StaffAdded notification for Deborah Phillips",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-19T06:35:12.928Z"
+  },
+  {
+    "UserId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Kenneth Hall",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-02-21T19:08:48.357Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f090f6e2b6579072635d4871"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for John Hernandez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-06-11T00:09:31.670Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9e9a8e4146aea49c02714087"
+    },
+    "type": "InventoryItemUpdated",
+    "Payload": {
+      "message": "InventoryItemUpdated notification for Sharon Taylor",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-02T10:30:37.531Z"
+  },
+  {
+    "UserId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "type": "StaffRemoved",
+    "Payload": {
+      "message": "StaffRemoved notification for David Carter",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-03T19:40:41.544Z"
+  },
+  {
+    "UserId": {
+      "$oid": "14fe30fb1c1d51e1d48ffd90"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for George Thomas",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-04T10:11:14.409Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f1d9abc7a00830877d00fc27"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Karen Turner",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-03-27T11:25:18.924Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "type": "PatientRemoved",
+    "Payload": {
+      "message": "PatientRemoved notification for Michael Davis",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-01-27T07:42:44.780Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f749c07cf5f7011a0438c99a"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Ronald Diaz",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-15T06:24:42.212Z"
+  },
+  {
+    "UserId": {
+      "$oid": "f32605beb8d6393efa2f1704"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for Daniel Perez",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-08-19T21:26:21.128Z"
+  },
+  {
+    "UserId": {
+      "$oid": "8aef033884892f841a6d0948"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Michael Davis",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-04-25T05:52:11.847Z"
+  },
+  {
+    "UserId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Kenneth Hall",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-03-31T13:47:13.258Z"
+  },
+  {
+    "UserId": {
+      "$oid": "168ee193b19fc3a01357c7e1"
+    },
+    "type": "InventoryItemAdded",
+    "Payload": {
+      "message": "InventoryItemAdded notification for George Diaz",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-17T14:53:01.813Z"
+  },
+  {
+    "UserId": {
+      "$oid": "b6e7348baf90551fc8224477"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Kenneth Hall",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-06T03:32:00.385Z"
+  },
+  {
+    "UserId": {
+      "$oid": "699ed7fc861a303b418cab37"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for David Carter",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-14T00:11:13.492Z"
+  },
+  {
+    "UserId": {
+      "$oid": "baadea69bb97ed634c89206c"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Carol Martin",
+      "timestamp": "2025-06-22T04:06:32.302Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-08-06T05:22:08.522Z"
+  }
+]

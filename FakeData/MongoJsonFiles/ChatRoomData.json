@@ -1,0 +1,269 @@
+[
+  {
+    "_id": {
+      "$oid": "7372884da09401869fd8e495"
+    },
+    "Name": "Emergency Department",
+    "Participants": [
+      {
+        "$oid": "5e29b58d1356d51eb0737b14"
+      },
+      {
+        "$oid": "8804acd75badeb802f9a61b4"
+      },
+      {
+        "$oid": "5d3428337f37b8966846fe11"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "c90806f05325c0ff853332e9"
+      }
+    ],
+    "CreatedAt": "2025-03-25T06:24:12.107Z"
+  },
+  {
+    "_id": {
+      "$oid": "6df73316965c24f179365654"
+    },
+    "Name": "ICU Team",
+    "Participants": [
+      {
+        "$oid": "5e29b58d1356d51eb0737b14"
+      },
+      {
+        "$oid": "f1d9abc7a00830877d00fc27"
+      },
+      {
+        "$oid": "f749c07cf5f7011a0438c99a"
+      },
+      {
+        "$oid": "8aef033884892f841a6d0948"
+      },
+      {
+        "$oid": "64b5f5814ff4342097027d8e"
+      },
+      {
+        "$oid": "c113db8c7eb970a4f5ce9400"
+      }
+    ],
+    "CreatedAt": "2025-04-25T06:50:04.120Z"
+  },
+  {
+    "_id": {
+      "$oid": "f9ed1e8f22db2f5eb3ff67af"
+    },
+    "Name": "Surgery Planning",
+    "Participants": [
+      {
+        "$oid": "f32605beb8d6393efa2f1704"
+      },
+      {
+        "$oid": "64b5f5814ff4342097027d8e"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "f749c07cf5f7011a0438c99a"
+      },
+      {
+        "$oid": "b6e7348baf90551fc8224477"
+      },
+      {
+        "$oid": "8804acd75badeb802f9a61b4"
+      },
+      {
+        "$oid": "636dc52cd7ac534a95cde8b7"
+      },
+      {
+        "$oid": "c90806f05325c0ff853332e9"
+      }
+    ],
+    "CreatedAt": "2024-12-21T09:44:13.873Z"
+  },
+  {
+    "_id": {
+      "$oid": "ce42242fd0c8dee092ba9c60"
+    },
+    "Name": "Nursing Station",
+    "Participants": [
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "8aef033884892f841a6d0948"
+      },
+      {
+        "$oid": "9e9a8e4146aea49c02714087"
+      },
+      {
+        "$oid": "168ee193b19fc3a01357c7e1"
+      }
+    ],
+    "CreatedAt": "2024-09-30T04:49:11.043Z"
+  },
+  {
+    "_id": {
+      "$oid": "3cbcea55783f0b428d88b012"
+    },
+    "Name": "Administration",
+    "Participants": [
+      {
+        "$oid": "f32605beb8d6393efa2f1704"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "f749c07cf5f7011a0438c99a"
+      },
+      {
+        "$oid": "8aef033884892f841a6d0948"
+      }
+    ],
+    "CreatedAt": "2025-02-21T23:02:12.152Z"
+  },
+  {
+    "_id": {
+      "$oid": "67caaae444abf78ff08737a2"
+    },
+    "Name": "Cardiology Unit",
+    "Participants": [
+      {
+        "$oid": "636dc52cd7ac534a95cde8b7"
+      },
+      {
+        "$oid": "14fe30fb1c1d51e1d48ffd90"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "f1d9abc7a00830877d00fc27"
+      },
+      {
+        "$oid": "699ed7fc861a303b418cab37"
+      },
+      {
+        "$oid": "5e29b58d1356d51eb0737b14"
+      },
+      {
+        "$oid": "64b5f5814ff4342097027d8e"
+      }
+    ],
+    "CreatedAt": "2025-01-30T05:04:31.511Z"
+  },
+  {
+    "_id": {
+      "$oid": "9e70799668b3ffb6c20a2e9b"
+    },
+    "Name": "Pediatrics Ward",
+    "Participants": [
+      {
+        "$oid": "f749c07cf5f7011a0438c99a"
+      },
+      {
+        "$oid": "baadea69bb97ed634c89206c"
+      },
+      {
+        "$oid": "b6e7348baf90551fc8224477"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "168ee193b19fc3a01357c7e1"
+      },
+      {
+        "$oid": "9e9a8e4146aea49c02714087"
+      },
+      {
+        "$oid": "14fe30fb1c1d51e1d48ffd90"
+      }
+    ],
+    "CreatedAt": "2025-03-03T13:03:02.942Z"
+  },
+  {
+    "_id": {
+      "$oid": "90b90a536afa41c2ddd9668a"
+    },
+    "Name": "General Medicine",
+    "Participants": [
+      {
+        "$oid": "64b5f5814ff4342097027d8e"
+      },
+      {
+        "$oid": "9e9a8e4146aea49c02714087"
+      },
+      {
+        "$oid": "c113db8c7eb970a4f5ce9400"
+      },
+      {
+        "$oid": "5e29b58d1356d51eb0737b14"
+      },
+      {
+        "$oid": "8804acd75badeb802f9a61b4"
+      },
+      {
+        "$oid": "636dc52cd7ac534a95cde8b7"
+      },
+      {
+        "$oid": "c90806f05325c0ff853332e9"
+      }
+    ],
+    "CreatedAt": "2024-01-25T19:52:07.847Z"
+  },
+  {
+    "_id": {
+      "$oid": "507be4e1569e84212a4974b4"
+    },
+    "Name": "Radiology Department",
+    "Participants": [
+      {
+        "$oid": "f32605beb8d6393efa2f1704"
+      },
+      {
+        "$oid": "c90806f05325c0ff853332e9"
+      },
+      {
+        "$oid": "f090f6e2b6579072635d4871"
+      },
+      {
+        "$oid": "c113db8c7eb970a4f5ce9400"
+      },
+      {
+        "$oid": "60a1f702efaa46602f12f64d"
+      },
+      {
+        "$oid": "636dc52cd7ac534a95cde8b7"
+      },
+      {
+        "$oid": "b6e7348baf90551fc8224477"
+      },
+      {
+        "$oid": "8aef033884892f841a6d0948"
+      }
+    ],
+    "CreatedAt": "2025-01-22T18:28:32.470Z"
+  },
+  {
+    "_id": {
+      "$oid": "9f509685485496807780e976"
+    },
+    "Name": "Pharmacy Team",
+    "Participants": [
+      {
+        "$oid": "f32605beb8d6393efa2f1704"
+      },
+      {
+        "$oid": "c90806f05325c0ff853332e9"
+      },
+      {
+        "$oid": "b6e7348baf90551fc8224477"
+      }
+    ],
+    "CreatedAt": "2025-02-27T20:03:28.710Z"
+  }
+]
