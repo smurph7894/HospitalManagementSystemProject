@@ -1,25 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const sql = require('mssql');
-const config = require('./dbConfig');
-const schemaDDL = require('./SqlSchema');
+const { connectToDatabase } = require('./insertSQLData');
 
-async function ensureSchema() {
-  const pool = await sql.connect(config.master);
-  // Run each batch separated by "GO"
-  for (let batch of schemaDDL.split(/^GO$/m)) {
-    const trimmed = batch.trim();
-    if (trimmed) await pool.request().batch(trimmed);
-  }
-  await pool.close();
-}
-
-// Connection function for compatibility with createData.js
-async function connectToDatabase() {
-  return await sql.connect(config.hospital);
-}
-
-// Fake Data Generator Class
 class FakeDataGenerator {
     constructor() {
         this.firstNames = [
@@ -181,7 +164,6 @@ class FakeDataGenerator {
     }
 }
 
-// Data Populator Class
 class DataPopulator {
     constructor() {
         this.generator = new FakeDataGenerator();
@@ -382,6 +364,10 @@ class DataPopulator {
         console.log('Clearing existing data...');
         
         const clearQueries = [
+            'DELETE FROM dbo.ChatMessages',
+            'DELETE FROM dbo.ChatRoomParticipants',
+            'DELETE FROM dbo.ChatRooms',
+            'DELETE FROM dbo.Notifications',
             'DELETE FROM dbo.ReportsHistory',
             'DELETE FROM dbo.Vitals',
             'DELETE FROM dbo.Admissions',
@@ -665,16 +651,15 @@ class DataPopulator {
             const condition = this.generator.getRandomElement(this.generator.conditions);
             const description = `Treatment plan for ${condition.toLowerCase()}. Regular monitoring and medication management required.`;
             const diagnosisDate = this.generator.getRandomDate(new Date('2023-01-01'), new Date());
-            const createdAt = this.generator.getRandomDate(new Date('2024-01-01'), new Date());
             const isResolved = Math.random() < 0.3;
             const dateResolved = isResolved ? this.generator.getRandomDate(diagnosisDate, new Date()) : null;
             
             const query = `
                 INSERT INTO dbo.CarePlans (
-                    PatientId, Condition, Description, DiagnosisDate, DateResolved, CreatedAt
+                    PatientId, Condition, Description, DiagnosisDate, DateResolved
                 )
                 VALUES (
-                    @patientId, @condition, @description, @diagnosisDate, @dateResolved, @createdAt
+                    @patientId, @condition, @description, @diagnosisDate, @dateResolved
                 )
             `;
             
@@ -684,7 +669,6 @@ class DataPopulator {
                 .input('description', sql.NVarChar(sql.MAX), description)
                 .input('diagnosisDate', sql.DateTime, diagnosisDate)
                 .input('dateResolved', sql.DateTime, dateResolved)
-                .input('createdAt', sql.DateTime, createdAt)
                 .query(query);
         }
         
@@ -883,6 +867,123 @@ class DataPopulator {
         console.log(`✓ Inserted ${count} reports history entries`);
     }
 
+    // JSON to SQL population methods
+    async populateNotificationsFromJSON() {
+        console.log('Populating Notifications from JSON...');
+        const notifications = this.loadJSON('NotificationData.json');
+
+        for (const notification of notifications) {
+            const userOrgId = notification.UserId.$oid;
+            const type = notification.type;
+            const payload = JSON.stringify(notification.Payload);
+            const isRead = notification.isRead;
+            const createdAt = new Date(notification.CreatedAt);
+
+            const query = `
+                INSERT INTO dbo.Notifications (
+                    UserRef, Type, Payload, IsRead, CreatedAt
+                )
+                VALUES (
+                    @userOrgId, @type, @payload, @isRead, @createdAt
+                )
+            `;
+
+            await this.pool.request()
+                .input('userOrgId', sql.NVarChar(500), userOrgId)
+                .input('type', sql.NVarChar(50), type)
+                .input('payload', sql.NVarChar(sql.MAX), payload)
+                .input('isRead', sql.Bit, isRead)
+                .input('createdAt', sql.DateTime, createdAt)
+                .query(query);
+        }
+
+        console.log(`✓ Inserted ${notifications.length} notifications from JSON`);
+    }
+
+    async populateChatRoomsFromJSON() {
+        console.log('Populating Chat Rooms from JSON...');
+        const chatRooms = this.loadJSON('ChatRoomData.json');
+
+        for (const room of chatRooms) {
+            const name = room.Name;
+            const createdAt = new Date(room.CreatedAt);
+
+            // Insert room and get the generated ID
+            const roomQuery = `
+                INSERT INTO dbo.ChatRooms (Name, CreatedAt)
+                OUTPUT INSERTED.RoomId
+                VALUES (@name, @createdAt)
+            `;
+
+            const result = await this.pool.request()
+                .input('name', sql.NVarChar(100), name)
+                .input('createdAt', sql.DateTime, createdAt)
+                .query(roomQuery);
+
+            const roomId = result.recordset[0].RoomId;
+
+            // Insert participants
+            for (const participant of room.Participants) {
+                const userOrgId = participant.$oid;
+
+                const participantQuery = `
+                    INSERT INTO dbo.ChatRoomParticipants (RoomId, PatientOrgId)
+                    VALUES (@roomId, @userOrgId)
+                `;
+
+                await this.pool.request()
+                    .input('roomId', sql.Int, roomId)
+                    .input('userOrgId', sql.NVarChar(500), userOrgId)
+                    .query(participantQuery);
+            }
+        }
+
+        console.log(`✓ Inserted ${chatRooms.length} chat rooms and participants from JSON`);
+    }
+
+    async populateChatMessagesFromJSON() {
+        console.log('Populating Chat Messages from JSON...');
+        const messages = this.loadJSON('ChatMessageData.json');
+
+        for (const message of messages) {
+            const roomOrgId = message.RoomId.$oid;
+            const senderOrgId = message.SenderId.$oid;
+            const messageText = message.Message;
+            const sentAt = new Date(message.SentAt);
+
+            // Find the room ID by matching the original room _id with our generated rooms
+            // This is a simplified approach - in practice you'd want better ID mapping
+            const roomResult = await this.pool.request()
+                .query('SELECT TOP 1 RoomId FROM dbo.ChatRooms ORDER BY NEWID()');
+            
+            const patientResult = await this.pool.request()
+                .input('orgId', sql.NVarChar(500), senderOrgId)
+                .query('SELECT PatientId FROM dbo.Patients WHERE PatientOrgId = @orgId');
+
+            if (roomResult.recordset.length > 0 && patientResult.recordset.length > 0) {
+                const roomId = roomResult.recordset[0].RoomId;
+                const senderId = patientResult.recordset[0].PatientId;
+
+                const query = `
+                    INSERT INTO dbo.ChatMessages (
+                        RoomId, SenderId, Message, SentAt
+                    )
+                    VALUES (
+                        @roomId, @senderId, @message, @sentAt
+                    )
+                `;
+
+                await this.pool.request()
+                    .input('roomId', sql.Int, roomId)
+                    .input('senderId', sql.Int, senderId)
+                    .input('message', sql.NVarChar(sql.MAX), messageText)
+                    .input('sentAt', sql.DateTime, sentAt)
+                    .query(query);
+            }
+        }
+
+        console.log(`✓ Inserted chat messages from JSON`);
+    }
 
     async populateAll() {
         try {
@@ -959,343 +1060,22 @@ class DataPopulator {
     }
 }
 
-// Individual Insert Functions
-// Insert into Patients
-async function insertPatient(
-  patientOrgId, firstName, lastName, dob, gender,
-  phone, email, address,
-  emergencyContactName, emergencyContactPhone,
-  insuranceProvider, insurancePolicyNumber
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('PatientOrgId', sql.NVarChar(500), patientOrgId)
-    .input('FirstName', sql.NVarChar(100), firstName)
-    .input('LastName', sql.NVarChar(100), lastName)
-    .input('DOB', sql.Date, dob)
-    .input('Gender', sql.Char(1), gender)
-    .input('Phone', sql.NVarChar(20), phone)
-    .input('Email', sql.NVarChar(255), email)
-    .input('Address', sql.NVarChar(500), address)
-    .input('EmergencyContactName', sql.NVarChar(200), emergencyContactName)
-    .input('EmergencyContactPhone', sql.NVarChar(20), emergencyContactPhone)
-    .input('InsuranceProvider', sql.NVarChar(200), insuranceProvider)
-    .input('InsurancePolicyNumber', sql.NVarChar(100), insurancePolicyNumber)
-    .query(
-      `INSERT INTO dbo.Patients (
-         PatientOrgId, FirstName, LastName, DOB, Gender,
-         Phone, Email, Address,
-         EmergencyContactName, EmergencyContactPhone,
-         InsuranceProvider, InsurancePolicyNumber
-       ) VALUES (
-         @PatientOrgId, @FirstName, @LastName, @DOB, @Gender,
-         @Phone, @Email, @Address,
-         @EmergencyContactName, @EmergencyContactPhone,
-         @InsuranceProvider, @InsurancePolicyNumber
-       );`
-    );
-  console.log('Patient inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Departments
-async function insertDepartment(name, description) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('Name', sql.NVarChar(100), name)
-    .input('Description', sql.NVarChar(500), description)
-    .query(
-      `INSERT INTO dbo.Departments (Name, Description)
-       VALUES (@Name, @Description);`
-    );
-  console.log('Department inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into CarePlans
-async function insertCarePlan(patientId, condition, description) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('PatientId', sql.Int, patientId)
-    .input('Condition', sql.NVarChar(200), condition)
-    .input('Description', sql.NVarChar(sql.MAX), description)
-    .query(
-      `INSERT INTO dbo.CarePlans (PatientId, Condition, Description)
-       VALUES (@PatientId, @Condition, @Description);`
-    );
-  console.log('CarePlan inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into CarePlanUpdates
-async function insertCarePlanUpdate(carePlanId, appointmentId, notes) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('CarePlanId', sql.Int, carePlanId)
-    .input('AppointmentId', sql.Int, appointmentId)
-    .input('Notes', sql.NVarChar(sql.MAX), notes)
-    .query(
-      `INSERT INTO dbo.CarePlanUpdates (CarePlanId, AppointmentId, Notes)
-       VALUES (@CarePlanId, @AppointmentId, @Notes);`
-    );
-  console.log('CarePlanUpdate inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Staff
-async function insertStaff(
-  userRef, name, staffType, specialization, departmentId,
-  hireDate, phone, email
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('UserRef', sql.VarChar(24), userRef)
-    .input('Name', sql.Varchar(100), name)
-    .input('StaffType', sql.Varchar(50), staffType)
-    .input('Specialization', sql.Varchar(100), specialization)
-    .input('DepartmentId', sql.Int, departmentId)
-    .input('HireDate', sql.Date, hireDate)
-    .input('Phone', sql.Varchar(20), phone)
-    .input('Email', sql.NVarChar(255), email)
-    .query(
-      `INSERT INTO dbo.Staff (
-         UserRef, Name, StaffType, Specialization, DepartmentId,
-         HireDate, Phone, Email
-       ) VALUES (
-         @UserRef, @Name, @StaffType, @Specialization, @DepartmentId,
-         @HireDate, @Phone, @Email
-       );`
-    );
-  console.log('Staff inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Appointments
-async function insertAppointment(
-  patientId, staffId, scheduledAt, durationMinutes,
-  status, reason, createdBy
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('PatientId', sql.Int, patientId)
-    .input('StaffId', sql.Int, staffId)
-    .input('ScheduledAt', sql.DateTime, scheduledAt)
-    .input('DurationMinutes', sql.Int, durationMinutes)
-    .input('Status', sql.NVarChar(50), status)
-    .input('Reason', sql.NVarChar(500), reason)
-    .input('CreatedBy', sql.Int, createdBy)
-    .query(
-      `INSERT INTO dbo.Appointments (
-         PatientId, StaffId, ScheduledAt, DurationMinutes,
-         Status, Reason, CreatedBy
-       ) VALUES (
-         @PatientId, @StaffId, @ScheduledAt, @DurationMinutes,
-         @Status, @Reason, @CreatedBy
-       );`
-    );
-  console.log('Appointment inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into InventoryItems
-async function insertInventoryItem(
-  name, description, quantityInStock, unitOfMeasure,
-  reorderLevel, location
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('Name', sql.NVarChar(200), name)
-    .input('Description', sql.NVarChar(500), description)
-    .input('QuantityInStock', sql.Int, quantityInStock)
-    .input('UnitOfMeasure', sql.NVarChar(50), unitOfMeasure)
-    .input('ReorderLevel', sql.Int, reorderLevel)
-    .input('Location', sql.NVarChar(100), location)
-    .query(
-      `INSERT INTO dbo.InventoryItems (
-         Name, Description, QuantityInStock, UnitOfMeasure,
-         ReorderLevel, Location
-       ) VALUES (
-         @Name, @Description, @QuantityInStock, @UnitOfMeasure,
-         @ReorderLevel, @Location
-       );`
-    );
-  console.log('InventoryItem inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into InventoryTransactions
-async function insertInventoryTransaction(
-  itemId, changeQuantity, transactionType, performedBy, remarks
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('ItemId', sql.Int, itemId)
-    .input('ChangeQuantity', sql.Int, changeQuantity)
-    .input('TransactionType', sql.NVarChar(50), transactionType)
-    .input('PerformedBy', sql.Int, performedBy)
-    .input('Remarks', sql.NVarChar(500), remarks)
-    .query(
-      `INSERT INTO dbo.InventoryTransactions (
-         ItemId, ChangeQuantity, TransactionType, PerformedBy, Remarks
-       ) VALUES (
-         @ItemId, @ChangeQuantity, @TransactionType, @PerformedBy, @Remarks
-       );`
-    );
-  console.log('InventoryTransaction inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Beds
-async function insertBed(ward, bedNumber, status) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('Ward', sql.NVarChar(100), ward)
-    .input('BedNumber', sql.NVarChar(50), bedNumber)
-    .input('Status', sql.NVarChar(20), status)
-    .query(
-      `INSERT INTO dbo.Beds (Ward, BedNumber, Status)
-       VALUES (@Ward, @BedNumber, @Status);`
-    );
-  console.log('Bed inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Admissions
-async function insertAdmission(
-  patientId, bedId, dischargedAt, admitBy, dischargeBy
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('PatientId', sql.Int, patientId)
-    .input('BedId', sql.Int, bedId)
-    .input('DischargedAt', sql.DateTime, dischargedAt)
-    .input('AdmitBy', sql.Int, admitBy)
-    .input('DischargeBy', sql.Int, dischargeBy)
-    .query(
-      `INSERT INTO dbo.Admissions (
-         PatientId, BedId, DischargedAt, AdmitBy, DischargeBy
-       ) VALUES (
-         @PatientId, @BedId, @DischargedAt, @AdmitBy, @DischargeBy
-       );`
-    );
-  console.log('Admission inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into Vitals
-async function insertVital(
-  patientId, vitalType, value, unit, recordedBy
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('PatientId', sql.Int, patientId)
-    .input('VitalType', sql.NVarChar(50), vitalType)
-    .input('Value', sql.NVarChar(50), value)
-    .input('Unit', sql.NVarChar(20), unit)
-    .input('RecordedBy', sql.Int, recordedBy)
-    .query(
-      `INSERT INTO dbo.Vitals (
-         PatientId, VitalType, Value, Unit, RecordedBy
-       ) VALUES (
-         @PatientId, @VitalType, @Value, @Unit, @RecordedBy
-       );`
-    );
-  console.log('Vital inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Insert into ReportsHistory
-async function insertReportsHistory(
-  reportType, parameters, generatedBy, filePath
-) {
-  const pool = await sql.connect(config.hospital);
-  const result = await pool.request()
-    .input('ReportType', sql.NVarChar(100), reportType)
-    .input('Parameters', sql.NVarChar(sql.MAX), parameters)
-    .input('GeneratedBy', sql.Int, generatedBy)
-    .input('FilePath', sql.NVarChar(500), filePath)
-    .query(
-      `INSERT INTO dbo.ReportsHistory (
-         ReportType, Parameters, GeneratedBy, FilePath
-       ) VALUES (
-         @ReportType, @Parameters, @GeneratedBy, @FilePath
-       );`
-    );
-  console.log('ReportsHistory inserted, rowsAffected:', result.rowsAffected[0]);
-  await pool.close();
-}
-
-// Main execution function for bulk data population
-async function populateAllData() {
-  const populator = new DataPopulator();
-  
-  try {
-    await populator.populateAll();
-  } catch (error) {
-    console.error('Application error:', error.message);
-    process.exit(1);
-  }
-}
-
-// Export classes and functions for use as module
-module.exports = { 
-  DataPopulator, 
-  FakeDataGenerator,
-  connectToDatabase,
-  ensureSchema,
-  populateAllData,
-  // Individual insert functions
-  insertPatient,
-  insertDepartment,
-  insertCarePlan,
-  insertCarePlanUpdate,
-  insertStaff,
-  insertAppointment,
-  insertInventoryItem,
-  insertInventoryTransaction,
-  insertBed,
-  insertAdmission,
-  insertVital,
-  insertReportsHistory
-};
-
-// Main execution when run directly
-(async () => {
-  try {
-    // console.log(config.hospital);
+// Main execution
+async function main() {
+    const populator = new DataPopulator();
     
-    // 1) Create DB + tables if missing
-    await ensureSchema();
+    try {
+        await populator.populateAll();
+    } catch (error) {
+        console.error('Application error:', error.message);
+        process.exit(1);
+    }
+}
 
-    // 2) Uncomment below to run bulk data population
-    await populateAllData();
+// Export for use as module
+module.exports = { DataPopulator, FakeDataGenerator };
 
-  } catch (err) {
-    console.error('Error during setup/insert:', err);
-  }
-})();
-
-/*
-USAGE:
-
-1. For bulk data population:
-   - Uncomment the populateAllData() call in the main execution
-   - Run: node insertSQLData.js
-
-2. For individual inserts:
-   - Use the exported functions in your own modules
-   - Or uncomment the example calls in the main execution
-
-3. For schema setup only:
-   - Run: node insertSQLData.js (default behavior)
-
-SQL EXPECTED OUTPUT:
-  Rows inserted: # 
-  (ex. Rows inserted: 1)
-
-BULK POPULATION OUTPUT:
-  🚀 Starting Data Population Process...
-  ✓ Generated UserData.json with 20 records
-  ✓ Inserted 120 patients from JSON
-  ✅ All Data Population Completed Successfully!
-*/
+// Run if executed directly
+if (require.main === module) {
+    main();
+}

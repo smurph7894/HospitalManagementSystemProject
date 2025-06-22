@@ -1,0 +1,602 @@
+[
+  {
+    "UserId": {
+      "$oid": "e03543283000580ad693235d"
+    },
+    "type": "InventoryItemAdded",
+    "Payload": {
+      "message": "InventoryItemAdded notification for Sharon Garcia",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-17T20:05:25.706Z"
+  },
+  {
+    "UserId": {
+      "$oid": "d15d3de983a197dda5378879"
+    },
+    "type": "AppointmentChanged",
+    "Payload": {
+      "message": "AppointmentChanged notification for Mary Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-01-15T22:34:05.507Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e03543283000580ad693235d"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Sharon Garcia",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-15T04:38:37.724Z"
+  },
+  {
+    "UserId": {
+      "$oid": "619b41a0b09d69b71e95a819"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Betty Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-04-08T16:11:38.457Z"
+  },
+  {
+    "UserId": {
+      "$oid": "18e9b73702343ce01196f3ca"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for Susan Diaz",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-06-08T14:37:58.974Z"
+  },
+  {
+    "UserId": {
+      "$oid": "beca806da78eafbc007e84c1"
+    },
+    "type": "StaffUpdated",
+    "Payload": {
+      "message": "StaffUpdated notification for Barbara Lee",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-04T18:32:21.017Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-20T16:41:40.444Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "PatientRemoved",
+    "Payload": {
+      "message": "PatientRemoved notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-15T07:26:21.579Z"
+  },
+  {
+    "UserId": {
+      "$oid": "beca806da78eafbc007e84c1"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for Barbara Lee",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-01-29T07:39:42.135Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-08T15:16:31.873Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9b86986b28c5829efb199485"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Carol Davis",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-29T00:06:05.931Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-03-06T19:20:12.823Z"
+  },
+  {
+    "UserId": {
+      "$oid": "18e9b73702343ce01196f3ca"
+    },
+    "type": "AppointmentChanged",
+    "Payload": {
+      "message": "AppointmentChanged notification for Susan Diaz",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-06-04T10:19:38.789Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-07-04T23:40:51.293Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-05-12T01:00:10.426Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-06-10T22:51:15.443Z"
+  },
+  {
+    "UserId": {
+      "$oid": "619b41a0b09d69b71e95a819"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Betty Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-06T08:11:48.698Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a50ffda4454cb66ae5484add"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for Jennifer Jones",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-11-05T20:34:31.714Z"
+  },
+  {
+    "UserId": {
+      "$oid": "4b4d7d27a610900cea31529c"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Sarah Turner",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-06-19T05:00:25.368Z"
+  },
+  {
+    "UserId": {
+      "$oid": "beca806da78eafbc007e84c1"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for Barbara Lee",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-04-10T09:12:31.991Z"
+  },
+  {
+    "UserId": {
+      "$oid": "619b41a0b09d69b71e95a819"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Betty Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-08-18T20:15:28.059Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9f6e7ae07695ceb5e79b4dc6"
+    },
+    "type": "StaffUpdated",
+    "Payload": {
+      "message": "StaffUpdated notification for David Hernandez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-02-10T05:51:44.545Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9b86986b28c5829efb199485"
+    },
+    "type": "MedicalHistoryUpdated",
+    "Payload": {
+      "message": "MedicalHistoryUpdated notification for Carol Davis",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-08-26T23:33:22.999Z"
+  },
+  {
+    "UserId": {
+      "$oid": "01ab69f98f91bf916d76ab09"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Charles Young",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-26T20:32:13.680Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5efd6681c1ba894eae791ab0"
+    },
+    "type": "InventoryItemAdded",
+    "Payload": {
+      "message": "InventoryItemAdded notification for Christopher Adams",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-12-27T05:11:46.102Z"
+  },
+  {
+    "UserId": {
+      "$oid": "d80770025c1a48fbb05f9a4d"
+    },
+    "type": "StaffRemoved",
+    "Payload": {
+      "message": "StaffRemoved notification for Thomas Brown",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-11T16:17:10.975Z"
+  },
+  {
+    "UserId": {
+      "$oid": "02d6f5ca5c1a04f92890857e"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for Karen Gomez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-02-24T13:56:27.864Z"
+  },
+  {
+    "UserId": {
+      "$oid": "fb95d15949ec96f346bfcebd"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Charles Clark",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-12-23T14:35:58.839Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-08-12T01:16:50.108Z"
+  },
+  {
+    "UserId": {
+      "$oid": "634cd9d4312566ba87c3bd2b"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Edward Anderson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-06-02T04:56:04.833Z"
+  },
+  {
+    "UserId": {
+      "$oid": "87430c2947f97eac20e8aeb7"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Matthew Mitchell",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-01-12T18:34:55.004Z"
+  },
+  {
+    "UserId": {
+      "$oid": "beca806da78eafbc007e84c1"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Barbara Lee",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-11-06T21:37:39.788Z"
+  },
+  {
+    "UserId": {
+      "$oid": "634cd9d4312566ba87c3bd2b"
+    },
+    "type": "BedReleased",
+    "Payload": {
+      "message": "BedReleased notification for Edward Anderson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-02-09T14:29:05.289Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9b86986b28c5829efb199485"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Carol Davis",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-04-22T07:40:11.223Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-02-05T14:38:00.276Z"
+  },
+  {
+    "UserId": {
+      "$oid": "d80770025c1a48fbb05f9a4d"
+    },
+    "type": "BedAssigned",
+    "Payload": {
+      "message": "BedAssigned notification for Thomas Brown",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-11-22T19:53:31.351Z"
+  },
+  {
+    "UserId": {
+      "$oid": "634cd9d4312566ba87c3bd2b"
+    },
+    "type": "StaffAdded",
+    "Payload": {
+      "message": "StaffAdded notification for Edward Anderson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-06-18T01:43:55.610Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-10T23:00:18.413Z"
+  },
+  {
+    "UserId": {
+      "$oid": "02d6f5ca5c1a04f92890857e"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for Karen Gomez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-04-13T05:32:11.624Z"
+  },
+  {
+    "UserId": {
+      "$oid": "02d6f5ca5c1a04f92890857e"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Karen Gomez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-02T08:34:36.791Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a50ffda4454cb66ae5484add"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for Jennifer Jones",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-14T13:33:15.530Z"
+  },
+  {
+    "UserId": {
+      "$oid": "5efd6681c1ba894eae791ab0"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Christopher Adams",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-06-14T11:04:51.009Z"
+  },
+  {
+    "UserId": {
+      "$oid": "fb95d15949ec96f346bfcebd"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Charles Clark",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-06T15:23:15.582Z"
+  },
+  {
+    "UserId": {
+      "$oid": "696be14e5152ae0f4361e859"
+    },
+    "type": "PatientAdded",
+    "Payload": {
+      "message": "PatientAdded notification for David Jackson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-04-26T14:12:42.813Z"
+  },
+  {
+    "UserId": {
+      "$oid": "626ee94bca893f4885643c8f"
+    },
+    "type": "StaffAdded",
+    "Payload": {
+      "message": "StaffAdded notification for Nancy Robinson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-02-14T22:25:03.438Z"
+  },
+  {
+    "UserId": {
+      "$oid": "696be14e5152ae0f4361e859"
+    },
+    "type": "AppointmentChanged",
+    "Payload": {
+      "message": "AppointmentChanged notification for David Jackson",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-02T08:11:01.443Z"
+  },
+  {
+    "UserId": {
+      "$oid": "619b41a0b09d69b71e95a819"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Betty Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-03-31T03:04:15.001Z"
+  },
+  {
+    "UserId": {
+      "$oid": "619b41a0b09d69b71e95a819"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Betty Flores",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-28T22:12:09.473Z"
+  },
+  {
+    "UserId": {
+      "$oid": "02d6f5ca5c1a04f92890857e"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Karen Gomez",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-03-01T19:26:36.359Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59964ddea6cd40e1151ead58"
+    },
+    "type": "AppointmentChanged",
+    "Payload": {
+      "message": "AppointmentChanged notification for John Harris",
+      "timestamp": "2025-06-22T03:41:46.669Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-03-04T15:55:29.173Z"
+  }
+]
