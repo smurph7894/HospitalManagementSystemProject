@@ -44,6 +44,17 @@ namespace HospitalManagementSystemAPI.Controllers
             return Ok("User registered successfully.");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var result = await _userCollection.DeleteOneAsync(u => u.UserId == id);
+            if (result.DeletedCount == 0)
+            {
+                return NotFound("User not found.");
+            }
+            return Ok("User deleted successfully.");
+        }
+
     }
 
     public class RegisterUserDto

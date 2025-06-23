@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson.IO;
 
 namespace HospitalManagementSystemAPI.Controllers
 {
@@ -12,6 +11,7 @@ namespace HospitalManagementSystemAPI.Controllers
     public class PatientController : ControllerBase
     {
         private readonly AppDbContext _context;
+
         public PatientController(AppDbContext context)
         {
             _context = context;
@@ -233,13 +233,12 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
-        // DELETE: api/patient/{patientId} - deletes a patient
+        // DELETE: api/patient/{patientId} - deletes a patient using PatientId or PatientOrgId
         [HttpDelete("{patientId}")]
-        public async Task<ActionResult> DeletePatient(int patientId)
+        public async Task<ActionResult> DeletePatient(string patientId)
         {
             try
             {
-                //TODO - delete mongoDB patient record as well
                 var patient = await _context.Patients.FindAsync(patientId);
                 if (patient == null)
                 {

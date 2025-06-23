@@ -154,12 +154,24 @@ namespace HospitalManagementSystemClient
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientId}").Result;
+                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientOrgId}").Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Patient deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Patient information deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        if(_loggedInUser.UserId == selectedPatient.PatientOrgId)
+                        //delete mongo user
+                        var responseMongo = client.DeleteAsync($"https://localhost:5001/api/users/{selectedPatient.PatientOrgId}").Result;
+                        if (responseMongo.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("User account deleted successfully .", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete user account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                        //navigate back to the appropriate form based on the logged-in user
+                        if (_loggedInUser.UserId == selectedPatient.PatientOrgId)
                         {
                             // If the logged-in user is the patient, redirect to the registration form
                             this.Close();

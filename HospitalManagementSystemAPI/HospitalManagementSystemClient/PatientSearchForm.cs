@@ -126,11 +126,21 @@ namespace HospitalManagementSystemClient
                         MessageBox.Show("Please select a patient to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientId}").Result;
+                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientOrgId}").Result;
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Patient deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadPatientsList(); // Refresh the list after deletion
+
+                        var responseMongo = client.DeleteAsync($"https://localhost:5001/api/users/{selectedPatient.PatientOrgId}").Result;
+                        if (responseMongo.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("User account deleted successfully .", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete user account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
