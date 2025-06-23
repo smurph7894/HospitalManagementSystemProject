@@ -18,17 +18,20 @@ namespace HospitalManagementSystemClient
         private Users _loggedInUser;
         private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
         private Patient selectedPatient;
-        private char[] gender = ['X', 'F', 'M'];
+        private char[] gender = new char[] { 'X', 'F', 'M' };
 
         public PatientUserInfo(Users loggedInUser, Patient patientInfo)
         {
             InitializeComponent();
             _loggedInUser = loggedInUser;
             selectedPatient = patientInfo;
+            PatientUserInfo_Load();
         }
 
-        private void PatientUserInfo_Load(object sender, EventArgs e)
+        private void PatientUserInfo_Load()
         {
+            Console.WriteLine("selectedPatient", selectedPatient);
+            Console.WriteLine(selectedPatient.PatientId.ToString(), selectedPatient.InsuranceProvider);
             // Load patient information into the form controls
             if (selectedPatient != null)
             {
@@ -70,7 +73,7 @@ namespace HospitalManagementSystemClient
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            if (_loggedInUser.UserId == selectedPatient.PatientOrgId)
+            if (_loggedInUser.UserId == this.selectedPatient.PatientOrgId)
             {
                 // If the logged-in user is the patient, go back to their dashboard
                 this.Close();
@@ -171,7 +174,7 @@ namespace HospitalManagementSystemClient
                         }
 
                         //navigate back to the appropriate form based on the logged-in user
-                        if (_loggedInUser.UserId == selectedPatient.PatientOrgId)
+                        if (_loggedInUser.UserId == this.selectedPatient.PatientOrgId)
                         {
                             // If the logged-in user is the patient, redirect to the registration form
                             this.Close();

@@ -86,7 +86,7 @@
             this.dataGridView_PatientList.RowTemplate.Height = 24;
             this.dataGridView_PatientList.Size = new System.Drawing.Size(1879, 701);
             this.dataGridView_PatientList.TabIndex = 4;
-            this.dataGridView_PatientList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_PatientList_CellContentClick);
+            this.dataGridView_PatientList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_PatientList_CellContentClick);
             // 
             // btn_back
             // 

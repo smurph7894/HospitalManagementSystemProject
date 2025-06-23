@@ -47,6 +47,7 @@ namespace HospitalManagementSystemAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
+            //TODO need to cascade delete to related collections if necessary
             var result = await _userCollection.DeleteOneAsync(u => u.UserId == id);
             if (result.DeletedCount == 0)
             {
