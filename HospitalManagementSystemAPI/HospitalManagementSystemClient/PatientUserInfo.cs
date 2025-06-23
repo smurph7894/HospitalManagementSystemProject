@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -94,7 +96,95 @@ namespace HospitalManagementSystemClient
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Update patient information logic here
+                if (txtb_firstName.Text == "" || txtB_lastName.Text == "" || dtp_DOB.Value == null || comboBox_gender == null)
+                {
+                    MessageBox.Show("Please fill in all required fields First Name, Last Name, Date of Birth(DOB), and Gender.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                var updatedPatient = new Patient
+                {
+                    PatientId = selectedPatient.PatientId,
+                    PatientOrgId = selectedPatient.PatientOrgId,
+                    FirstName = txtb_firstName.Text.Trim(),
+                    LastName = txtB_lastName.Text.Trim(),
+                    Email = txtB_email.Text.Trim(),
+                    Phone = txtB_phone.Text.Trim(),
+                    Address = txtB_address.Text.Trim(),
+                    EmergencyContactName = txtB_emergContactName.Text.Trim(),
+                    EmergencyContactPhone = txtB_emergContactPhone.Text.Trim(),
+                    InsuranceProvider = txtB_InsurProvider.Text.Trim(),
+                    InsurancePolicyNumber = txtB_InsurPolicyNumber.Text.Trim(),
+                    DOB = dtp_DOB.Value,
+                    Gender = gender[comboBox_gender.SelectedIndex],
+                };
 
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = client.PutAsJsonAsync($"{apiBaseUrl}/{selectedPatient.PatientId}", updatedPatient).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Update the selected patient with the new information
+                        selectedPatient = updatedPatient;
+                        MessageBox.Show("Patient information updated successfully.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update patient information. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while updating patient information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            //check they want to delete the folder
+            var confirmResult = MessageBox.Show("Are you sure you want to delete this patient?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmResult != DialogResult.Yes)
+            {
+                return; // User chose not to delete
+            }
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientId}").Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Patient deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if(_loggedInUser.UserId == selectedPatient.PatientOrgId)
+                        {
+                            // If the logged-in user is the patient, redirect to the registration form
+                            this.Close();
+                            var registerForm = new RegisterForm();
+                            registerForm.Show(); // Redirect to the registration form after deletion
+                        }
+                        else
+                        {
+                            // If the logged-in user is not the patient, refresh the patient search form
+                            this.Close();
+                            var patientSearchForm = new PatientSearchForm(_loggedInUser);
+                            patientSearchForm.Show();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete patient. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while deleting the patient.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Delete error: {ex.Message}");
+            }
         }
     }
 }

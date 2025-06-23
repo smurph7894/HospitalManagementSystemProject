@@ -24,7 +24,7 @@ namespace HospitalManagementSystemAPI.Controllers
             try
             {
                 var patient = await _context.Patients.FindAsync(patientId);
-                if (patient == null)
+                if (patient == null)    
                 {
                     return NotFound("Patient not found.");
                 }
