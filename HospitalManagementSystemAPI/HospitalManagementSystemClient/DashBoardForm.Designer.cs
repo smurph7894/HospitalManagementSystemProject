@@ -30,7 +30,6 @@
         {
             this.btn_ScheduleAppointments = new System.Windows.Forms.Button();
             this.btn_AccessReports = new System.Windows.Forms.Button();
-            this.btn_ViewMedicalHistory = new System.Windows.Forms.Button();
             this.btn_ManageInventory = new System.Windows.Forms.Button();
             this.btn_ManageStaff = new System.Windows.Forms.Button();
             this.btn_ViewVitals = new System.Windows.Forms.Button();
@@ -63,16 +62,6 @@
             this.btn_AccessReports.TabIndex = 1;
             this.btn_AccessReports.Text = "Access Reports";
             this.btn_AccessReports.UseVisualStyleBackColor = true;
-            // 
-            // btn_ViewMedicalHistory
-            // 
-            this.btn_ViewMedicalHistory.Location = new System.Drawing.Point(155, 309);
-            this.btn_ViewMedicalHistory.Name = "btn_ViewMedicalHistory";
-            this.btn_ViewMedicalHistory.Size = new System.Drawing.Size(118, 52);
-            this.btn_ViewMedicalHistory.TabIndex = 2;
-            this.btn_ViewMedicalHistory.Text = "View Medical History";
-            this.btn_ViewMedicalHistory.UseVisualStyleBackColor = true;
-            this.btn_ViewMedicalHistory.Click += new System.EventHandler(this.btn_ViewMedicalHistory_Click);
             // 
             // btn_ManageInventory
             // 
@@ -204,7 +193,6 @@
             this.Controls.Add(this.btn_ViewVitals);
             this.Controls.Add(this.btn_ManageStaff);
             this.Controls.Add(this.btn_ManageInventory);
-            this.Controls.Add(this.btn_ViewMedicalHistory);
             this.Controls.Add(this.btn_AccessReports);
             this.Controls.Add(this.btn_ScheduleAppointments);
             this.Name = "DashBoardForm";
@@ -219,7 +207,6 @@
 
         private System.Windows.Forms.Button btn_ScheduleAppointments;
         private System.Windows.Forms.Button btn_AccessReports;
-        private System.Windows.Forms.Button btn_ViewMedicalHistory;
         private System.Windows.Forms.Button btn_ManageInventory;
         private System.Windows.Forms.Button btn_ManageStaff;
         private System.Windows.Forms.Button btn_ViewVitals;

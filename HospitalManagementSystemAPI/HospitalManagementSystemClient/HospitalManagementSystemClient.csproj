@@ -247,11 +247,23 @@
     </Compile>
     <Compile Include="Models\Patient.cs" />
     <Compile Include="MongoDbService.cs" />
+    <Compile Include="MedicalHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalHistoryForm.Designer.cs">
+      <DependentUpon>MedicalHistoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PatientSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PatientSearchForm.Designer.cs">
       <DependentUpon>PatientSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientUserInfo.Designer.cs">
+      <DependentUpon>PatientUserInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -274,8 +286,14 @@
     <EmbeddedResource Include="InventoryManagementForm.resx">
       <DependentUpon>InventoryManagementForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MedicalHistoryForm.resx">
+      <DependentUpon>MedicalHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PatientSearchForm.resx">
       <DependentUpon>PatientSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientUserInfo.resx">
+      <DependentUpon>PatientUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

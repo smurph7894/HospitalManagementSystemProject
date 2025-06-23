@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson.IO;
 
 namespace HospitalManagementSystemAPI.Controllers
 {
@@ -16,7 +17,7 @@ namespace HospitalManagementSystemAPI.Controllers
             _context = context;
         }
 
-        // GET: api/patient/{patientId} - gets a specific patient by ID
+        // GET: api/patient/{patientId} - gets a specific patient by ID or PatientOrgId
         [HttpGet("{patientId}")]
         public async Task<ActionResult> GetPatientById(int patientId)
         {
@@ -33,6 +34,96 @@ namespace HospitalManagementSystemAPI.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving patient: {ex.Message}");
             }
+        }
+
+        // GET: api/patient/{category}/{searchInput} - gets patients based on search input and by category if added  
+        [HttpGet("search/{category}/{searchInput}")]
+        public async Task<ActionResult> SearchPatients(string searchInput, string category)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(searchInput))
+                {
+                    return BadRequest("Search input cannot be empty.");
+                }
+
+                bool isInt = int.TryParse(searchInput, out int parsedId);
+                bool isDate = DateTime.TryParse(searchInput, out DateTime parsedDate);
+                bool isChar = char.TryParse(searchInput, out char parsedGender);
+
+                List<Patient> patients;
+
+                if (category == "category" && searchInput != null)
+                {
+                    patients = await _context.Patients
+                        .Where(p =>
+                            // string searches  
+                            p.FirstName.Contains(searchInput) || p.LastName.Contains(searchInput) || p.Phone.Contains(searchInput) ||
+                            p.Email.Contains(searchInput) || p.Address.Contains(searchInput) || p.EmergencyContactName.Contains(searchInput) ||
+                            p.EmergencyContactPhone.Contains(searchInput) || p.InsuranceProvider.Contains(searchInput) || p.InsurancePolicyNumber.Contains(searchInput) ||
+                            // non-string searches  
+                            (isInt && p.PatientId == parsedId) || (isDate && p.DOB.Date == parsedDate) || (isChar && p.Gender == parsedGender)
+                        )
+                        .ToListAsync();
+                    if (!patients.Any())
+                    {
+                        return NotFound("No patients found matching the search criteria.");
+                    }
+                    return Ok(patients);
+                }
+                else if (category != "category")
+                {
+                    if (isInt)
+                    {
+                        patients = await _context.Patients
+                            .Where(p =>
+                                p.PatientId == parsedId
+                            )
+                            .ToListAsync();
+                    }
+                    else if (isDate)
+                    {
+                        patients = await _context.Patients
+                            .Where(p =>
+                                p.DOB.Date == parsedDate.Date
+                            )
+                            .ToListAsync();
+                    }
+                    else if (isChar)
+                    {
+                        patients = await _context.Patients
+                            .Where(p =>
+                                p.Gender == parsedGender
+                            )
+                            .ToListAsync();
+                    }
+                    else
+                    {
+                        patients = await _context.Patients
+                            .Where(p => StringMatches(p, searchInput, category))
+                            .ToListAsync();
+                    }
+                    if (!patients.Any())
+                    {
+                        return NotFound("No patients found matching the search criteria.");
+                    }
+                    return Ok(patients);
+                }
+
+                // Return BadRequest if category is invalid  
+                return BadRequest("Invalid category.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error searching patients: {ex.Message}");
+            }
+        }
+
+        private static bool StringMatches(Patient patient, string searchInput, string category)
+        {
+            var propertyInfo = patient.GetType().GetProperty(category);
+            var prop = propertyInfo.GetValue(patient);
+            return ((string)prop).Contains(searchInput);
         }
 
         // Get: api/patient - gets all patients
@@ -148,6 +239,7 @@ namespace HospitalManagementSystemAPI.Controllers
         {
             try
             {
+                //TODO - delete mongoDB patient record as well
                 var patient = await _context.Patients.FindAsync(patientId);
                 if (patient == null)
                 {
