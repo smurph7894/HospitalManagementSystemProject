@@ -91,5 +91,10 @@ namespace HospitalManagementSystemClient
             var dashBoardForm = new DashBoardForm(_loggedInUser);
             dashBoardForm.Show();
         }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
