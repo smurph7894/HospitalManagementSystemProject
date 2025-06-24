@@ -19,7 +19,7 @@ namespace HospitalManagementSystemAPI.Controllers
             _context = context;
         }
 
-        // GET: api/patient/{patientId} - gets a specific patient by ID or PatientOrgId
+        // GET: api/patient/{patientId} - gets a specific patient by ID
         [HttpGet("{patientId}")]
         public async Task<ActionResult> GetPatientById(int patientId)
         {
@@ -27,6 +27,31 @@ namespace HospitalManagementSystemAPI.Controllers
             {
                 var patient = await _context.Patients.FindAsync(patientId);
                 if (patient == null)    
+                {
+                    return NotFound("Patient not found.");
+                }
+                return Ok(patient);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving patient: {ex.Message}");
+            }
+        }
+
+        //GET: api/patient/userId/{patientOrgId} - gets a specific patient by Organization ID
+        [HttpGet("userId/{patientOrgId}")]
+        public async Task<ActionResult> GetPatientByOrgId(string patientOrgId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(patientOrgId))
+                {
+                    return BadRequest("Patient Organization ID cannot be empty.");
+                }
+                var patient = await _context.Patients
+                    .Where(p => p.PatientOrgId == patientOrgId)
+                    .FirstOrDefaultAsync();
+                if (patient == null)
                 {
                     return NotFound("Patient not found.");
                 }

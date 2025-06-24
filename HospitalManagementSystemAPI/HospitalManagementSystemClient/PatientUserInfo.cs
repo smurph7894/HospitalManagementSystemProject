@@ -16,7 +16,7 @@ namespace HospitalManagementSystemClient
     public partial class PatientUserInfo : Form
     {
         private Users _loggedInUser;
-        private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
+        private readonly string apiBaseUrl = "http://localhost:5277/api";
         private Patient selectedPatient;
         private char[] gender = new char[] { 'X', 'F', 'M' };
 
@@ -30,8 +30,6 @@ namespace HospitalManagementSystemClient
 
         private void PatientUserInfo_Load()
         {
-            Console.WriteLine("selectedPatient", selectedPatient);
-            Console.WriteLine(selectedPatient.PatientId.ToString(), selectedPatient.InsuranceProvider);
             // Load patient information into the form controls
             if (selectedPatient != null)
             {
@@ -126,7 +124,7 @@ namespace HospitalManagementSystemClient
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = client.PutAsJsonAsync($"{apiBaseUrl}/{selectedPatient.PatientId}", updatedPatient).Result;
+                    var response = client.PutAsJsonAsync($"{apiBaseUrl}/patient/{selectedPatient.PatientId}", updatedPatient).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         // Update the selected patient with the new information
@@ -159,20 +157,18 @@ namespace HospitalManagementSystemClient
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientId}").Result;
+                    var response = client.DeleteAsync($"{apiBaseUrl}/patient/{selectedPatient.PatientId}").Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Patient information deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         //delete mongo user
-                        var responseMongo = client.DeleteAsync($"http://localhost:5277/api/users/{patientIdMongo}").Result;
+                        var responseMongo = client.DeleteAsync($"{apiBaseUrl}/users/{patientIdMongo}").Result;
                         if (responseMongo.IsSuccessStatusCode)
                         {
-                            MessageBox.Show("User account deleted successfully .", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Patient account deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Failed to delete user account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Failed to delete patient account.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                         //navigate back to the appropriate form based on the logged-in user

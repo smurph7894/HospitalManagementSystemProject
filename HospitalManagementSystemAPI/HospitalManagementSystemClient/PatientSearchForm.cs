@@ -20,7 +20,7 @@ namespace HospitalManagementSystemClient
     public partial class PatientSearchForm : Form
     {
         private Users _loggedInUser;
-        private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
+        private readonly string apiBaseUrl = "http://localhost:5277/api";
         string category = "category"; // Default category if none selected
         private Patient selectedPatient;
 
@@ -44,7 +44,7 @@ namespace HospitalManagementSystemClient
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = await client.GetAsync(apiBaseUrl + "/all");
+                    var response = await client.GetAsync($"{apiBaseUrl}/patient/all");
                     response.EnsureSuccessStatusCode();
                     var json = await response.Content.ReadAsStringAsync();
                     var patients = JsonConvert.DeserializeObject<List<Patient>>(json);
@@ -76,7 +76,7 @@ namespace HospitalManagementSystemClient
                         MessageBox.Show("Please enter a search term.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    var response = client.GetAsync($"{apiBaseUrl}/search/{category}/{searchInput}").Result;
+                    var response = client.GetAsync($"{apiBaseUrl}/patient/search/{category}/{searchInput}").Result;
                     response.EnsureSuccessStatusCode();
                     var json = response.Content.ReadAsStringAsync().Result;
                     var patients = JsonConvert.DeserializeObject<List<Patient>>(json);
@@ -128,11 +128,11 @@ namespace HospitalManagementSystemClient
                         return;
                     }
 
-                    var response = client.DeleteAsync(apiBaseUrl + $"/{selectedPatient.PatientId}").Result;
+                    var response = client.DeleteAsync($"{apiBaseUrl}/patient/{selectedPatient.PatientId}").Result;
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var responseMongo = client.DeleteAsync($"http://localhost:5277/api/users/{patientIdMongo}").Result;
+                        var responseMongo = client.DeleteAsync($"{apiBaseUrl}/users/{patientIdMongo}").Result;
                         if (responseMongo.IsSuccessStatusCode)
                         {
                             MessageBox.Show("User account deleted successfully .", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

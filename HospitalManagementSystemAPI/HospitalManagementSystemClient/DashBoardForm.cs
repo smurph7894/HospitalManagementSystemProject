@@ -20,7 +20,7 @@ namespace HospitalManagementSystemClient
         private Users _loggedInUser;
         private List<string> userPermissions;
         private Patient _patient;
-        private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
+        private readonly string apiBaseUrl = "http://localhost:5277/api";
 
         // Constructor receives the logged-in user and initializes the dashboard
         public DashBoardForm(Users user)
@@ -118,7 +118,7 @@ namespace HospitalManagementSystemClient
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = await client.GetAsync(apiBaseUrl + $"/{_loggedInUser.UserId}");
+                    var response = await client.GetAsync($"{apiBaseUrl}/patient/userId/{_loggedInUser.UserId}");
                     response.EnsureSuccessStatusCode();
                     var json = await response.Content.ReadAsStringAsync();
                     _patient = JsonConvert.DeserializeObject<Patient>(json);
