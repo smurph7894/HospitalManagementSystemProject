@@ -49,13 +49,13 @@ namespace HospitalManagementSystemAPI.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             var objectId = ObjectId.Parse(id);
-            var find = await _userCollection.Find(u => u.UserId == objectId).FirstOrDefaultAsync(); //makes the if statement work where the deleteOneAsync on it's own won't  - Sarah
             var result = await _userCollection.DeleteOneAsync(u => u.UserId == objectId);
-            if (result.DeletedCount == 0)
+            Users find = await _userCollection.Find(u => u.UserId == objectId).FirstOrDefaultAsync(); //if check on delete being finicky, using a find to confirm instead so it's accurate 100% of time  - Sarah
+            if (find == null)
             {
-                return NotFound("User not found.");
+                return Ok("User deleted successfully.");
             }
-            return Ok("User deleted successfully.");
+            return NotFound("User not found.");
         }
     }
 

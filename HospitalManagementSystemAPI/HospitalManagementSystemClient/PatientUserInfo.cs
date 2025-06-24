@@ -159,7 +159,7 @@ namespace HospitalManagementSystemClient
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientOrgId}").Result;
+                    var response = client.DeleteAsync($"{apiBaseUrl}/{selectedPatient.PatientId}").Result;
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Patient information deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
