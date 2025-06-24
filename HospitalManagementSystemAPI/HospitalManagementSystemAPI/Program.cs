@@ -9,7 +9,6 @@ using System.Data;
 
 namespace HospitalManagementSystemAPI
 {
-    public class MongoSettings { public string ConnectionString { get; set; } public string DatabaseName { get; set; } };
     public class Program
     {
         public static void Main(string[] args)
@@ -34,13 +33,12 @@ namespace HospitalManagementSystemAPI
 
             // *** MONGO CONNECTIONS *** //
             // MongoDB Connection - connection strings are stored in appsettings.json
-
-            builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("Mongo"));
-            builder.Services.AddSingleton<IMongoClient>(sp =>
-                new MongoClient(sp.GetRequiredService<IOptions<MongoSettings>>().Value.ConnectionString));
-            builder.Services.AddScoped(sp =>
-                sp.GetRequiredService<IMongoClient>()
-                    .GetDatabase(sp.GetRequiredService<IOptions<MongoSettings>>().Value.DatabaseName));
+            var mongoConnectionString = builder.Configuration.GetConnectionString("Mongo");
+            if (mongoConnectionString == null)
+            {
+                throw new InvalidOperationException("MongoDB connection string is not configured in appsettings.json");
+            }
+            builder.Services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoConnectionString));
 
             var app = builder.Build();
 

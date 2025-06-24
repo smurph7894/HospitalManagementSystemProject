@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Security;
 using System.Text.Json.Serialization;
 //Nyambura Note: 
@@ -43,7 +44,7 @@ namespace HospitalManagementSystemAPI.Models
     public class Users
     {
         [BsonId, BsonElement("_id"), BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public string UserId { get; set; }
+        public ObjectId UserId { get; set; } //needs to be ObjectId so can compare patientOrgId to mongoDB when deleting - Sarah
 
         [BsonElement("Username"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public string Username { get; set; }

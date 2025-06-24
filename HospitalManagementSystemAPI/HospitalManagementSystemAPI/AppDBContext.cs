@@ -97,7 +97,7 @@ namespace HospitalManagementSystemAPI
                .HasMany(cp => cp.CarePlanUpdates)
                .WithOne()
                .HasForeignKey("CarePlanId")
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.Cascade); //Deletes on cascade
 
             //CarePlanUpdates - none needed
 

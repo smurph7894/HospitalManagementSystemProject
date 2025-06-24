@@ -147,6 +147,8 @@ namespace HospitalManagementSystemClient
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            var patientIdMongo = selectedPatient.PatientOrgId;
+
             //check they want to delete the folder
             var confirmResult = MessageBox.Show("Are you sure you want to delete this patient?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmResult != DialogResult.Yes)
@@ -163,7 +165,7 @@ namespace HospitalManagementSystemClient
                         MessageBox.Show("Patient information deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         //delete mongo user
-                        var responseMongo = client.DeleteAsync($"https://localhost:5001/api/users/{selectedPatient.PatientOrgId}").Result;
+                        var responseMongo = client.DeleteAsync($"http://localhost:5277/api/users/{patientIdMongo}").Result;
                         if (responseMongo.IsSuccessStatusCode)
                         {
                             MessageBox.Show("User account deleted successfully .", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

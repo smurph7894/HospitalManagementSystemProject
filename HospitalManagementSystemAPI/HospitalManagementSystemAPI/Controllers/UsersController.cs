@@ -1,5 +1,6 @@
 ﻿using HospitalManagementSystemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace HospitalManagementSystemAPI.Controllers
@@ -12,7 +13,7 @@ namespace HospitalManagementSystemAPI.Controllers
 
         public UsersController(IMongoClient client)
         {
-            var database = client.GetDatabase("HospitalDB");
+            var database = client.GetDatabase("HospitalManagementDB");
             _userCollection = database.GetCollection<Users>("Users");
         }
 
@@ -47,15 +48,15 @@ namespace HospitalManagementSystemAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            //TODO need to cascade delete to related collections if necessary
-            var result = await _userCollection.DeleteOneAsync(u => u.UserId == id);
+            var objectId = ObjectId.Parse(id);
+            var find = await _userCollection.Find(u => u.UserId == objectId).FirstOrDefaultAsync(); //makes the if statement work where the deleteOneAsync on it's own won't  - Sarah
+            var result = await _userCollection.DeleteOneAsync(u => u.UserId == objectId);
             if (result.DeletedCount == 0)
             {
                 return NotFound("User not found.");
             }
             return Ok("User deleted successfully.");
         }
-
     }
 
     public class RegisterUserDto

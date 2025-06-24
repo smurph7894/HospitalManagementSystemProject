@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 
 namespace HospitalManagementSystemAPI.Controllers
 {
@@ -233,24 +235,52 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
-        // DELETE: api/patient/{patientId} - deletes a patient using PatientId or PatientOrgId
+        // DELETE: api/patient/{patientId} - deletes a patient using PatientId
         [HttpDelete("{patientId}")]
-        public async Task<ActionResult> DeletePatient(string patientId)
+        public async Task<ActionResult> DeletePatient(int patientId)
         {
-            try
+            string connectionString = "Server=LITTLE_JUICY\\SQLEXPRESS;Database=HospitalManagementDB;Trusted_Connection=True;Encrypt=False;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                var patient = await _context.Patients.FindAsync(patientId);
-                if (patient == null)
+                await conn.OpenAsync();
+                using (SqlTransaction transaction = conn.BeginTransaction())
                 {
-                    return NotFound("Patient not found.");
+                    try
+                    {
+                        //delete careplans 
+                        string deleteCarePlanQuery = @"
+                        DELETE FROM CarePlans WHERE PatientId = @PatientId";
+
+                        using (SqlCommand cmd = new SqlCommand(deleteCarePlanQuery, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@PatientId", patientId);
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+
+                        //delete patient and cascading data
+                        string deletePatientQuery = @"
+                        DELETE FROM Patients WHERE PatientId = @PatientId";
+
+                        using (SqlCommand cmd = new SqlCommand(deletePatientQuery, conn, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@PatientId", patientId);
+                            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                            if (rowsAffected == 0)
+                            {
+                                transaction.Rollback();
+                                return NotFound("Patient not found.");
+                            }
+                        }
+                        transaction.Commit();
+                        return Ok("Patient deleted successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting patient: {ex.Message}");
+                    }
                 }
-                _context.Patients.Remove(patient);
-                await _context.SaveChangesAsync();
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting patient: {ex.Message}");
             }
         }
     }

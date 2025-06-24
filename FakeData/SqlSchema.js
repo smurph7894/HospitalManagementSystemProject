@@ -20,6 +20,7 @@ CREATE TABLE dbo.CarePlans (
 
 	CONSTRAINT FK_CarePlan_Patients
 		FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
+		ON DELETE CASCADE
 );
 END
 GO
@@ -33,7 +34,8 @@ CREATE TABLE dbo.CarePlanUpdates (
 	Notes NVARCHAR(MAX) NOT NULL,
 
 	CONSTRAINT FK_CarePlanUpdates_CarePlans 
-		FOREIGN KEY(CarePlanId) REFERENCES dbo.CarePlans(CarePlanId),
+		FOREIGN KEY(CarePlanId) REFERENCES dbo.CarePlans(CarePlanId)
+		ON DELETE CASCADE,
 	CONSTRAINT FK_CarePlanUpdates_Appointments
 		FOREIGN KEY(AppointmentId) REFERENCES dbo.Appointments(AppointmentId)
 );
@@ -106,7 +108,8 @@ CREATE TABLE dbo.Appointments (
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     CONSTRAINT FK_Appointments_Patients
-        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId),
+        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
+        ON DELETE CASCADE,
     CONSTRAINT FK_Appointments_Staff
         FOREIGN KEY(StaffId) REFERENCES dbo.Staff(StaffId),
     CONSTRAINT FK_Appointments_CreatedBy
@@ -172,7 +175,8 @@ CREATE TABLE dbo.Admissions (
     AdmitBy        INT             NOT NULL,
     DischargeBy    INT             NULL,
     CONSTRAINT FK_Admissions_Patients
-        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId),
+        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
+        ON DELETE CASCADE,
     CONSTRAINT FK_Admissions_Beds
         FOREIGN KEY(BedId) REFERENCES dbo.Beds(BedId),
     CONSTRAINT FK_Admissions_AdmitBy
@@ -194,7 +198,8 @@ CREATE TABLE dbo.Vitals (
     RecordedAt     DATETIME        NOT NULL DEFAULT GETDATE(),
     RecordedBy     INT             NOT NULL,
     CONSTRAINT FK_Vitals_Patients
-        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId),
+        FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
+        ON DELETE CASCADE,
     CONSTRAINT FK_Vitals_Staff
         FOREIGN KEY(RecordedBy) REFERENCES dbo.Staff(StaffId)
 );
