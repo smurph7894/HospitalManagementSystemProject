@@ -1,7 +1,28 @@
+/*
+USAGE:
+
+1. For bulk data population:
+   - Uncomment the populateAllData() call in the main execution
+   - Run: node insertSQLData.js
+
+2. For individual inserts:
+   - Use the exported functions in your own modules
+   - Or uncomment the example calls in the main execution
+
+3. For schema setup only:
+   - Run: node insertSQLData.js (default behavior)
+
+SQL EXPECTED OUTPUT:
+  Rows inserted: # 
+  (ex. Rows inserted: 1)
+*/
+
+
 const fs = require('fs');
 const path = require('path');
 const sql = require('mssql');
 const config = require('./dbConfig');
+const schemaDDL = require('./SqlSchema');
 
 async function ensureSchema() {
   try {
@@ -215,12 +236,12 @@ class DataPopulator {
         }
         const filePath = path.join(dirPath, filename);
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-        console.log(`✓ Generated ${filename} with ${data.length} records`);
+        console.log(`Generated ${filename} with ${data.length} records`);
     }
 
     // Generate JSON data first
     async generateJSONData() {
-        console.log('\n🔄 Generating JSON Data...\n');
+        console.log('\nGenerating JSON Data...\n');
         
         // Generate User Data
         await this.generateUserData();
@@ -234,7 +255,7 @@ class DataPopulator {
         // Generate Chat Message Data
         await this.generateChatMessageData();
         
-        console.log('\n✅ JSON Data Generation Completed!\n');
+        console.log('\nJSON Data Generation Completed!\n');
     }
 
     async generateUserData(count = 20) {
@@ -402,9 +423,9 @@ class DataPopulator {
         for (const query of clearQueries) {
             try {
                 await this.pool.request().query(query);
-                console.log(`✓ Cleared: ${query.split(' ')[2]}`);
+                console.log(`Cleared: ${query.split(' ')[2]}`);
             } catch (error) {
-                console.log(`⚠ Warning clearing ${query.split(' ')[2]}: ${error.message}`);
+                console.log(`Warning clearing ${query.split(' ')[2]}: ${error.message}`);
             }
         }
     }
@@ -465,7 +486,7 @@ class DataPopulator {
                 .query(query);
         }
 
-        console.log(`✓ Inserted ${userData.length} patients from JSON`);
+        console.log(`Inserted ${userData.length} patients from JSON`);
     }
 
     async populateDepartments() {
@@ -483,7 +504,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${this.generator.departments.length} departments`);
+        console.log(`Inserted ${this.generator.departments.length} departments`);
     }
 
     async populatePatients(count = 100) {
@@ -523,7 +544,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} additional patients`);
+        console.log(`Inserted ${count} additional patients`);
     }
 
     async populateStaff(count = 50) {
@@ -561,7 +582,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} staff members`);
+        console.log(`Inserted ${count} staff members`);
     }
 
     async populateBeds(count = 100) {
@@ -584,7 +605,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} beds`);
+        console.log(`Inserted ${count} beds`);
     }
 
     async populateInventoryItems() {
@@ -613,7 +634,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${this.generator.inventoryItems.length} inventory items`);
+        console.log(`Inserted ${this.generator.inventoryItems.length} inventory items`);
     }
 
     async populateAppointments(count = 200) {
@@ -654,7 +675,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} appointments`);
+        console.log(`Inserted ${count} appointments`);
     }
 
     async populateCarePlans(count = 80) {
@@ -691,7 +712,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} care plans`);
+        console.log(`Inserted ${count} care plans`);
     }
 
     async populateCarePlanUpdates(count = 120) {
@@ -724,7 +745,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} care plan updates`);
+        console.log(`Inserted ${count} care plan updates`);
     }
 
     async populateVitals(count = 300) {
@@ -762,7 +783,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} vital signs`);
+        console.log(`Inserted ${count} vital signs`);
     }
 
     async populateInventoryTransactions(count = 200) {
@@ -802,7 +823,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} inventory transactions`);
+        console.log(`Inserted ${count} inventory transactions`);
     }
 
     async populateAdmissions(count = 80) {
@@ -844,7 +865,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} admissions`);
+        console.log(`Inserted ${count} admissions`);
     }
 
     async populateReportsHistory(count = 100) {
@@ -883,13 +904,13 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} reports history entries`);
+        console.log(`Inserted ${count} reports history entries`);
     }
 
 
     async populateAll() {
         try {
-            console.log('🚀 Starting Data Population Process...\n');
+            console.log('Starting Data Population Process...\n');
             
             // Step 1: Generate JSON data first
             await this.generateJSONData();
@@ -918,13 +939,13 @@ class DataPopulator {
             await this.populateAdmissions(80);
             await this.populateReportsHistory(100);
             
-            console.log('\n✅ All Data Population Completed Successfully!');
+            console.log('\nAll Data Population Completed Successfully!');
             
             // Show summary
             await this.showSummary();
             
         } catch (error) {
-            console.error('❌ Error during data population:', error.message);
+            console.error('Error during data population:', error.message);
             throw error;
         } finally {
             if (this.pool) {
@@ -935,7 +956,7 @@ class DataPopulator {
     }
 
     async showSummary() {
-        console.log('\n📊 Database Population Summary:');
+        console.log('\nDatabase Population Summary:');
         console.log('================================');
         
         const tables = [
@@ -1272,28 +1293,3 @@ module.exports = {
     console.error('Error during setup/insert:', err);
   }
 })();
-
-/*
-USAGE:
-
-1. For bulk data population:
-   - Uncomment the populateAllData() call in the main execution
-   - Run: node insertSQLData.js
-
-2. For individual inserts:
-   - Use the exported functions in your own modules
-   - Or uncomment the example calls in the main execution
-
-3. For schema setup only:
-   - Run: node insertSQLData.js (default behavior)
-
-SQL EXPECTED OUTPUT:
-  Rows inserted: # 
-  (ex. Rows inserted: 1)
-
-BULK POPULATION OUTPUT:
-  🚀 Starting Data Population Process...
-  ✓ Generated UserData.json with 20 records
-  ✓ Inserted 120 patients from JSON
-  ✅ All Data Population Completed Successfully!
-*/

@@ -194,12 +194,12 @@ class DataPopulator {
         }
         const filePath = path.join(dirPath, filename);
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-        console.log(`✓ Generated ${filename} with ${data.length} records`);
+        console.log(`Generated ${filename} with ${data.length} records`);
     }
 
     // Generate JSON data first
     async generateJSONData() {
-        console.log('\n🔄 Generating JSON Data...\n');
+        console.log('\nGenerating JSON Data...\n');
         
         // Generate User Data
         await this.generateUserData();
@@ -213,7 +213,7 @@ class DataPopulator {
         // Generate Chat Message Data
         await this.generateChatMessageData();
         
-        console.log('\n✅ JSON Data Generation Completed!\n');
+        console.log('\nJSON Data Generation Completed!\n');
     }
 
     async generateUserData(count = 20) {
@@ -364,10 +364,6 @@ class DataPopulator {
         console.log('Clearing existing data...');
         
         const clearQueries = [
-            'DELETE FROM dbo.ChatMessages',
-            'DELETE FROM dbo.ChatRoomParticipants',
-            'DELETE FROM dbo.ChatRooms',
-            'DELETE FROM dbo.Notifications',
             'DELETE FROM dbo.ReportsHistory',
             'DELETE FROM dbo.Vitals',
             'DELETE FROM dbo.Admissions',
@@ -385,9 +381,9 @@ class DataPopulator {
         for (const query of clearQueries) {
             try {
                 await this.pool.request().query(query);
-                console.log(`✓ Cleared: ${query.split(' ')[2]}`);
+                console.log(`Cleared: ${query.split(' ')[2]}`);
             } catch (error) {
-                console.log(`⚠ Warning clearing ${query.split(' ')[2]}: ${error.message}`);
+                console.log(`Warning clearing ${query.split(' ')[2]}: ${error.message}`);
             }
         }
     }
@@ -448,7 +444,7 @@ class DataPopulator {
                 .query(query);
         }
 
-        console.log(`✓ Inserted ${userData.length} patients from JSON`);
+        console.log(`Inserted ${userData.length} patients from JSON`);
     }
 
     async populateDepartments() {
@@ -466,7 +462,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${this.generator.departments.length} departments`);
+        console.log(`Inserted ${this.generator.departments.length} departments`);
     }
 
     async populatePatients(count = 100) {
@@ -506,7 +502,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} additional patients`);
+        console.log(`Inserted ${count} additional patients`);
     }
 
     async populateStaff(count = 50) {
@@ -544,7 +540,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} staff members`);
+        console.log(`Inserted ${count} staff members`);
     }
 
     async populateBeds(count = 100) {
@@ -567,7 +563,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} beds`);
+        console.log(`Inserted ${count} beds`);
     }
 
     async populateInventoryItems() {
@@ -596,7 +592,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${this.generator.inventoryItems.length} inventory items`);
+        console.log(`Inserted ${this.generator.inventoryItems.length} inventory items`);
     }
 
     async populateAppointments(count = 200) {
@@ -637,7 +633,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} appointments`);
+        console.log(`Inserted ${count} appointments`);
     }
 
     async populateCarePlans(count = 80) {
@@ -672,7 +668,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} care plans`);
+        console.log(`Inserted ${count} care plans`);
     }
 
     async populateCarePlanUpdates(count = 120) {
@@ -705,7 +701,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} care plan updates`);
+        console.log(`Inserted ${count} care plan updates`);
     }
 
     async populateVitals(count = 300) {
@@ -743,7 +739,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} vital signs`);
+        console.log(`Inserted ${count} vital signs`);
     }
 
     async populateInventoryTransactions(count = 200) {
@@ -783,7 +779,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} inventory transactions`);
+        console.log(`Inserted ${count} inventory transactions`);
     }
 
     async populateAdmissions(count = 80) {
@@ -825,7 +821,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} admissions`);
+        console.log(`Inserted ${count} admissions`);
     }
 
     async populateReportsHistory(count = 100) {
@@ -864,7 +860,7 @@ class DataPopulator {
                 .query(query);
         }
         
-        console.log(`✓ Inserted ${count} reports history entries`);
+        console.log(`Inserted ${count} reports history entries`);
     }
 
     // JSON to SQL population methods
@@ -897,7 +893,7 @@ class DataPopulator {
                 .query(query);
         }
 
-        console.log(`✓ Inserted ${notifications.length} notifications from JSON`);
+        console.log(`Inserted ${notifications.length} notifications from JSON`);
     }
 
     async populateChatRoomsFromJSON() {
@@ -938,7 +934,7 @@ class DataPopulator {
             }
         }
 
-        console.log(`✓ Inserted ${chatRooms.length} chat rooms and participants from JSON`);
+        console.log(`Inserted ${chatRooms.length} chat rooms and participants from JSON`);
     }
 
     async populateChatMessagesFromJSON() {
@@ -982,12 +978,12 @@ class DataPopulator {
             }
         }
 
-        console.log(`✓ Inserted chat messages from JSON`);
+        console.log(`Inserted chat messages from JSON`);
     }
 
     async populateAll() {
         try {
-            console.log('🚀 Starting Data Population Process...\n');
+            console.log('Starting Data Population Process...\n');
             
             // Step 1: Generate JSON data first
             await this.generateJSONData();
@@ -1021,13 +1017,13 @@ class DataPopulator {
             await this.populateChatRoomsFromJSON();
             await this.populateChatMessagesFromJSON();
             
-            console.log('\n✅ All Data Population Completed Successfully!');
+            console.log('\n All Data Population Completed Successfully!');
             
             // Show summary
             await this.showSummary();
             
         } catch (error) {
-            console.error('❌ Error during data population:', error.message);
+            console.error('Error during data population:', error.message);
             throw error;
         } finally {
             if (this.pool) {
@@ -1038,7 +1034,7 @@ class DataPopulator {
     }
 
     async showSummary() {
-        console.log('\n📊 Database Population Summary:');
+        console.log('\n Database Population Summary:');
         console.log('================================');
         
         const tables = [
