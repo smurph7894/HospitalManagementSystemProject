@@ -50,6 +50,47 @@ namespace HospitalManagementSystemClient
             }
         }
 
+        private async void InitializeSignalR()
+        {
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5277/appointmentHub") // Ensure this URL matches your API's SignalR hub endpoint
+                .Build();
+            try
+            {
+                _hubConnection.On<string, string>("ReceiveAppointmentNotification", (message, user) =>
+                {
+                    // Handle the notification received from the hub
+                    MessageBox.Show($"Notification: {message} from {user}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                });
+
+                await _hubConnection.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to SignalR hub: {ex.Message}");
+            }
+        }
+
+        public static class NotificationHandler
+        {
+            public static void ShowNotification(string message, string user)
+            {
+                Form form = Form.ActiveForm;
+
+                if (form != null)
+                {
+                    if (form.InvokeRequired)
+                    {
+                        form.Invoke(new Action(() => MessageBox.Show($"Notification: {message} from {user}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information));
+                    }
+                    else
+                    {
+                        MessageBox.Show(form, message, "Appointment Notification");
+                    }
+                }
+            }
+        }
+
         private async void getStaffID()
         {
             try
@@ -104,22 +145,6 @@ namespace HospitalManagementSystemClient
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while retrieving patient details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private async void InitializeSignalR()
-        {
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5277/appointmentHub") // Ensure this URL matches your API's SignalR hub endpoint
-                .Build();
-            try
-            {
-                await _hubConnection.StartAsync();
-                MessageBox.Show("Connected to SignalR hub successfully.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error connecting to SignalR hub: {ex.Message}");
             }
         }
 
