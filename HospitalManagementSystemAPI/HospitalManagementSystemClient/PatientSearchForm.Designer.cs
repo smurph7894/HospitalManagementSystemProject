@@ -84,7 +84,7 @@
             this.dataGridView_PatientList.Name = "dataGridView_PatientList";
             this.dataGridView_PatientList.RowHeadersWidth = 51;
             this.dataGridView_PatientList.RowTemplate.Height = 24;
-            this.dataGridView_PatientList.Size = new System.Drawing.Size(1879, 701);
+            this.dataGridView_PatientList.Size = new System.Drawing.Size(1373, 701);
             this.dataGridView_PatientList.TabIndex = 4;
             this.dataGridView_PatientList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_PatientList_CellContentClick);
             // 
@@ -146,7 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1903, 817);
+            this.ClientSize = new System.Drawing.Size(1410, 817);
             this.Controls.Add(this.btn_viewPatientHistory);
             this.Controls.Add(this.btn_getAllPatients);
             this.Controls.Add(this.comboBox_searchCategories);

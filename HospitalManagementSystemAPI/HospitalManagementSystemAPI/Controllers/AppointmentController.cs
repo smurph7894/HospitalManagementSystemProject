@@ -71,196 +71,28 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
-        //GET: api/appointment/{appointmentId}/careplans/careplanupdates - gets care plans and updates for a specific appointment
-        [HttpGet("{appointmentId}/careplans/careplanupdates")]
+        //GET: api/appointment/{appointment.AppointmentId}/careplan/careplanupdates - get care plans and updates for a specific appointment
+        [HttpGet("{appointmentId}/careplan/careplanupdates")]
         public async Task<ActionResult> GetCarePlansAndUpdatesForAppointment(int appointmentId)
         {
-            var _connectionString = "Server=LITTLE_JUICY\\SQLEXPRESS;Database=HospitalManagementDB;Trusted_Connection=True;Encrypt=False;";
             try
             {
-                //var result = new
-                //{
-                //    CarePlans = new List<CarePlan>(),
-                //    CarePlanUpdates = new List<CarePlanUpdates>()
-                //};
-
-                //using (var connection = new SqlConnection(_connectionString))
-                //{
-                //    await connection.OpenAsync();
-
-                //    // Get Care Plans that have updates for the specific appointment
-                //    // This joins CarePlans with CarePlanUpdates to find care plans with matching appointment updates
-                //    var carePlansQuery = @"
-                //        SELECT DISTINCT cp.CarePlanId, cp.PatientId, cp.Condition, cp.Description, 
-                //               cp.DiagnosisDate, cp.DateResolved, cp.CreatedAt
-                //        FROM CarePlans cp
-                //        INNER JOIN CarePlanUpdates cpu ON cp.CarePlanId = cpu.CarePlanId
-                //        WHERE cpu.AppointmentId = @AppointmentId";
-
-                //    var carePlans = new List<CarePlan>();
-                //    var carePlanIds = new List<int>();
-
-                //    using (var carePlansCommand = new SqlCommand(carePlansQuery, connection))
-                //    {
-                //        carePlansCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
-
-                //        using (var reader = await carePlansCommand.ExecuteReaderAsync())
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                var carePlan = new CarePlan
-                //                {
-                //                    CarePlanId = reader.GetInt32("CarePlanId"),
-                //                    PatientId = reader.GetInt32("PatientId"),
-                //                    Condition = reader.GetString("Condition"),
-                //                    Description = reader.IsDBNull("Description") ? null : reader.GetString("Description"),
-                //                    DiagnosisDate = reader.IsDBNull("DiagnosisDate") ? null : reader.GetDateTime("DiagnosisDate"),
-                //                    DateResolved = reader.IsDBNull("DateResolved") ? null : reader.GetDateTime("DateResolved"),
-                //                    CreatedAt = reader.GetDateTime("CreatedAt")
-                //                };
-                //                carePlans.Add(carePlan);
-                //                carePlanIds.Add(carePlan.CarePlanId);
-                //            }
-                //        }
-                //    }
-
-                //    // Get the Care Plan Updates for each CarePlan individually
-                //    foreach (var carePlan in carePlans)
-                //    {
-                //        var carePlanUpdatesQuery = @"
-                //            SELECT cpu.CarePlanUpdateId, cpu.AppointmentId, cpu.Notes
-                //            FROM CarePlanUpdates cpu
-                //            WHERE cpu.AppointmentId = @AppointmentId 
-                //            AND cpu.CarePlanId = @CarePlanId";
-
-                //        using (var updatesCommand = new SqlCommand(carePlanUpdatesQuery, connection))
-                //        {
-                //            updatesCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
-                //            updatesCommand.Parameters.AddWithValue("@CarePlanId", carePlan.CarePlanId);
-
-                //            using (var reader = await updatesCommand.ExecuteReaderAsync())
-                //            {
-                //                var carePlanUpdatesForThisPlan = new List<CarePlanUpdates>();
-
-                //                while (await reader.ReadAsync())
-                //                {
-                //                    var update = new CarePlanUpdates
-                //                    {
-                //                        CarePlanUpdateId = reader.GetInt32("CarePlanUpdateId"),
-                //                        AppointmentId = reader.GetInt32("AppointmentId"),
-                //                        Notes = reader.GetString("Notes")
-                //                    };
-                //                    carePlanUpdatesForThisPlan.Add(update);
-                //                }
-
-                //                carePlan.CarePlanUpdates = carePlanUpdatesForThisPlan;
-                //            }
-                //        }
-                //    }
-
-                //    // Collect all updates for the response
-                //    var allCarePlanUpdates = carePlans.SelectMany(cp => cp.CarePlanUpdates).ToList();
-
-                //    result = new { CarePlans = carePlans, CarePlanUpdates = allCarePlanUpdates };
-                //}
-
-                //return Ok(result);
-                var result = new
+                var carePlanUpdates = await _context.CarePlanUpdates
+                    .Where(cpu => cpu.AppointmentId == appointmentId)
+                    .ToListAsync();
+                if (carePlanUpdates == null || !carePlanUpdates.Any())
                 {
-                    CarePlans = new List<CarePlan>(),
-                    CarePlanUpdates = new List<CarePlanUpdates>()
-                };
-
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-
-                    // First, get Care Plan Updates for the specific appointment
-                    var carePlanUpdates = new List<CarePlanUpdates>();
-                    var carePlanIds = new List<int>();
-
-                    var carePlanUpdatesQuery = @"
-                        SELECT cpu.CarePlanUpdateId, cpu.AppointmentId, cpu.Notes, cpu.CarePlanId
-                        FROM CarePlanUpdates cpu
-                        WHERE cpu.AppointmentId = @AppointmentId";
-
-                    using (var updatesCommand = new SqlCommand(carePlanUpdatesQuery, connection))
-                    {
-                        updatesCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
-
-                        using (var reader = await updatesCommand.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                var update = new CarePlanUpdates
-                                {
-                                    CarePlanUpdateId = reader.GetInt32("CarePlanUpdateId"),
-                                    AppointmentId = reader.GetInt32("AppointmentId"),
-                                    Notes = reader.GetString("Notes")
-                                };
-                                carePlanUpdates.Add(update);
-
-                                // Collect CarePlanIds if the relationship exists
-                                if (!reader.IsDBNull("CarePlanId"))
-                                {
-                                    int carePlanId = reader.GetInt32("CarePlanId");
-                                    if (!carePlanIds.Contains(carePlanId))
-                                    {
-                                        carePlanIds.Add(carePlanId);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // If no care plan updates found, return empty result
-                    if (!carePlanUpdates.Any())
-                    {
-                        return Ok(new { CarePlans = new List<CarePlan>(), CarePlanUpdates = carePlanUpdates });
-                    }
-
-                    // Get Care Plans that match the CarePlanIds from the updates
-                    var carePlans = new List<CarePlan>();
-
-                    if (carePlanIds.Any())
-                    {
-                        var carePlanIdsString = string.Join(",", carePlanIds);
-                        var carePlansQuery = $@"
-                            SELECT CarePlanId, PatientId, Condition, Description, 
-                                   DiagnosisDate, DateResolved, CreatedAt
-                            FROM CarePlans 
-                            WHERE CarePlanId IN ({carePlanIdsString})";
-
-                        using (var carePlansCommand = new SqlCommand(carePlansQuery, connection))
-                        {
-                            using (var reader = await carePlansCommand.ExecuteReaderAsync())
-                            {
-                                while (await reader.ReadAsync())
-                                {
-                                    var carePlan = new CarePlan
-                                    {
-                                        CarePlanId = reader.GetInt32("CarePlanId"),
-                                        PatientId = reader.GetInt32("PatientId"),
-                                        Condition = reader.GetString("Condition"),
-                                        Description = reader.IsDBNull("Description") ? null : reader.GetString("Description"),
-                                        DiagnosisDate = reader.IsDBNull("DiagnosisDate") ? null : reader.GetDateTime("DiagnosisDate"),
-                                        DateResolved = reader.IsDBNull("DateResolved") ? null : reader.GetDateTime("DateResolved"),
-                                        CreatedAt = reader.GetDateTime("CreatedAt")
-                                    };
-                                    carePlans.Add(carePlan);
-                                }
-                            }
-                        }
-                    }
-
-                    result = new { CarePlans = carePlans, CarePlanUpdates = carePlanUpdates };
+                    return NotFound("No care plan updates found for this appointment.");
                 }
-
-                return Ok(result);
+                var carePlanIds = carePlanUpdates.Select(cpu => cpu.CarePlanId).Distinct().ToList();
+                var carePlans = await _context.CarePlans
+                    .Where(cp => carePlanIds.Contains(cp.CarePlanId))
+                    .ToListAsync();
+                return Ok(new { CarePlans = carePlans, CarePlanUpdates = carePlanUpdates });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving care plans: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving care plans and updates: {ex.Message}");
             }
         }
 

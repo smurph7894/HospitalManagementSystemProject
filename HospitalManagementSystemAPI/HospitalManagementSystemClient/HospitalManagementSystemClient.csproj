@@ -248,6 +248,7 @@
       <DependentUpon>InventoryManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Beds.cs" />
+    <Compile Include="Models\CarePlanResponse.cs" />
     <Compile Include="Models\CarePlans.cs" />
     <Compile Include="Models\CarePlanUpdates.cs" />
     <Compile Include="Models\Patient.cs" />

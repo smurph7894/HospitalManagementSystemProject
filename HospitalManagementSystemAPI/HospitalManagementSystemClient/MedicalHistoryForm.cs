@@ -36,6 +36,7 @@ namespace HospitalManagementSystemClient
             //populate titles
             lbl_patientId.Text = selectedPatient.PatientId.ToString();
             lbl_patientName.Text = $"{selectedPatient.FirstName} {selectedPatient.LastName}";
+            LoadMedicalHistory();
         }
 
         private void btn_Dashboard_Click(object sender, EventArgs e)
@@ -64,7 +65,7 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        private async void btn_getFullHistory_Click(object sender, EventArgs e)
+        private async void LoadMedicalHistory()
         {
             //get the top grids medical history of the selected patient
 
@@ -74,7 +75,8 @@ namespace HospitalManagementSystemClient
             if (admissionResponse.IsSuccessStatusCode)
             {
                 dgv_admissions.DataSource = admissions;
-                //dgv_admissions.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                dgv_admissions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_admissions.AutoResizeColumns();
             }
             else
             {
@@ -93,7 +95,8 @@ namespace HospitalManagementSystemClient
             if (appointmentResponse.IsSuccessStatusCode)
             {
                 dgv_appointments.DataSource = appointments;
-                //dgv_appointments.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill); ;
+                dgv_appointments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_appointments.AutoResizeColumns();
             }
             else
             {
@@ -112,7 +115,8 @@ namespace HospitalManagementSystemClient
             if (carePlanResponse.IsSuccessStatusCode)
             {
                 dgv_carePlans.DataSource = carePlans;
-                //dgv_carePlans.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill); 
+                dgv_carePlans.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_carePlans.AutoResizeColumns();
             }
             else
             {
@@ -131,17 +135,13 @@ namespace HospitalManagementSystemClient
             if (vitalsResponse.IsSuccessStatusCode)
             {
                 dgv_vitals.DataSource = vitals;
-                //dgv_vitals.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+                dgv_vitals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_vitals.AutoResizeColumns();
             }
             else
             {
                 MessageBox.Show("Failed to retrieve vitals.");
             }
-        }
-
-        private void btn_historyByDate_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void dgv_appointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -185,10 +185,17 @@ namespace HospitalManagementSystemClient
                 MessageBox.Show("No care plan selected. Please select a care plan to view details.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else
+            {
+                // If a care plan is selected, retrieve and display its updates
+                getCarePlanUpdatesByCarePlan(selectedCarePlan.CarePlanId);
+            }
         }
 
         private async void getAdmissionBeds(int bedId)
         {
+            dgv_beds.DataSource = null; // Clear previous data
+
             var bedResponse = await client.GetAsync($"{apiBaseUrl}/admission/bed/{bedId}");
             var bedJson = await bedResponse.Content.ReadAsStringAsync();
             if (string.IsNullOrEmpty(bedJson))
@@ -199,8 +206,9 @@ namespace HospitalManagementSystemClient
             var bedDetails = JsonConvert.DeserializeObject<Bed>(bedJson);
             if (bedResponse.IsSuccessStatusCode)
             {
-                dgv_beds.DataSource = bedDetails;
-                //dgv_beds.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+                dgv_beds.DataSource = new List<Bed> { bedDetails };
+                dgv_beds.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_beds.AutoResizeColumns();
             }
             else
             {
@@ -208,74 +216,102 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        //private async void getCarePlanUpdatesByCarePlan(int carePlanId)
-        //{
-        //    var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/careplan/updates/{carePlanId}");
-        //    var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+        private async void getCarePlanUpdatesByCarePlan(int carePlanId)
+        {
+            dgv_carePlanUpdates.DataSource = null; // Clear previous data
+
+            var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/careplan/{carePlanId}/careplanupdates");
+            var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(responseContent))
+            {
+                MessageBox.Show("No care plan updates available for this care plan.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (carePlanUpdatesResponse.IsSuccessStatusCode)
+            {
+                // Deserialize the response which contains CarePlanUpdates  
+                var carePlanUpdatesList = JsonConvert.DeserializeObject<List<CarePlanUpdates>>(responseContent);
+
+                // Populate Care Plan Updates DataGridView  
+                dgv_carePlanUpdates.DataSource = carePlanUpdatesList;
+                dgv_carePlanUpdates.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgv_carePlanUpdates.AutoResizeColumns();
+
+            }
+            else
+            {
+                MessageBox.Show($"Failed to retrieve care plan updates for the selected care plan. Status: {carePlanUpdatesResponse.StatusCode}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         private async void getAppointmentCarePlansAndUpdates(Appointment appointment)
         {
             try
             {
-                // Get carePlans by appointment ID  
-                var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/careplan/appointment/{appointment.AppointmentId}");
-                var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+                dgv_carePlans.DataSource = null; // Clear previous data
+                dgv_carePlanUpdates.DataSource = null; // Clear previous data
 
+                // Get care plans and updates by appointment ID  
+                var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/appointment/{appointment.AppointmentId}/careplan/careplanupdates");
+                var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+                if (string.IsNullOrEmpty(responseContent))
+                {
+                    MessageBox.Show("No care plans or updates available for this appointment.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (carePlanUpdatesResponse.IsSuccessStatusCode)
                 {
-                    // Deserialize the response which contains both CarePlans and CarePlanUpdates  
-                    var response = JsonConvert.DeserializeObject<dynamic>(responseContent);
-
-                    // Extract CarePlans from the response  
-                    var carePlans = JsonConvert.DeserializeObject<List<CarePlan>>(response.carePlans.ToString());
-
-                    // Extract CarePlanUpdates from the response  
-                    var carePlanUpdates = JsonConvert.DeserializeObject<List<CarePlanUpdates>>(response.carePlanUpdates.ToString());
+                    // Deserialize the response which contains CarePlans and CarePlanUpdates  
+                    var response = JsonConvert.DeserializeObject<CarePlanResponse>(responseContent);
 
                     // Populate Care Plans DataGridView
-                    var carePlanList = new List<object>();
-                    foreach (var cp in carePlans)
-                    {
-                        carePlanList.Add(new
-                        {
-                            CarePlanId = cp.CarePlanId,
-                            PatientId = cp.PatientId,
-                            Condition = cp.Condition,
-                            Description = cp.Description,
-                            DiagnosisDate = cp.DiagnosisDate,
-                            DateResolved = cp.DateResolved,
-                            CreatedAt = cp.CreatedAt,
-                            UpdatesCount = cp.CarePlanUpdates != null ? cp.CarePlanUpdates.Count : 0
-                        });
-                    }
-                    dgv_carePlans.DataSource = carePlanList;
-                    //dgv_carePlans.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    dgv_carePlans.DataSource = response.CarePlans;
+                    dgv_carePlans.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    dgv_carePlans.AutoResizeColumns();
 
                     // Populate Care Plan Updates DataGridView  
-                    var carePlanUpdatesList = new List<object>();
-                    foreach (var cpu in carePlanUpdates)
-                    {
-                        carePlanUpdatesList.Add(new
-                        {
-                            CarePlanUpdateId = cpu.CarePlanUpdateId,
-                            AppointmentId = cpu.AppointmentId,
-                            Notes = cpu.Notes
-                        });
-                    }
-                    dgv_carePlanUpdates.DataSource = carePlanUpdatesList;
-                    //dgv_carePlanUpdates.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    dgv_carePlanUpdates.DataSource = response.CarePlanUpdates;
+                    dgv_carePlanUpdates.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    dgv_carePlanUpdates.AutoResizeColumns();
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to retrieve care plans for the selected appointment. Status: {carePlanUpdatesResponse.StatusCode}",
+                    MessageBox.Show($"Failed to retrieve care plans and updates for the selected appointment. Status: {carePlanUpdatesResponse.StatusCode}",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while retrieving appointment care plans: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while retrieving appointment care plans and updates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dgv_appointments_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void dgv_admissions_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void dgv_carePlans_CellContentClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void btn_getFullHistory_Click(object sender, EventArgs e)
+        {
+            dgv_carePlanUpdates.DataSource = null; // Clear previous data
+            dgv_carePlans.DataSource = null; // Clear previous data
+            dgv_beds.DataSource = null; // Clear previous data
+            dgv_vitals.DataSource = null; // Clear previous data
+            dgv_appointments.DataSource = null; // Clear previous data
+            dgv_admissions.DataSource = null; // Clear previous data
+            // Reload the medical history to show all data in main tier
+            LoadMedicalHistory();
         }
     }
 }

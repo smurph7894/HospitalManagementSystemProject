@@ -15,6 +15,7 @@ namespace HospitalManagementSystemAPI
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
         public DbSet<CarePlan> CarePlans { get; set; }
+        public DbSet<CarePlanUpdates> CarePlanUpdates { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<ReportsHistory> ReportsHistory { get; set; }
         public DbSet<Staff> Staff { get; set; }

@@ -33,7 +33,27 @@ namespace HospitalManagementSystemAPI.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving care plans: {ex.Message}");
             }
+        }
 
+        // GET: api/careplan/{carePlanId}/careplanupdates - gets all care plan updates for a specific care plan
+        [HttpGet("{carePlanId}/careplanupdates")]
+        public async Task<ActionResult> GetCarePlanUpdates(int carePlanId)
+        {
+            try
+            {
+                var carePlanUpdates = await _context.CarePlanUpdates
+                    .Where(cp => cp.CarePlanId == carePlanId)
+                    .ToListAsync();
+                if (carePlanUpdates == null)
+                {
+                    return NotFound("Care plan not found.");
+                }
+                return Ok(carePlanUpdates);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving care plan updates: {ex.Message}");
+            }
         }
 
         // POST: api/careplan - creates a new care plan for a patient

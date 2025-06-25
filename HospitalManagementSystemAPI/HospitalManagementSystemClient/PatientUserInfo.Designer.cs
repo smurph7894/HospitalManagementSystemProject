@@ -376,7 +376,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1305, 567);
+            this.ClientSize = new System.Drawing.Size(1215, 567);
             this.Controls.Add(this.btn_medicalHistoryNav);
             this.Controls.Add(this.comboBox_gender);
             this.Controls.Add(this.dtp_DOB);
