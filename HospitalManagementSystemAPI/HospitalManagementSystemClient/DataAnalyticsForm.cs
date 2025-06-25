@@ -26,7 +26,7 @@ namespace HospitalManagementSystemClient
             _httpClient.BaseAddress = new Uri("http://localhost:5277/api/dataanalytics/"); // Replace port if needed
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _loggedInUser = user; //stores user infor for possible future use 
+            _loggedInUser = user; //stores user infor for possible future usage
         }
 
 
