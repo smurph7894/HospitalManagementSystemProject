@@ -165,7 +165,7 @@ namespace HospitalManagementSystemAPI.Controllers
 
                 _context.Appointments.Update(existingAppointment);
                 await _context.SaveChangesAsync();
-                return Ok(existingAppointment);
+                return Ok(existingAppointment.AppointmentId);
             }
             catch (Exception ex)
             {

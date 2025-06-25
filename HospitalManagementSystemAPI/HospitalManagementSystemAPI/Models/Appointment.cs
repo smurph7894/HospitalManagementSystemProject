@@ -32,9 +32,6 @@ namespace HospitalManagementSystemAPI.Models
         public Status Status { get; set; }
 
         [Required]
-        public int CreatedBy { get; set; } // ID of the staff member who created the appointment
-
-        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [Required]
