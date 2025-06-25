@@ -26,7 +26,7 @@ namespace HospitalManagementSystemClient
             InitializeComponent();
 
             //Initialize MongoDB connection
-            _mongoService = new MongoDbService("HospitalManagementDB", "userData");
+            _mongoService = new MongoDbService("HospitalManagementDB", "Users");
 
             //Bind the ComboBox to the Role Enum (Doctor, Nurse etc..) 
             comboBox_role.DataSource = Enum.GetNames(typeof(Role));

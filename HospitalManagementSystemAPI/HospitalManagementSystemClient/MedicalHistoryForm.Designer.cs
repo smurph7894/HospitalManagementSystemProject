@@ -35,7 +35,6 @@
             this.lbl_patientId = new System.Windows.Forms.Label();
             this.lbl_patientName = new System.Windows.Forms.Label();
             this.dgv_carePlans = new System.Windows.Forms.DataGridView();
-            this.dgv_appointments = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -50,12 +49,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.dgv_appointments = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_carePlans)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_admissions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vitals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_beds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_carePlanUpdates)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_back
@@ -66,6 +66,7 @@
             this.btn_back.TabIndex = 0;
             this.btn_back.Text = "Back";
             this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
             // btn_Dashboard
             // 
@@ -75,6 +76,7 @@
             this.btn_Dashboard.TabIndex = 1;
             this.btn_Dashboard.Text = "Dashboard";
             this.btn_Dashboard.UseVisualStyleBackColor = true;
+            this.btn_Dashboard.Click += new System.EventHandler(this.btn_Dashboard_Click);
             // 
             // label1
             // 
@@ -123,16 +125,6 @@
             this.dgv_carePlans.RowTemplate.Height = 24;
             this.dgv_carePlans.Size = new System.Drawing.Size(811, 419);
             this.dgv_carePlans.TabIndex = 9;
-            // 
-            // dgv_appointments
-            // 
-            this.dgv_appointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_appointments.Location = new System.Drawing.Point(84, 354);
-            this.dgv_appointments.Name = "dgv_appointments";
-            this.dgv_appointments.RowHeadersWidth = 51;
-            this.dgv_appointments.RowTemplate.Height = 24;
-            this.dgv_appointments.Size = new System.Drawing.Size(743, 419);
-            this.dgv_appointments.TabIndex = 12;
             // 
             // label4
             // 
@@ -266,11 +258,22 @@
             this.label10.TabIndex = 27;
             this.label10.Text = "*Click on an Appointment to get Vitals recorded.";
             // 
+            // dgv_appointments
+            // 
+            this.dgv_appointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_appointments.Location = new System.Drawing.Point(84, 354);
+            this.dgv_appointments.Name = "dgv_appointments";
+            this.dgv_appointments.RowHeadersWidth = 51;
+            this.dgv_appointments.RowTemplate.Height = 24;
+            this.dgv_appointments.Size = new System.Drawing.Size(783, 419);
+            this.dgv_appointments.TabIndex = 28;
+            // 
             // MedicalHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2676, 1340);
+            this.Controls.Add(this.dgv_appointments);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
@@ -285,7 +288,6 @@
             this.Controls.Add(this.dgv_admissions);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dgv_appointments);
             this.Controls.Add(this.dgv_carePlans);
             this.Controls.Add(this.lbl_patientId);
             this.Controls.Add(this.lbl_patientName);
@@ -296,11 +298,11 @@
             this.Name = "MedicalHistoryForm";
             this.Text = "Patient Medical History";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_carePlans)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_admissions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vitals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_beds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_carePlanUpdates)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,7 +317,6 @@
         private System.Windows.Forms.Label lbl_patientId;
         private System.Windows.Forms.Label lbl_patientName;
         private System.Windows.Forms.DataGridView dgv_carePlans;
-        private System.Windows.Forms.DataGridView dgv_appointments;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -330,5 +331,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridView dgv_appointments;
     }
 }

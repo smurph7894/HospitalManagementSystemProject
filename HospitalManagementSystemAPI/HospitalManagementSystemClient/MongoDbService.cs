@@ -13,7 +13,7 @@ namespace HospitalManagementSystemClient.Services
            
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("HospitalManagementDB");
-            _usersCollection = database.GetCollection<Users>("userData");
+            _usersCollection = database.GetCollection<Users>("Users");
         }
 
         public Users FindUserByUsername(string username)

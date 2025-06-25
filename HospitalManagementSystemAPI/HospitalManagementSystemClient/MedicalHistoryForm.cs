@@ -19,7 +19,7 @@ namespace HospitalManagementSystemClient
     public partial class MedicalHistoryForm : Form
     {
         private Users _loggedInUser;
-        private readonly string apiBaseUrl = "http://localhost:5277/api/Patient";
+        private readonly string apiBaseUrl = "http://localhost:5277/api";
         private Patient selectedPatient;
 
         private readonly HttpClient client = new HttpClient();
@@ -29,6 +29,26 @@ namespace HospitalManagementSystemClient
             InitializeComponent();
             _loggedInUser = loggedInUser;
             selectedPatient = patientInfo;
+
+            //populate titles
+            lbl_patientId.Text = selectedPatient.PatientId.ToString();
+            lbl_patientName.Text = $"{selectedPatient.FirstName} {selectedPatient.LastName}"; 
+        }
+
+        private void btn_Dashboard_Click(object sender, EventArgs e)
+        {
+            // Navigate to the dashboard form 
+            this.Close();
+            var dashBoardForm = new DashBoardForm(_loggedInUser);
+            dashBoardForm.Show();
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            // If the logged-in user is the patient, go back to their info
+            this.Close();
+            var form = new PatientUserInfo(_loggedInUser, selectedPatient);
+            form.Show();
         }
 
         private async void btn_getFullHistory_Click(object sender, EventArgs e)
@@ -36,13 +56,19 @@ namespace HospitalManagementSystemClient
             //get the top grids medical history of the selected patient
 
             //Admissions
-            var admissionResponse = await client.GetAsync($"{apiBaseUrl}/admissions/patient/{selectedPatient.PatientId}");
+            var admissionResponse = await client.GetAsync($"{apiBaseUrl}/admission/patient/{selectedPatient.PatientId}");
+            var admissions = JsonConvert.DeserializeObject<List<Admission>>(await admissionResponse.Content.ReadAsStringAsync());
             if (admissionResponse.IsSuccessStatusCode)
             {
-                var admissionsJson = await admissionResponse.Content.ReadAsStringAsync();
-                var admissions = JsonConvert.DeserializeObject<List<Admission>>(admissionsJson);
                 // Display admissions in a suitable control, e.g., DataGridView
                 dgv_admissions.DataSource = admissions;
+                dgv_admissions.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+            }
+            else if(admissionResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                dgv_admissions.DataSource = null; // Clear the DataGridView if no admissions found
+                dgv_admissions.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //TODO add invisible label to show no admissions found
             }
             else
             {
@@ -50,29 +76,44 @@ namespace HospitalManagementSystemClient
             }
 
             //Appointments
-            var appointmentResponse = await client.GetAsync($"{apiBaseUrl}/appointments/patient/{selectedPatient.PatientId}");
-            var appointments = JsonConvert.DeserializeObject<List<Appointment>>(await appointmentResponse.Content.ReadAsStringAsync());
+            var appointmentResponse = await client.GetAsync($"{apiBaseUrl}/appointment/patient/{selectedPatient.PatientId}");
+            var appointmentJson = await appointmentResponse.Content.ReadAsStringAsync();
+            var appointments = JsonConvert.DeserializeObject<List<Appointment>>(appointmentJson);
             if (appointmentResponse.IsSuccessStatusCode)
             {
                 // Display appointments in a suitable control, e.g., DataGridView
                 dgv_appointments.DataSource = appointments;
+                dgv_appointments.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+            }
+            else if (appointmentResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                dgv_appointments.DataSource = null; // Clear the DataGridView if no appointments found
+                dgv_appointments.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //TODO add invisible label to show no appointments found
             }
             else
             {
                 MessageBox.Show("Failed to retrieve appointments.");
             }
 
-            //Vitals
-            var vitalsResponse = await client.GetAsync($"{apiBaseUrl}/vitals/patient/{selectedPatient.PatientId}");
-            var vitals = JsonConvert.DeserializeObject<List<Vitals>>(await vitalsResponse.Content.ReadAsStringAsync());
-            if (vitalsResponse.IsSuccessStatusCode)
+            //CarePlans
+            var carePlanResponse = await client.GetAsync($"{apiBaseUrl}/careplan/patient/{selectedPatient.PatientId}");
+            var carePlans = JsonConvert.DeserializeObject<List<CarePlan>>(await carePlanResponse.Content.ReadAsStringAsync());
+            if (carePlanResponse.IsSuccessStatusCode)
             {
                 // Display vitals in a suitable control, e.g., DataGridView
-                dgv_vitals.DataSource = vitals;
+                dgv_carePlans.DataSource = carePlans;
+                dgv_carePlans.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+            }
+            else if (carePlanResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                dgv_carePlans.DataSource = null; // Clear the DataGridView if no careplans found
+                dgv_carePlans.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //TODO add invisible label to show no careplans found
             }
             else
             {
-                MessageBox.Show("Failed to retrieve vitals.");
+                MessageBox.Show("Failed to retrieve careplans.");
             }
         }
 
@@ -80,5 +121,7 @@ namespace HospitalManagementSystemClient
         {
 
         }
+
+
     }
 }

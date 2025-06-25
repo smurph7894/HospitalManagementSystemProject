@@ -13,7 +13,7 @@ namespace HospitalManagementSystemClient
         {
             InitializeComponent();
 
-            //Initializes mongoDB service connecting 'user' collection
+            //Initializes mongoDB service connecting 'userData' collection
             _mongoDbService = new MongoDbService("HospitalManagementDB", "Users");
         }
 

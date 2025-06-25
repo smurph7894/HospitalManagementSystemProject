@@ -21,7 +21,7 @@ namespace HospitalManagementSystemAPI.Controllers
         {
             try
             {
-                var appointments = await _context.Appointments
+               List<Appointment> appointments = await _context.Appointments
                     .Where(a => a.PatientId == patientId)
                     .OrderByDescending(a => a.ScheduledAt)
                     .ToListAsync();

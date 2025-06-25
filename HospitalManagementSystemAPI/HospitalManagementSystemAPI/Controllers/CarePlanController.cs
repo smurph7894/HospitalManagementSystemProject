@@ -16,8 +16,8 @@ namespace HospitalManagementSystemAPI.Controllers
             _context = context;
         }
 
-        // GET: api/careplan/{patientId} - gets all care plans for a specific patient
-        [HttpGet("{patientId}")]
+        // GET: api/careplan/patient/{patientId} - gets all care plans for a specific patient
+        [HttpGet("patient/{patientId}")]
         public async Task<ActionResult> GetCarePatientsPlans(int patientId)
         {
             try
