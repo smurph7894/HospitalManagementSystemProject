@@ -42,6 +42,7 @@
             this.btn_OpenChat = new System.Windows.Forms.Button();
             this.btn_myInfo = new System.Windows.Forms.Button();
             this.btn_patientSearch = new System.Windows.Forms.Button();
+            this.btn_SignOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ScheduleAppointments
@@ -176,11 +177,22 @@
             this.btn_patientSearch.UseVisualStyleBackColor = true;
             this.btn_patientSearch.Click += new System.EventHandler(this.btn_patientSearch_Click);
             // 
+            // btn_SignOut
+            // 
+            this.btn_SignOut.Location = new System.Drawing.Point(675, 39);
+            this.btn_SignOut.Name = "btn_SignOut";
+            this.btn_SignOut.Size = new System.Drawing.Size(77, 30);
+            this.btn_SignOut.TabIndex = 7;
+            this.btn_SignOut.Text = "Sign Out";
+            this.btn_SignOut.UseVisualStyleBackColor = true;
+            this.btn_SignOut.Click += new System.EventHandler(this.btn_SignOut_Click);
+            // 
             // DashBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_SignOut);
             this.Controls.Add(this.btn_patientSearch);
             this.Controls.Add(this.btn_myInfo);
             this.Controls.Add(this.btn_OpenChat);
@@ -219,5 +231,6 @@
         private System.Windows.Forms.Button btn_OpenChat;
         private System.Windows.Forms.Button btn_myInfo;
         private System.Windows.Forms.Button btn_patientSearch;
+        private System.Windows.Forms.Button btn_SignOut;
     }
 }

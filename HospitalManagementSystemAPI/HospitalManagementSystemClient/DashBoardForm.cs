@@ -129,5 +129,16 @@ namespace HospitalManagementSystemClient
                 MessageBox.Show($"Error retrieving patient information: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btn_SignOut_Click(object sender, EventArgs e)
+        {
+            // Show the login form
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+
+            // Closes the inventory form
+            this.Close();
+
+        }
     }
 }

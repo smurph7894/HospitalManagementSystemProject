@@ -216,6 +216,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAnalyticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataAnalyticsForm.Designer.cs">
+      <DependentUpon>DataAnalyticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="DashBoardForm.cs">
@@ -253,7 +259,6 @@
     <Compile Include="Models\CarePlanUpdates.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Staff.cs" />
-    <Compile Include="MongoDbService.cs" />
     <Compile Include="MedicalHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>

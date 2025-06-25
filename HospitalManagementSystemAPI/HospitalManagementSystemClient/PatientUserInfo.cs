@@ -15,7 +15,7 @@ namespace HospitalManagementSystemClient
 {
     public partial class PatientUserInfo : Form
     {
-        private Users _loggedInUser;
+        private  Users _loggedInUser;
         private readonly string apiBaseUrl = "http://localhost:5277/api";
         private Patient selectedPatient;
         private char[] gender = new char[] { 'X', 'F', 'M' };
