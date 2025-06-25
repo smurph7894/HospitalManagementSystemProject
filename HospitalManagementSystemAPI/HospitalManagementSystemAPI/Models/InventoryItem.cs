@@ -39,5 +39,5 @@ public class InventoryItem
 
     [Required]
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    public int TotalHospitalUsage { get; internal set; }
+    
 }
