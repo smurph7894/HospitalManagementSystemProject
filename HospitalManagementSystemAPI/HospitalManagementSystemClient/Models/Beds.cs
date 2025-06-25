@@ -16,9 +16,7 @@ namespace HospitalManagementSystemClient.Models
     public class Bed
     {
         public int BedId { get; set; }
-        [StringLength(100)]
         public string Ward { get; set; }
-        [StringLength(50)]
         public string BedNumber { get; set; }
         public BedStatus Status { get; set; }
     }

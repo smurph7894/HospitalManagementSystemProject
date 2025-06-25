@@ -18,7 +18,7 @@ namespace HospitalManagementSystemAPI.Controllers
         }
 
         // GET: api/vitals/patient/{patientId}
-        [HttpGet("/patient/{patientId}")]
+        [HttpGet("patient/{patientId}")]
         public async Task<ActionResult> GetVitalsByPatientId(int patientId)
         {
             try
@@ -41,6 +41,8 @@ namespace HospitalManagementSystemAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving vitals: {ex.Message}");
             }
         }
+
+        //TODO - future add of connecting vitals to a admission or appointment, so that vitals can be linked to a specific visit or stay in the hospital - Sarah
 
         // POST: api/vitals
         [HttpPost]

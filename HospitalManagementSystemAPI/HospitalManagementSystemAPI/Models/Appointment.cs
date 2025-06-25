@@ -30,7 +30,6 @@ namespace HospitalManagementSystemAPI.Models
         public string Reason { get; set; }
 
         [Required]
-        [StringLength(50)]
         public Status Status { get; set; }
 
         [Required]

@@ -11,7 +11,6 @@ namespace HospitalManagementSystemClient.Models
     {
         public int CarePlanId { get; set; }
         public int PatientId { get; set; } // Foreign key to Patient  
-        [StringLength(200)]
         public string Condition { get; set; }
         public string Description { get; set; }
         public List<CarePlanUpdates> CarePlanUpdates { get; set; }

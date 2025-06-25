@@ -56,8 +56,15 @@ namespace HospitalManagementSystemAPI
                 .Property(e => e.UpdatedAt).HasConversion(
                     v => v,
                     v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+            modelBuilder.Entity<Appointment>()
+                .Property(e => e.Status)
+                .HasConversion<string>();
 
-            //Beds - none needed
+            //Beds 
+            modelBuilder.Entity<Bed>()
+                .Property(e => e.Status)
+                .HasConversion<string>();
+
             //Departments - none needed
 
             //InventoryItems
@@ -144,6 +151,10 @@ namespace HospitalManagementSystemAPI
                 .Property(e => e.RecordedAt).HasConversion(
                     v => v,
                     v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            modelBuilder.Entity<Vitals>()
+                .Property(e => e.VitalType)
+                .HasConversion<string>();
         }
     }
 }

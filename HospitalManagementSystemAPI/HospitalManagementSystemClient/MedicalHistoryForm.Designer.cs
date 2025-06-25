@@ -48,7 +48,6 @@
             this.btn_getFullHistory = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.dgv_appointments = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_carePlans)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_admissions)).BeginInit();
@@ -125,6 +124,7 @@
             this.dgv_carePlans.RowTemplate.Height = 24;
             this.dgv_carePlans.Size = new System.Drawing.Size(811, 419);
             this.dgv_carePlans.TabIndex = 9;
+            this.dgv_carePlans.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_carePlans_CellContentClick);
             // 
             // label4
             // 
@@ -162,11 +162,12 @@
             this.dgv_admissions.RowTemplate.Height = 24;
             this.dgv_admissions.Size = new System.Drawing.Size(783, 419);
             this.dgv_admissions.TabIndex = 16;
+            this.dgv_admissions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_admissions_CellContentClick);
             // 
             // labal1
             // 
             this.labal1.AutoSize = true;
-            this.labal1.Location = new System.Drawing.Point(81, 808);
+            this.labal1.Location = new System.Drawing.Point(2644, 335);
             this.labal1.Name = "labal1";
             this.labal1.Size = new System.Drawing.Size(40, 16);
             this.labal1.TabIndex = 19;
@@ -175,11 +176,11 @@
             // dgv_vitals
             // 
             this.dgv_vitals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_vitals.Location = new System.Drawing.Point(84, 827);
+            this.dgv_vitals.Location = new System.Drawing.Point(2647, 354);
             this.dgv_vitals.Name = "dgv_vitals";
             this.dgv_vitals.RowHeadersWidth = 51;
             this.dgv_vitals.RowTemplate.Height = 24;
-            this.dgv_vitals.Size = new System.Drawing.Size(746, 436);
+            this.dgv_vitals.Size = new System.Drawing.Size(783, 436);
             this.dgv_vitals.TabIndex = 18;
             // 
             // label7
@@ -245,18 +246,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(1883, 808);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(346, 16);
+            this.label9.Size = new System.Drawing.Size(439, 16);
             this.label9.TabIndex = 26;
-            this.label9.Text = "*Click on a Care Plan to get recorded Care Plan Updates.";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(127, 808);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(288, 16);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "*Click on an Appointment to get Vitals recorded.";
+            this.label9.Text = "*Click on a Care Plan or Appointment to get recorded Care Plan Updates.";
             // 
             // dgv_appointments
             // 
@@ -267,14 +259,14 @@
             this.dgv_appointments.RowTemplate.Height = 24;
             this.dgv_appointments.Size = new System.Drawing.Size(783, 419);
             this.dgv_appointments.TabIndex = 28;
+            this.dgv_appointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_appointments_CellContentClick);
             // 
             // MedicalHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2676, 1340);
+            this.ClientSize = new System.Drawing.Size(3558, 1340);
             this.Controls.Add(this.dgv_appointments);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_getFullHistory);
@@ -330,7 +322,6 @@
         private System.Windows.Forms.Button btn_getFullHistory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgv_appointments;
     }
 }

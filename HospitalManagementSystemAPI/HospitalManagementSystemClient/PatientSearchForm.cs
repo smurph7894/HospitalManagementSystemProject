@@ -179,10 +179,18 @@ namespace HospitalManagementSystemClient
 
         private void btn_viewPatientHistory_Click(object sender, EventArgs e)
         {
-            this.Close();
-            // Pass the full Users object to the Dashboard form (or Form1)
-            var medicalHistoryForm = new MedicalHistoryForm(_loggedInUser, selectedPatient);
-            medicalHistoryForm.Show();
+            if(selectedPatient == null)
+            {
+                MessageBox.Show("Please select a patient to view their medical history.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                this.Close();
+                // Pass the full Users object to the Dashboard form (or Form1)
+                var medicalHistoryForm = new MedicalHistoryForm(_loggedInUser, selectedPatient);
+                medicalHistoryForm.Show();
+            }
         }
     }
 }
