@@ -27,7 +27,6 @@ namespace HospitalManagementSystemClient
         {
             InitializeComponent();
             _loggedInUser = user;
-            InitializeSignalR();
             loadDataIfPatient(); // Load patient name if the user is a patient
         }
 
@@ -50,26 +49,7 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        private async void InitializeSignalR()
-        {
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5277/appointmentHub") // Ensure this URL matches your API's SignalR hub endpoint
-                .Build();
-            try
-            {
-                _hubConnection.On<string, string>("ReceiveAppointmentNotification", (message, user) =>
-                {
-                    // Handle the notification received from the hub
-                    MessageBox.Show($"Notification: {message} from {user}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                });
-
-                await _hubConnection.StartAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error connecting to SignalR hub: {ex.Message}");
-            }
-        }
+        
 
         public static class NotificationHandler
         {

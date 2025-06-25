@@ -27,7 +27,7 @@ namespace HospitalManagementSystemClient
         {
             InitializeComponent();
             InitializeGrid();
-            InitializeSignalR();
+            //InitializeSignalR();
             LoadInventory();
             _loggedInUser = user;
 
@@ -135,50 +135,52 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        //set up signalR listeners for real time updates
-        private async void InitializeSignalR()
-        {
-            connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5277/inventoryHub") 
-                .WithAutomaticReconnect()
-                .Build();
-            //item that is added or updated (on)
-            connection.On<InventoryItem>("ReceiveInventoryUpdate", (updatedItem) =>
-            {
-                Invoke((Action)(() =>
-                {
-                    UpdateInventoryRow(updatedItem);
-                    MessageBox.Show($"Item updated or added: Id: {updatedItem.ItemId}, Name:{updatedItem.Name} (Qty: {updatedItem.QuantityInStock})");
-                }));
-            });
+        //moving to central manager-Sarah
 
-            //Item that is deleted (on)
-            connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
-            {
-                Invoke((Action)(() =>
-                {
-                    foreach (DataGridViewRow row in dgv_Inventory.Rows)
-                    {
-                        if (row.Cells["Id"].Value != null && (int)row.Cells["Id"].Value == deletedItemId)
-                        {
-                            dgv_Inventory.Rows.Remove(row);
-                            MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
-                            break;
-                        }
-                    }
-                }));
-            });
+        ////set up signalR listeners for real time updates
+        //private async void InitializeSignalR()
+        //{
+        //    connection = new HubConnectionBuilder()
+        //        .WithUrl("http://localhost:5277/inventoryHub") 
+        //        .WithAutomaticReconnect()
+        //        .Build();
+        //    //item that is added or updated (on)
+        //    connection.On<InventoryItem>("ReceiveInventoryUpdate", (updatedItem) =>
+        //    {
+        //        Invoke((Action)(() =>
+        //        {
+        //            UpdateInventoryRow(updatedItem);
+        //            MessageBox.Show($"Item updated or added: Id: {updatedItem.ItemId}, Name:{updatedItem.Name} (Qty: {updatedItem.QuantityInStock})");
+        //        }));
+        //    });
 
-            try
-            {
-                await connection.StartAsync();
-                MessageBox.Show("Connected to SignalR successfully.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error connecting to SignalR: " + ex.Message);
-            }
-        }
+        //    //Item that is deleted (on)
+        //    connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
+        //    {
+        //        Invoke((Action)(() =>
+        //        {
+        //            foreach (DataGridViewRow row in dgv_Inventory.Rows)
+        //            {
+        //                if (row.Cells["Id"].Value != null && (int)row.Cells["Id"].Value == deletedItemId)
+        //                {
+        //                    dgv_Inventory.Rows.Remove(row);
+        //                    MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
+        //                    break;
+        //                }
+        //            }
+        //        }));
+        //    });
+
+        //    try
+        //    {
+        //        await connection.StartAsync();
+        //        MessageBox.Show("Connected to SignalR successfully.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error connecting to SignalR: " + ex.Message);
+        //    }
+        //}
 
 
 
