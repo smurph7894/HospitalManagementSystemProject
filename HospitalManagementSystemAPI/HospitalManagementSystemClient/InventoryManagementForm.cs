@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using HospitalManagementSystemClient.Models;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 //Nyamburas
 //Windows form UI for interacting with inventory via REST APi and SignalR
@@ -32,6 +32,7 @@ namespace HospitalManagementSystemClient
             _loggedInUser = user;
 
             dgv_Inventory.SelectionChanged += dgv_Inventory_SelectionChanged;
+            cmb_IsMedication.SelectedIndexChanged += comboBox_IsMedication_SelectedIndexChanged;
 
 
             lblStatus.Visible = false; // start hidden
@@ -48,6 +49,7 @@ namespace HospitalManagementSystemClient
             dgv_Inventory.Columns.Add("UnitOfMeasure", "Unit");
             dgv_Inventory.Columns.Add("ReorderLevel", "Reorder Level");
             dgv_Inventory.Columns.Add("Location", "Location");
+            dgv_Inventory.Columns.Add("IsMedication", "Is Medication?");
             dgv_Inventory.Columns.Add("CreatedAt", "Created At");
             dgv_Inventory.Columns.Add("UpdatedAt", "Last Updated");
         }
@@ -87,6 +89,10 @@ namespace HospitalManagementSystemClient
                     item.UnitOfMeasure,
                     item.ReorderLevel,
                     item.Location,
+                    // Display IsMedication and MedicationName in the DataGridView for clarity
+                    // Helpful for analytics and inventory separation between medical and non-medical items
+                    item.IsMedication,
+                    item.MedicationName,
                     item.CreatedAt,
                     item.UpdatedAt
                 );
@@ -152,24 +158,24 @@ namespace HospitalManagementSystemClient
         //            UpdateInventoryRow(updatedItem);
         //            MessageBox.Show($"Item updated or added: Id: {updatedItem.ItemId}, Name:{updatedItem.Name} (Qty: {updatedItem.QuantityInStock})");
         //        }));
-        //    });
+        //    });    
 
-        //    //Item that is deleted (on)
-        //    connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
-        //    {
-        //        Invoke((Action)(() =>
-        //        {
-        //            foreach (DataGridViewRow row in dgv_Inventory.Rows)
-        //            {
-        //                if (row.Cells["Id"].Value != null && (int)row.Cells["Id"].Value == deletedItemId)
-        //                {
-        //                    dgv_Inventory.Rows.Remove(row);
-        //                    MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
-        //                    break;
-        //                }
-        //            }
-        //        }));
-        //    });
+        //Item that is deleted (on)
+        //connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
+    //    {
+    //        Invoke((Action)(() =>
+    //        {
+    //            foreach (DataGridViewRow row in dgv_Inventory.Rows)
+    //            {
+    //                if (row.Cells["Id"].Value != null && (int)row.Cells["Id"].Value == deletedItemId)
+    //                {
+    //                    dgv_Inventory.Rows.Remove(row);
+    //                    MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
+    //                    break;
+    //                }
+    //            }
+    //        }));
+    //    });
 
         //    try
         //    {
@@ -197,7 +203,9 @@ namespace HospitalManagementSystemClient
                 QuantityInStock = (int)nup_quantityinstock.Value,
                 UnitOfMeasure = cmb_unitofmeasure.Text,
                 ReorderLevel = (int)nup_reorderLevel.Value,
-                Location = txb_location.Text,
+                IsMedication = cmb_IsMedication.SelectedItem.ToString() == "Yes",// Set IsMedication based on the selected dropdown option ("Yes" = true, "No" = false)
+                MedicationName = cmb_IsMedication.SelectedItem.ToString() == "Yes" ? cmb_MedicationName.SelectedItem?.ToString() : null, // Save the selected medication name only if IsMedication is true
+                //Location = txb_location.Text, was deleted in merge -unsure if it was still needed since it's kept elsewhere -Sarah
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
 
@@ -234,7 +242,10 @@ namespace HospitalManagementSystemClient
                 QuantityInStock = (int)nup_quantityinstock.Value,
                 UnitOfMeasure = cmb_unitofmeasure.Text,
                 ReorderLevel = (int)nup_reorderLevel.Value,
+                IsMedication = cmb_IsMedication.SelectedItem.ToString() == "Yes",
+                MedicationName = cmb_IsMedication.SelectedItem.ToString() == "Yes" ? cmb_MedicationName.SelectedItem?.ToString() : null,
                 Location = txb_location.Text,
+
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -270,6 +281,7 @@ namespace HospitalManagementSystemClient
                     row.Cells["UnitOfMeasure"].Value = item.UnitOfMeasure;
                     row.Cells["ReorderLevel"].Value = item.ReorderLevel;
                     row.Cells["Location"].Value = item.Location;
+                    row.Cells["IsMedication"].Value = item.IsMedication ? "Yes" : "No";
                     row.Cells["CreatedAt"].Value = item.CreatedAt;
                     row.Cells["UpdatedAt"].Value = item.UpdatedAt;
                     return;
@@ -330,6 +342,23 @@ namespace HospitalManagementSystemClient
                 "Piece",
             });
 
+            // Populate IsMedication dropdown with Yes/No options
+            cmb_IsMedication.Items.AddRange(new[] { "Yes", "No" });
+            cmb_IsMedication.SelectedIndex = 1; // Default to No
+
+            // Populate MedicationName dropdown with preset medication names to ensure consistency
+            cmb_MedicationName.Items.AddRange(new[]
+            {
+                "Paracetamol", "Ibuprofen", "Amoxicillin", "Insulin", "Aspirin"
+            });
+            // Disable MedicationName dropdown by default; it will only enable if "Yes" is selected in IsMedication
+            cmb_MedicationName.Enabled = false;
+
+        }
+        private void comboBox_IsMedication_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Enable or disable the MedicationName dropdown based on whether the item is marked as a medication
+            cmb_MedicationName.Enabled = cmb_IsMedication.SelectedItem.ToString() == "Yes";
         }
 
         //Signout Button goes back to login page
@@ -361,6 +390,11 @@ namespace HospitalManagementSystemClient
             nup_quantityinstock.Value = nup_quantityinstock.Minimum;
             nup_reorderLevel.Value = nup_reorderLevel.Minimum;
 
+            //reset med 
+            cmb_IsMedication.SelectedIndex = 1; // Set back to "No"
+            cmb_MedicationName.SelectedIndex = -1;
+            cmb_MedicationName.Enabled = false;
+
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -373,6 +407,7 @@ namespace HospitalManagementSystemClient
             dashBoardForm.Show();
 
         }
+
     }
 
     //Inventory Model with Validation attributes
@@ -398,6 +433,8 @@ namespace HospitalManagementSystemClient
 
         [StringLength(100)]
         public string Location { get; set; }
+        public bool IsMedication { get; set; } //indicates whether inventory item is medication (true/false)
+        public string MedicationName { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -405,5 +442,6 @@ namespace HospitalManagementSystemClient
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
+        public int TotalHospitalUsage { get; set; }
     }
 }
