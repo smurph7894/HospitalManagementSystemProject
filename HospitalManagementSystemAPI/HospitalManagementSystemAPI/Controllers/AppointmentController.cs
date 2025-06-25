@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using MongoDB.Driver.Core.Configuration;
 using System.Data;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HospitalManagementSystemAPI.Controllers
 {
@@ -14,10 +15,13 @@ namespace HospitalManagementSystemAPI.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public AppointmentController(AppDbContext context)
+        private readonly IHubContext<AppointmentHub> _hubContext;
+        public AppointmentController(AppDbContext context, IHubContext<AppointmentHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
+
         // GET: api/appointment/patient/{patientId} - gets all appointments for a specific patient
         [HttpGet("patient/{patientId}")]
         public async Task<ActionResult> GetPatientAppointments(int patientId)
@@ -52,6 +56,7 @@ namespace HospitalManagementSystemAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving appointments: {ex.Message}");
             }
         }
+
         // GET: api/appointment/{appointmentId} - gets a specific appointment by ID
         [HttpGet("{appointmentId}")]
         public async Task<ActionResult> GetAppointmentById(int appointmentId)

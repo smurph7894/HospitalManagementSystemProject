@@ -58,6 +58,7 @@ namespace HospitalManagementSystemAPI
 
             app.MapHub<ChatHub>("/chathub");
             app.MapHub<InventoryHub>("/inventoryHub");
+            app.MapHub<AppointmentHub>("/appointmentHub");
 
 
             app.Run();

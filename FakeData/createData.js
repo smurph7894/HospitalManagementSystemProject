@@ -606,8 +606,8 @@ class DataPopulator {
         
         for (let i = 0; i < count; i++) {
             const patientId = this.generator.getRandomElement(patientIds);
-            const staffId = this.generator.getRandomElement(staffIds);
-            const createdBy = this.generator.getRandomElement(staffIds);
+            // 20% chance of having no staff assigned (null StaffId)
+            const staffId = Math.random() < 0.2 ? null : this.generator.getRandomElement(staffIds);
             const scheduledAt = this.generator.getRandomDate(new Date('2024-01-01'), new Date('2025-12-31'));
             const duration = this.generator.getRandomElement([15, 30, 45, 60, 90]);
             const status = this.generator.getRandomElement(this.generator.appointmentStatuses);
@@ -615,10 +615,10 @@ class DataPopulator {
             
             const query = `
                 INSERT INTO dbo.Appointments (
-                    PatientId, StaffId, ScheduledAt, DurationMinutes, Status, Reason, CreatedBy
+                    PatientId, StaffId, ScheduledAt, DurationMinutes, Status, Reason
                 )
                 VALUES (
-                    @patientId, @staffId, @scheduledAt, @durationMinutes, @status, @reason, @createdBy
+                    @patientId, @staffId, @scheduledAt, @durationMinutes, @status, @reason
                 )
             `;
             
@@ -629,7 +629,6 @@ class DataPopulator {
                 .input('durationMinutes', sql.Int, duration)
                 .input('status', sql.NVarChar(50), status)
                 .input('reason', sql.NVarChar(500), reason)
-                .input('createdBy', sql.Int, createdBy)
                 .query(query);
         }
         
