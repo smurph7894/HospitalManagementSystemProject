@@ -107,7 +107,7 @@ namespace HospitalManagementSystemAPI.Controllers
         {
             try
             {
-                if (appointment == null || appointment.PatientId <= 0 || appointment.StaffId <= 0)
+                if (appointment == null || appointment.PatientId <= 0 )
                 {
                     return BadRequest("Invalid appointment data.");
                 }
@@ -115,7 +115,7 @@ namespace HospitalManagementSystemAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(appointment);
             }
-            catch (Exception ex)
+catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating appointment: {ex.Message}");
             }

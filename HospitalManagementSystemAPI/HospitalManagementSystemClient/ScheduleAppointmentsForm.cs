@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,7 +41,7 @@ namespace HospitalManagementSystemClient
             }
             else
             {
-                lbl_patientId.Visible = true;
+                txtB_patientId.Visible = true;
                 lbl_patientIdTitle.Visible = true;
                 lbl_status.Visible = true;
                 comboBox_appointmentStatus.Visible = true;
@@ -56,6 +57,7 @@ namespace HospitalManagementSystemClient
                 using (HttpClient client = new HttpClient())
                 {
                     var staffOrgId = _loggedInUser.UserId.ToString();
+                    Console.WriteLine($"staff userId {staffOrgId}");
                     var response = await client.GetAsync($"{apiBaseUrl}/staff/{staffOrgId}");
 
                     if (response.IsSuccessStatusCode)
@@ -76,6 +78,32 @@ namespace HospitalManagementSystemClient
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while retrieving staff details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task getPatientId()
+        {
+            var patientOrgId = _loggedInUser.UserId.ToString();
+            Console.WriteLine($"patientOrgId: {patientOrgId}");
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"{apiBaseUrl}/patient/userId/{patientOrgId}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var json = await response.Content.ReadAsStringAsync();
+                        selectedPatient = JsonConvert.DeserializeObject<Patient>(json);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error retrieving patient details. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while retrieving patient details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -128,36 +156,16 @@ namespace HospitalManagementSystemClient
                                 if (selectedPatient != null)
                                 {
                                     // Display appointment and patient details
-                                    lbl_patientId.Text = selectedPatient.PatientId.ToString();
+                                    txtB_patientId.Text = selectedPatient.PatientId.ToString();
                                     lbl_patientName.Text = $"{selectedPatient.FirstName} {selectedPatient.LastName}";
                                     dateTimePicker1.Value = selectedAppointment.ScheduledAt;
                                     numericUpDown_duration.Value = selectedAppointment.DurationMinutes;
                                     richTextBox1.Text = selectedAppointment.Reason;
-                                    //if(Enum.TryParse(selectedAppointment.Status, out Status parsedStatus))
-                                    //{
-                                    //    comboBox_appointmentStatus.SelectedIndex = 0; // Scheduled
-                                    //}
                                     var statusString = selectedAppointment.Status.ToString();
                                     if (Enum.TryParse(statusString, out Status parsedStatus))
                                     {
                                         comboBox_appointmentStatus.SelectedIndex = (int)parsedStatus;
                                     }
-                                    //else if (selectedAppointment.Status == "InProgress")
-                                    //{
-                                    //    comboBox_appointmentStatus.SelectedIndex = 1; // InProgress
-                                    //}
-                                    //else if (selectedAppointment.Status == "Completed")
-                                    //{
-                                    //    comboBox_appointmentStatus.SelectedIndex = 2; // Completed
-                                    //}
-                                    //else if (selectedAppointment.Status == "Cancelled")
-                                    //{
-                                    //    comboBox_appointmentStatus.SelectedIndex = 3; // Cancelled
-                                    //}
-                                    //else if (selectedAppointment.Status == "NoShow")
-                                    //{
-                                    //    comboBox_appointmentStatus.SelectedIndex = 4; // NoShow
-                                    //}
                                 }
                             }
                             else
@@ -179,47 +187,104 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        private void btn_Add_Click(object sender, EventArgs e)
+        private void validate_appointment(Appointment appointment)
         {
-            var appointmentUpdated = new Appointment
+            if (appointment == null)
             {
-                AppointmentId = selectedAppointment.AppointmentId,
-                PatientId = selectedPatient.PatientId,
-                StaffId = _staff?.StaffId ?? 0, // Use null-coalescing operator to handle null _staff  
+                MessageBox.Show("Appointment cannot be null.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(appointment.Reason == null || appointment.Reason.Trim().Length == 0)
+            {
+                MessageBox.Show("Reason for appointment cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (appointment.ScheduledAt == null)
+            {
+                MessageBox.Show("Scheduled date and time cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(appointment.DurationMinutes < 30 || appointment.DurationMinutes>90)
+            {
+                MessageBox.Show("Duration must be between 30 and 90 minutes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(appointment.Status == null)
+            {
+                MessageBox.Show("Status cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            using(HttpClient client = new HttpClient())
+            {
+                var checkUserExistsResponse = client.GetAsync($"{apiBaseUrl}/patient/{appointment.PatientId}").Result;
+                if (!checkUserExistsResponse.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Patient does not exist. Please enter a valid Patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+        }
+
+        private async void btn_Add_Click(object sender, EventArgs e)
+        {
+            int appointmentPatientId;
+
+            if (_loggedInUser.Roles.Contains(Role.Patient))
+            {
+                await getPatientId(); // Await the async call  
+                if (selectedPatient == null)
+                {
+                    MessageBox.Show("Patient not found. Cannot create appointment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                appointmentPatientId = selectedPatient.PatientId;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(txtB_patientId.Text) || !int.TryParse(txtB_patientId.Text, out int patientId))
+                {
+                    MessageBox.Show("Please enter a valid Patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                appointmentPatientId = patientId;
+            }
+            Appointment appointmentUpdated = new Appointment
+            {
+                PatientId = appointmentPatientId,
+                StaffId = _staff?.StaffId, // Use null-coalescing operator to handle null _staff    
                 ScheduledAt = dateTimePicker1.Value,
                 Status = comboBox_appointmentStatus.SelectedItem != null
                     ? (Status)Enum.Parse(typeof(Status), comboBox_appointmentStatus.SelectedItem.ToString())
-                    : Status.Scheduled, // Default to 'Scheduled' if no status is selected  
+                    : Status.Scheduled, // Default to 'Scheduled' if no status is selected    
                 DurationMinutes = (int)numericUpDown_duration.Value,
-                Reason = richTextBox1.Text
+                Reason = richTextBox1.Text,
+                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.Now
             };
+
+            validate_appointment(appointmentUpdated);
+
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var appJson = JsonConvert.SerializeObject(appointmentUpdated);
-                    var appContent = new StringContent(appJson, Encoding.UTF8, "application/json");
-                    var response = client.PostAsync($"{apiBaseUrl}/appointment", appContent).Result;
+                    var response = client.PostAsJsonAsync($"{apiBaseUrl}/appointment", appointmentUpdated).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        var appointmentId = response.Content.ReadAsStringAsync().Result;
-                        selectedAppointment = JsonConvert.DeserializeObject<Appointment>(appointmentId);
-                        MessageBox.Show($"Appointment added successfully. AppointmentId: {selectedAppointment}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Appointment added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Clear the form fields after adding
-                        lbl_patientId.Text = string.Empty;
+                        // Clear the form fields after adding  
+                        txtB_patientId.Text = string.Empty;
                         lbl_patientName.Text = string.Empty;
                         dateTimePicker1.Value = DateTime.Now;
                         comboBox_appointmentStatus.SelectedIndex = -1;
                         numericUpDown_duration.Value = 30;
                         richTextBox1.Clear();
-                        loadDataIfPatient(); // Reload data if the user is a patient
                     }
                     else
                     {
                         MessageBox.Show("Error adding appointment. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -231,26 +296,28 @@ namespace HospitalManagementSystemClient
 
         private void btn_update_Click(object sender, EventArgs e)
         {
+
             var appointmentUpdated = new Appointment
             {
                 AppointmentId = selectedAppointment.AppointmentId,
                 PatientId = selectedPatient.PatientId,
-                StaffId = _staff?.StaffId ?? 0, // Use null-coalescing operator to handle null _staff  
+                StaffId = _staff?.StaffId, // Use null-coalescing operator to handle null _staff  
                 ScheduledAt = dateTimePicker1.Value,
-                Status = comboBox_appointmentStatus.SelectedItem != null
-                    ? (Status)Enum.Parse(typeof(Status), comboBox_appointmentStatus.SelectedItem.ToString())
-                    : Status.Scheduled, // Default to 'Scheduled' if no status is selected  
                 DurationMinutes = (int)numericUpDown_duration.Value,
                 Reason = richTextBox1.Text
             };
+            if (Enum.TryParse<Status>(comboBox_appointmentStatus.SelectedItem?.ToString(), out var status))
+            {
+                appointmentUpdated.Status = (Status)status;
+            }
+
+            validate_appointment(appointmentUpdated);
 
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    var appJson = JsonConvert.SerializeObject(appointmentUpdated);
-                    var appContent = new StringContent(appJson, Encoding.UTF8, "application/json");
-                    var response = client.PutAsync($"{apiBaseUrl}/appointment/{appointmentUpdated.AppointmentId}", appContent).Result;
+                    var response = client.PutAsJsonAsync($"{apiBaseUrl}/appointment/{appointmentUpdated.AppointmentId}", appointmentUpdated).Result;
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -267,13 +334,18 @@ namespace HospitalManagementSystemClient
                 MessageBox.Show($"An error occurred while updating the appointment: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             selectedAppointment = null; // Clear the selected appointment after update
-            lbl_patientId.Text = string.Empty; // Clear patient ID label
+            txtB_patientId.Text = string.Empty; // Clear patient ID label
             lbl_patientName.Text = string.Empty; // Clear patient name label
             dateTimePicker1.Value = DateTime.Now; // Reset date picker to current time
             comboBox_appointmentStatus.SelectedIndex = -1; // Reset appointment status combo box
             numericUpDown_duration.Value = 30; // Reset duration to default value
             richTextBox1.Clear(); // Clear the reason text box
-            loadDataIfPatient();
+            // Check if the user is a patient
+            if (_loggedInUser.Roles.Contains(Role.Patient))
+            {
+                // Load the patient's information
+                lbl_patientName.Text = _loggedInUser.Username;
+            }
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -292,13 +364,18 @@ namespace HospitalManagementSystemClient
                     {
                         MessageBox.Show("Appointment deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Clear the form fields after deletion
-                        lbl_patientId.Text = string.Empty;
+                        txtB_patientId.Text = string.Empty;
                         lbl_patientName.Text = string.Empty;
                         dateTimePicker1.Value = DateTime.Now;
                         comboBox_appointmentStatus.SelectedIndex = -1;
                         numericUpDown_duration.Value = 30;
                         richTextBox1.Clear();
-                        loadDataIfPatient();
+                        // Check if the user is a patient
+                        if (_loggedInUser.Roles.Contains(Role.Patient))
+                        {
+                            // Load the patient's information
+                            lbl_patientName.Text = _loggedInUser.Username;
+                        }
                     }
                     else
                     {
