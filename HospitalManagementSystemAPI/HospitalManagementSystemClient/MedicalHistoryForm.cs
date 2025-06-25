@@ -74,7 +74,7 @@ namespace HospitalManagementSystemClient
             if (admissionResponse.IsSuccessStatusCode)
             {
                 dgv_admissions.DataSource = admissions;
-                dgv_admissions.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //dgv_admissions.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
             }
             else
             {
@@ -83,12 +83,17 @@ namespace HospitalManagementSystemClient
 
             //Appointments
             var appointmentResponse = await client.GetAsync($"{apiBaseUrl}/appointment/patient/{selectedPatient.PatientId}");
+            var appointmentJson = await appointmentResponse.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(appointmentJson))
+            {
+                MessageBox.Show("No appointments available for this patient.");
+                return;
+            }
+            var appointments = JsonConvert.DeserializeObject<List<Appointment>>(appointmentJson);
             if (appointmentResponse.IsSuccessStatusCode)
             {
-                var appointmentJson = await appointmentResponse.Content.ReadAsStringAsync();
-                var appointments = JsonConvert.DeserializeObject<List<Appointment>>(appointmentJson);
                 dgv_appointments.DataSource = appointments;
-                dgv_appointments.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //dgv_appointments.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill); ;
             }
             else
             {
@@ -97,11 +102,17 @@ namespace HospitalManagementSystemClient
 
             //CarePlans
             var carePlanResponse = await client.GetAsync($"{apiBaseUrl}/careplan/patient/{selectedPatient.PatientId}");
-            var carePlans = JsonConvert.DeserializeObject<List<CarePlan>>(await carePlanResponse.Content.ReadAsStringAsync());
+            var carePlanJson = await carePlanResponse.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(carePlanJson))
+            {
+                MessageBox.Show("No care plans available for this patient.");
+                return;
+            }
+            var carePlans = JsonConvert.DeserializeObject<List<CarePlan>>(carePlanJson);
             if (carePlanResponse.IsSuccessStatusCode)
             {
                 dgv_carePlans.DataSource = carePlans;
-                dgv_carePlans.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //dgv_carePlans.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill); 
             }
             else
             {
@@ -111,11 +122,16 @@ namespace HospitalManagementSystemClient
             //Vitals
             var vitalsResponse = await client.GetAsync($"{apiBaseUrl}/vitals/patient/{selectedPatient.PatientId}");
             var vitalsJson = await vitalsResponse.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(vitalsJson))
+            {
+                MessageBox.Show("No vitals data available for this patient.");
+                return;
+            }
             var vitals = JsonConvert.DeserializeObject<List<Vitals>>(vitalsJson);
             if (vitalsResponse.IsSuccessStatusCode)
             {
                 dgv_vitals.DataSource = vitals;
-                dgv_vitals.Columns.GetColumnsWidth(DataGridViewElementStates.Visible);
+                //dgv_vitals.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             else
             {
@@ -153,6 +169,11 @@ namespace HospitalManagementSystemClient
                 MessageBox.Show("No admission selected. Please select an admission to view details.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else
+            {
+                // If an admission is selected, retrieve and display its bed details
+                getAdmissionBeds(selectedAdmission.BedId);
+            }
         }
 
         private void dgv_carePlans_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -166,12 +187,89 @@ namespace HospitalManagementSystemClient
             }
         }
 
+        private async void getAdmissionBeds(int bedId)
+        {
+            var bedResponse = await client.GetAsync($"{apiBaseUrl}/admission/bed/{bedId}");
+            var bedJson = await bedResponse.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(bedJson))
+            {
+                MessageBox.Show("No bed details available for this admission.");
+                return;
+            }
+            var bedDetails = JsonConvert.DeserializeObject<Bed>(bedJson);
+            if (bedResponse.IsSuccessStatusCode)
+            {
+                dgv_beds.DataSource = bedDetails;
+                //dgv_beds.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            }
+            else
+            {
+                MessageBox.Show("Failed to retrieve bed details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //private async void getCarePlanUpdatesByCarePlan(int carePlanId)
+        //{
+        //    var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/careplan/updates/{carePlanId}");
+        //    var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+
         private async void getAppointmentCarePlansAndUpdates(Appointment appointment)
         {
             try
             {
-                //get carePlans by appointment ID
+                // Get carePlans by appointment ID  
                 var carePlanUpdatesResponse = await client.GetAsync($"{apiBaseUrl}/careplan/appointment/{appointment.AppointmentId}");
+                var responseContent = await carePlanUpdatesResponse.Content.ReadAsStringAsync();
+
+                if (carePlanUpdatesResponse.IsSuccessStatusCode)
+                {
+                    // Deserialize the response which contains both CarePlans and CarePlanUpdates  
+                    var response = JsonConvert.DeserializeObject<dynamic>(responseContent);
+
+                    // Extract CarePlans from the response  
+                    var carePlans = JsonConvert.DeserializeObject<List<CarePlan>>(response.carePlans.ToString());
+
+                    // Extract CarePlanUpdates from the response  
+                    var carePlanUpdates = JsonConvert.DeserializeObject<List<CarePlanUpdates>>(response.carePlanUpdates.ToString());
+
+                    // Populate Care Plans DataGridView
+                    var carePlanList = new List<object>();
+                    foreach (var cp in carePlans)
+                    {
+                        carePlanList.Add(new
+                        {
+                            CarePlanId = cp.CarePlanId,
+                            PatientId = cp.PatientId,
+                            Condition = cp.Condition,
+                            Description = cp.Description,
+                            DiagnosisDate = cp.DiagnosisDate,
+                            DateResolved = cp.DateResolved,
+                            CreatedAt = cp.CreatedAt,
+                            UpdatesCount = cp.CarePlanUpdates != null ? cp.CarePlanUpdates.Count : 0
+                        });
+                    }
+                    dgv_carePlans.DataSource = carePlanList;
+                    //dgv_carePlans.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+                    // Populate Care Plan Updates DataGridView  
+                    var carePlanUpdatesList = new List<object>();
+                    foreach (var cpu in carePlanUpdates)
+                    {
+                        carePlanUpdatesList.Add(new
+                        {
+                            CarePlanUpdateId = cpu.CarePlanUpdateId,
+                            AppointmentId = cpu.AppointmentId,
+                            Notes = cpu.Notes
+                        });
+                    }
+                    dgv_carePlanUpdates.DataSource = carePlanUpdatesList;
+                    //dgv_carePlanUpdates.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                }
+                else
+                {
+                    MessageBox.Show($"Failed to retrieve care plans for the selected appointment. Status: {carePlanUpdatesResponse.StatusCode}",
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
             }
             catch (Exception ex)

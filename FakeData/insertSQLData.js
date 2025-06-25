@@ -93,7 +93,7 @@ class FakeDataGenerator {
             'Back Pain', 'Allergies', 'Insomnia', 'High Cholesterol', 'Obesity'
         ];
 
-        this.appointmentStatuses = ['Scheduled', 'InProgress', 'Completed', 'Cancelled', 'No-Show'];
+        this.appointmentStatuses = ['Scheduled', 'InProgress', 'Completed', 'Cancelled', 'NoShow'];
         this.appointmentReasons = [
             'Annual Physical', 'Follow-up Visit', 'Consultation', 'Emergency Visit',
             'Routine Checkup', 'Vaccination', 'Lab Results Review', 'Medication Review',

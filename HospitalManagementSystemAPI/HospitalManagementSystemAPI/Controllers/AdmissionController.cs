@@ -71,6 +71,22 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
+        // GET: api/admission/bed/{bedId} - gets bed by an admission
+        [HttpGet("bed/{bedId}")]
+        public async Task<ActionResult> GetAdmissionsByBed(int bedId)
+        {
+            try
+            {
+                var admissionBed = await _context.Admissions
+                    .FirstOrDefaultAsync(a => a.BedId == bedId);
+                return Ok(admissionBed);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving admissions: {ex.Message}");
+            }
+        }
+
         // POST: api/admission - creates a new admission
         [HttpPost]
         public async Task<ActionResult> CreateAdmission([FromBody] Admission admission)

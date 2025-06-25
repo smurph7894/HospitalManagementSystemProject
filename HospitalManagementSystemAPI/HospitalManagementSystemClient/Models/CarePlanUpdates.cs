@@ -12,5 +12,7 @@ namespace HospitalManagementSystemClient.Models
         public int CarePlanUpdateId { get; set; }
         public int AppointmentId { get; set; } // Foreign key to Appointment  
         public string Notes { get; set; } // Notes or updates regarding the care plan  
+        public int CarePlanId { get; set; } // Foreign key to CarePlan
+
     }
 }

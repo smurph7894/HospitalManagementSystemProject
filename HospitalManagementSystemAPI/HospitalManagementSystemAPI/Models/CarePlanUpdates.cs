@@ -12,5 +12,7 @@ namespace HospitalManagementSystemAPI.Models
 
         [Required]
         public string Notes { get; set; } // Notes or updates regarding the care plan  
+
+        public int CarePlanId { get; set; } // Foreign key to CarePlan
     }
 }
