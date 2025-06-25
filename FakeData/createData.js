@@ -917,124 +917,7 @@ class DataPopulator {
         console.log(`Inserted ${count} reports history entries`);
     }
 
-    // JSON to SQL population methods
-    async populateNotificationsFromJSON() {
-        console.log('Populating Notifications from JSON...');
-        const notifications = this.loadJSON('NotificationData.json');
-
-        for (const notification of notifications) {
-            const userOrgId = notification.UserId.$oid;
-            const type = notification.type;
-            const payload = JSON.stringify(notification.Payload);
-            const isRead = notification.isRead;
-            const createdAt = new Date(notification.CreatedAt);
-
-            const query = `
-                INSERT INTO dbo.Notifications (
-                    UserRef, Type, Payload, IsRead, CreatedAt
-                )
-                VALUES (
-                    @userOrgId, @type, @payload, @isRead, @createdAt
-                )
-            `;
-
-            await this.pool.request()
-                .input('userOrgId', sql.NVarChar(500), userOrgId)
-                .input('type', sql.NVarChar(50), type)
-                .input('payload', sql.NVarChar(sql.MAX), payload)
-                .input('isRead', sql.Bit, isRead)
-                .input('createdAt', sql.DateTime, createdAt)
-                .query(query);
-        }
-
-        console.log(`Inserted ${notifications.length} notifications from JSON`);
-    }
-
-    async populateChatRoomsFromJSON() {
-        console.log('Populating Chat Rooms from JSON...');
-        const chatRooms = this.loadJSON('ChatRoomData.json');
-
-        for (const room of chatRooms) {
-            const name = room.Name;
-            const createdAt = new Date(room.CreatedAt);
-
-            // Insert room and get the generated ID
-            const roomQuery = `
-                INSERT INTO dbo.ChatRooms (Name, CreatedAt)
-                OUTPUT INSERTED.RoomId
-                VALUES (@name, @createdAt)
-            `;
-
-            const result = await this.pool.request()
-                .input('name', sql.NVarChar(100), name)
-                .input('createdAt', sql.DateTime, createdAt)
-                .query(roomQuery);
-
-            const roomId = result.recordset[0].RoomId;
-
-            // Insert participants
-            for (const participant of room.Participants) {
-                const userOrgId = participant.$oid;
-
-                const participantQuery = `
-                    INSERT INTO dbo.ChatRoomParticipants (RoomId, PatientOrgId)
-                    VALUES (@roomId, @userOrgId)
-                `;
-
-                await this.pool.request()
-                    .input('roomId', sql.Int, roomId)
-                    .input('userOrgId', sql.NVarChar(500), userOrgId)
-                    .query(participantQuery);
-            }
-        }
-
-        console.log(`Inserted ${chatRooms.length} chat rooms and participants from JSON`);
-    }
-
-    async populateChatMessagesFromJSON() {
-        console.log('Populating Chat Messages from JSON...');
-        const messages = this.loadJSON('ChatMessageData.json');
-
-        for (const message of messages) {
-            const roomOrgId = message.RoomId.$oid;
-            const senderOrgId = message.SenderId.$oid;
-            const messageText = message.Message;
-            const sentAt = new Date(message.SentAt);
-
-            // Find the room ID by matching the original room _id with our generated rooms
-            // This is a simplified approach - in practice you'd want better ID mapping
-            const roomResult = await this.pool.request()
-                .query('SELECT TOP 1 RoomId FROM dbo.ChatRooms ORDER BY NEWID()');
-            
-            const patientResult = await this.pool.request()
-                .input('orgId', sql.NVarChar(500), senderOrgId)
-                .query('SELECT PatientId FROM dbo.Patients WHERE PatientOrgId = @orgId');
-
-            if (roomResult.recordset.length > 0 && patientResult.recordset.length > 0) {
-                const roomId = roomResult.recordset[0].RoomId;
-                const senderId = patientResult.recordset[0].PatientId;
-
-                const query = `
-                    INSERT INTO dbo.ChatMessages (
-                        RoomId, SenderId, Message, SentAt
-                    )
-                    VALUES (
-                        @roomId, @senderId, @message, @sentAt
-                    )
-                `;
-
-                await this.pool.request()
-                    .input('roomId', sql.Int, roomId)
-                    .input('senderId', sql.Int, senderId)
-                    .input('message', sql.NVarChar(sql.MAX), messageText)
-                    .input('sentAt', sql.DateTime, sentAt)
-                    .query(query);
-            }
-        }
-
-        console.log(`Inserted chat messages from JSON`);
-    }
-
+    
     async populateAll() {
         try {
             console.log('Starting Data Population Process...\n');
@@ -1066,10 +949,6 @@ class DataPopulator {
             await this.populateAdmissions(80);
             await this.populateReportsHistory(100);
             
-            // Step 6: Populate from JSON data
-            await this.populateNotificationsFromJSON();
-            await this.populateChatRoomsFromJSON();
-            await this.populateChatMessagesFromJSON();
             
             console.log('\n All Data Population Completed Successfully!');
             
@@ -1094,8 +973,7 @@ class DataPopulator {
         const tables = [
             'Departments', 'Patients', 'Staff', 'Beds', 'InventoryItems',
             'Appointments', 'CarePlans', 'CarePlanUpdates', 'Vitals',
-            'InventoryTransactions', 'Admissions', 'ReportsHistory',
-            'Notifications', 'ChatRooms', 'ChatRoomParticipants', 'ChatMessages'
+            'InventoryTransactions', 'Admissions', 'ReportsHistory'
         ];
         
         for (const table of tables) {

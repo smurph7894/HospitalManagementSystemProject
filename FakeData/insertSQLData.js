@@ -1016,8 +1016,7 @@ class DataPopulator {
         const tables = [
             'Departments', 'Patients', 'Staff', 'Beds', 'InventoryItems',
             'Appointments', 'CarePlans', 'CarePlanUpdates', 'Vitals',
-            'InventoryTransactions', 'Admissions', 'ReportsHistory',
-            'Notifications', 'ChatRooms', 'ChatRoomParticipants', 'ChatMessages'
+            'InventoryTransactions', 'Admissions', 'ReportsHistory'
         ];
         
         for (const table of tables) {

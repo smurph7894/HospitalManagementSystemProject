@@ -1,602 +1,602 @@
 [
   {
     "UserId": {
-      "$oid": "f1a7445a27a193c9ddde3c31"
+      "$oid": "fe82c5d169228474cd11a90c"
     },
-    "type": "BedReleased",
+    "type": "Message",
     "Payload": {
-      "message": "BedReleased notification for Timothy Walker",
-      "timestamp": "2025-06-24T21:42:36.836Z"
+      "message": "Message notification for Paul Robinson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": false,
-    "CreatedAt": "2025-06-02T21:04:32.286Z"
+    "isRead": true,
+    "CreatedAt": "2024-04-18T13:21:07.696Z"
   },
   {
     "UserId": {
-      "$oid": "b2952295fa0338429e1b7330"
+      "$oid": "e67bd956246681aabd498caf"
     },
-    "type": "BedAssigned",
+    "type": "StaffAdded",
     "Payload": {
-      "message": "BedAssigned notification for William Lee",
-      "timestamp": "2025-06-24T21:42:36.836Z"
+      "message": "StaffAdded notification for David Davis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": false,
-    "CreatedAt": "2025-06-12T13:07:09.473Z"
+    "isRead": true,
+    "CreatedAt": "2024-10-13T10:58:54.575Z"
   },
   {
     "UserId": {
-      "$oid": "01f91270c009dd53fd2bd738"
-    },
-    "type": "GeneralNotification",
-    "Payload": {
-      "message": "GeneralNotification notification for Mark Flores",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-05-07T17:14:52.819Z"
-  },
-  {
-    "UserId": {
-      "$oid": "10a44c4bb7b024defd385848"
-    },
-    "type": "MedicalHistoryUpdated",
-    "Payload": {
-      "message": "MedicalHistoryUpdated notification for Kevin Martin",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-11-18T06:01:55.755Z"
-  },
-  {
-    "UserId": {
-      "$oid": "e495edf87e155f71f68a5662"
+      "$oid": "49e43fdfaeee9bf59acbc558"
     },
     "type": "VitalSignsUpdated",
     "Payload": {
-      "message": "VitalSignsUpdated notification for Susan Sanchez",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-04-13T23:39:28.858Z"
-  },
-  {
-    "UserId": {
-      "$oid": "10a44c4bb7b024defd385848"
-    },
-    "type": "AdmissionUpdated",
-    "Payload": {
-      "message": "AdmissionUpdated notification for Kevin Martin",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-09-09T13:00:05.757Z"
-  },
-  {
-    "UserId": {
-      "$oid": "e495edf87e155f71f68a5662"
-    },
-    "type": "AdmissionCreated",
-    "Payload": {
-      "message": "AdmissionCreated notification for Susan Sanchez",
-      "timestamp": "2025-06-24T21:42:36.836Z"
+      "message": "VitalSignsUpdated notification for Deborah Campbell",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2025-02-08T07:56:44.035Z"
+    "CreatedAt": "2025-03-13T07:53:52.423Z"
   },
   {
     "UserId": {
-      "$oid": "6e63188bdcb4bf399bdd38b7"
-    },
-    "type": "AppointmentChanged",
-    "Payload": {
-      "message": "AppointmentChanged notification for Kimberly Roberts",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-08-09T13:07:12.144Z"
-  },
-  {
-    "UserId": {
-      "$oid": "6e63188bdcb4bf399bdd38b7"
-    },
-    "type": "StaffRemoved",
-    "Payload": {
-      "message": "StaffRemoved notification for Kimberly Roberts",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2025-05-07T19:08:56.151Z"
-  },
-  {
-    "UserId": {
-      "$oid": "2f59b477e9b1f1972b40140b"
+      "$oid": "09f7f1e633139a035750291d"
     },
     "type": "AppointmentCancelled",
     "Payload": {
-      "message": "AppointmentCancelled notification for Mark Roberts",
-      "timestamp": "2025-06-24T21:42:36.836Z"
+      "message": "AppointmentCancelled notification for Patricia Torres",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-09-29T22:07:07.007Z"
+    "CreatedAt": "2024-01-25T07:39:04.612Z"
   },
   {
     "UserId": {
-      "$oid": "c8c09fa79a2ced9305805f83"
-    },
-    "type": "AppointmentChanged",
-    "Payload": {
-      "message": "AppointmentChanged notification for Michelle Johnson",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-07-25T03:32:57.818Z"
-  },
-  {
-    "UserId": {
-      "$oid": "c8c09fa79a2ced9305805f83"
-    },
-    "type": "PatientUpdated",
-    "Payload": {
-      "message": "PatientUpdated notification for Michelle Johnson",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-10-04T02:37:42.605Z"
-  },
-  {
-    "UserId": {
-      "$oid": "01f91270c009dd53fd2bd738"
+      "$oid": "09f7f1e633139a035750291d"
     },
     "type": "Message",
     "Payload": {
-      "message": "Message notification for Mark Flores",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2025-01-17T11:45:01.692Z"
-  },
-  {
-    "UserId": {
-      "$oid": "fbdef29530df5c28770d7787"
-    },
-    "type": "PatientUpdated",
-    "Payload": {
-      "message": "PatientUpdated notification for Lisa King",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-08-21T16:26:15.895Z"
-  },
-  {
-    "UserId": {
-      "$oid": "49a9b5d6497c019cbc855e5f"
-    },
-    "type": "Message",
-    "Payload": {
-      "message": "Message notification for Steven Anderson",
-      "timestamp": "2025-06-24T21:42:36.836Z"
+      "message": "Message notification for Patricia Torres",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-01-25T15:10:33.783Z"
+    "CreatedAt": "2024-02-14T07:13:06.082Z"
   },
   {
     "UserId": {
-      "$oid": "bed42d240ecf00cebdd3d7b0"
-    },
-    "type": "PatientUpdated",
-    "Payload": {
-      "message": "PatientUpdated notification for Barbara Lee",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-03-25T07:41:43.458Z"
-  },
-  {
-    "UserId": {
-      "$oid": "6e63188bdcb4bf399bdd38b7"
-    },
-    "type": "VitalSignsUpdated",
-    "Payload": {
-      "message": "VitalSignsUpdated notification for Kimberly Roberts",
-      "timestamp": "2025-06-24T21:42:36.836Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-09-15T19:02:52.207Z"
-  },
-  {
-    "UserId": {
-      "$oid": "10a44c4bb7b024defd385848"
-    },
-    "type": "BedAssigned",
-    "Payload": {
-      "message": "BedAssigned notification for Kevin Martin",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-10-31T04:22:12.686Z"
-  },
-  {
-    "UserId": {
-      "$oid": "2f59b477e9b1f1972b40140b"
+      "$oid": "49e43fdfaeee9bf59acbc558"
     },
     "type": "ReportAdded",
     "Payload": {
-      "message": "ReportAdded notification for Mark Roberts",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "ReportAdded notification for Deborah Campbell",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-08-02T01:59:44.448Z"
+    "CreatedAt": "2024-11-17T14:26:52.581Z"
   },
   {
     "UserId": {
-      "$oid": "f1a7445a27a193c9ddde3c31"
-    },
-    "type": "ReportAdded",
-    "Payload": {
-      "message": "ReportAdded notification for Timothy Walker",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-09-20T13:22:08.358Z"
-  },
-  {
-    "UserId": {
-      "$oid": "5370b074113ce3c1cdb6f7d6"
-    },
-    "type": "PatientAdded",
-    "Payload": {
-      "message": "PatientAdded notification for Deborah Rivera",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2025-01-23T19:01:15.341Z"
-  },
-  {
-    "UserId": {
-      "$oid": "2f59b477e9b1f1972b40140b"
+      "$oid": "fe82c5d169228474cd11a90c"
     },
     "type": "AdmissionUpdated",
     "Payload": {
-      "message": "AdmissionUpdated notification for Mark Roberts",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "AdmissionUpdated notification for Paul Robinson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": false,
-    "CreatedAt": "2024-06-03T14:16:06.276Z"
+    "isRead": true,
+    "CreatedAt": "2024-07-23T12:59:52.023Z"
   },
   {
     "UserId": {
-      "$oid": "c8c09fa79a2ced9305805f83"
+      "$oid": "9d1844b9bcffef016ac409ce"
     },
-    "type": "InventoryItemRemoved",
+    "type": "AppointmentCreated",
     "Payload": {
-      "message": "InventoryItemRemoved notification for Michelle Johnson",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "AppointmentCreated notification for John Young",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-02-20T05:31:50.260Z"
+    "CreatedAt": "2024-05-09T05:06:33.130Z"
   },
   {
     "UserId": {
-      "$oid": "a0952af2182371e8ba1025df"
+      "$oid": "d40a07ba6d925e99f1f2eb99"
     },
-    "type": "StaffRemoved",
+    "type": "AppointmentChanged",
     "Payload": {
-      "message": "StaffRemoved notification for Edward Allen",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "AppointmentChanged notification for Susan Thomas",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2025-04-17T23:40:23.440Z"
+    "CreatedAt": "2024-11-29T15:42:47.417Z"
   },
   {
     "UserId": {
-      "$oid": "b2952295fa0338429e1b7330"
-    },
-    "type": "PatientUpdated",
-    "Payload": {
-      "message": "PatientUpdated notification for William Lee",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-02-18T04:31:29.895Z"
-  },
-  {
-    "UserId": {
-      "$oid": "e495edf87e155f71f68a5662"
-    },
-    "type": "PatientRemoved",
-    "Payload": {
-      "message": "PatientRemoved notification for Susan Sanchez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-04-22T17:41:16.346Z"
-  },
-  {
-    "UserId": {
-      "$oid": "fbdef29530df5c28770d7787"
-    },
-    "type": "VitalSignsUpdated",
-    "Payload": {
-      "message": "VitalSignsUpdated notification for Lisa King",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-09-28T00:25:55.393Z"
-  },
-  {
-    "UserId": {
-      "$oid": "6e63188bdcb4bf399bdd38b7"
-    },
-    "type": "PatientUpdated",
-    "Payload": {
-      "message": "PatientUpdated notification for Kimberly Roberts",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-01-18T02:50:17.524Z"
-  },
-  {
-    "UserId": {
-      "$oid": "e495edf87e155f71f68a5662"
-    },
-    "type": "AdmissionCancelled",
-    "Payload": {
-      "message": "AdmissionCancelled notification for Susan Sanchez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-07-22T12:46:58.853Z"
-  },
-  {
-    "UserId": {
-      "$oid": "305fd08bc8a05af2a7611b94"
-    },
-    "type": "PatientAdded",
-    "Payload": {
-      "message": "PatientAdded notification for Paul Hernandez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-12-11T20:29:22.673Z"
-  },
-  {
-    "UserId": {
-      "$oid": "f93e32512bf32db990cc981d"
-    },
-    "type": "StaffRemoved",
-    "Payload": {
-      "message": "StaffRemoved notification for Brian Mitchell",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-09-13T15:31:03.637Z"
-  },
-  {
-    "UserId": {
-      "$oid": "5370b074113ce3c1cdb6f7d6"
+      "$oid": "9c46a1a92186ea4f30619b73"
     },
     "type": "InventoryItemAdded",
     "Payload": {
-      "message": "InventoryItemAdded notification for Deborah Rivera",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2025-05-11T23:45:14.922Z"
-  },
-  {
-    "UserId": {
-      "$oid": "d0960fa9ce942d93b6537315"
-    },
-    "type": "AppointmentChanged",
-    "Payload": {
-      "message": "AppointmentChanged notification for Anthony Clark",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "InventoryItemAdded notification for David Hill",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-11-09T00:17:39.976Z"
+    "CreatedAt": "2024-11-24T09:13:31.201Z"
   },
   {
     "UserId": {
-      "$oid": "e495edf87e155f71f68a5662"
-    },
-    "type": "Message",
-    "Payload": {
-      "message": "Message notification for Susan Sanchez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-01-25T22:59:46.911Z"
-  },
-  {
-    "UserId": {
-      "$oid": "10a44c4bb7b024defd385848"
-    },
-    "type": "StaffAdded",
-    "Payload": {
-      "message": "StaffAdded notification for Kevin Martin",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-08-12T01:07:19.490Z"
-  },
-  {
-    "UserId": {
-      "$oid": "f1a7445a27a193c9ddde3c31"
-    },
-    "type": "MedicalHistoryUpdated",
-    "Payload": {
-      "message": "MedicalHistoryUpdated notification for Timothy Walker",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-02-27T02:07:28.250Z"
-  },
-  {
-    "UserId": {
-      "$oid": "f9c57c4a172199b872a5d38f"
-    },
-    "type": "BedAssigned",
-    "Payload": {
-      "message": "BedAssigned notification for Nancy Rodriguez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2025-05-08T07:40:50.204Z"
-  },
-  {
-    "UserId": {
-      "$oid": "dd93aacea1378ab02eba5083"
-    },
-    "type": "AdmissionUpdated",
-    "Payload": {
-      "message": "AdmissionUpdated notification for Karen Smith",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-08-08T07:51:23.952Z"
-  },
-  {
-    "UserId": {
-      "$oid": "f9c57c4a172199b872a5d38f"
-    },
-    "type": "BedReleased",
-    "Payload": {
-      "message": "BedReleased notification for Nancy Rodriguez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2025-02-24T12:35:56.748Z"
-  },
-  {
-    "UserId": {
-      "$oid": "10a44c4bb7b024defd385848"
-    },
-    "type": "ReportUpdated",
-    "Payload": {
-      "message": "ReportUpdated notification for Kevin Martin",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2024-07-11T09:36:23.792Z"
-  },
-  {
-    "UserId": {
-      "$oid": "731dba2333a07db248047825"
-    },
-    "type": "VitalSignsUpdated",
-    "Payload": {
-      "message": "VitalSignsUpdated notification for Joseph Wright",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": true,
-    "CreatedAt": "2025-04-21T12:07:56.070Z"
-  },
-  {
-    "UserId": {
-      "$oid": "49a9b5d6497c019cbc855e5f"
-    },
-    "type": "GeneralNotification",
-    "Payload": {
-      "message": "GeneralNotification notification for Steven Anderson",
-      "timestamp": "2025-06-24T21:42:36.837Z"
-    },
-    "isRead": false,
-    "CreatedAt": "2024-03-12T10:02:28.382Z"
-  },
-  {
-    "UserId": {
-      "$oid": "d0960fa9ce942d93b6537315"
+      "$oid": "1b6318b3d085aa5ca5f97702"
     },
     "type": "PatientAdded",
     "Payload": {
-      "message": "PatientAdded notification for Anthony Clark",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "PatientAdded notification for Ronald Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": true,
-    "CreatedAt": "2024-11-24T01:52:36.192Z"
+    "CreatedAt": "2024-12-05T06:29:01.181Z"
   },
   {
     "UserId": {
-      "$oid": "b2952295fa0338429e1b7330"
+      "$oid": "df08c2fbe8eda63b26575528"
     },
-    "type": "ReportUpdated",
+    "type": "StaffRemoved",
     "Payload": {
-      "message": "ReportUpdated notification for William Lee",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "StaffRemoved notification for Patricia Scott",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2025-05-14T18:47:04.683Z"
+    "CreatedAt": "2025-01-28T18:36:48.984Z"
   },
   {
     "UserId": {
-      "$oid": "be7d85b99fd97d6a9060447c"
+      "$oid": "eac75a277157e4a50c9963c6"
     },
-    "type": "StaffAdded",
+    "type": "StaffRemoved",
     "Payload": {
-      "message": "StaffAdded notification for Richard Campbell",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "StaffRemoved notification for Paul Moore",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-16T07:49:22.606Z"
+  },
+  {
+    "UserId": {
+      "$oid": "eac75a277157e4a50c9963c6"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for Paul Moore",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": true,
-    "CreatedAt": "2024-05-27T09:19:50.977Z"
+    "CreatedAt": "2024-05-07T23:52:33.871Z"
   },
   {
     "UserId": {
-      "$oid": "b2952295fa0338429e1b7330"
+      "$oid": "fe82c5d169228474cd11a90c"
     },
-    "type": "AdmissionUpdated",
+    "type": "AppointmentChanged",
     "Payload": {
-      "message": "AdmissionUpdated notification for William Lee",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "AppointmentChanged notification for Paul Robinson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": true,
-    "CreatedAt": "2025-04-05T22:30:27.727Z"
+    "isRead": false,
+    "CreatedAt": "2025-03-01T07:16:15.081Z"
   },
   {
     "UserId": {
-      "$oid": "c8c09fa79a2ced9305805f83"
+      "$oid": "e67bd956246681aabd498caf"
     },
-    "type": "GeneralNotification",
+    "type": "Message",
     "Payload": {
-      "message": "GeneralNotification notification for Michelle Johnson",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "Message notification for David Davis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": true,
-    "CreatedAt": "2025-03-12T05:43:33.180Z"
+    "isRead": false,
+    "CreatedAt": "2024-12-02T02:11:08.816Z"
   },
   {
     "UserId": {
-      "$oid": "a0952af2182371e8ba1025df"
+      "$oid": "09f7f1e633139a035750291d"
     },
-    "type": "PatientRemoved",
+    "type": "BedReleased",
     "Payload": {
-      "message": "PatientRemoved notification for Edward Allen",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "BedReleased notification for Patricia Torres",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": true,
-    "CreatedAt": "2024-05-13T18:14:32.788Z"
+    "isRead": false,
+    "CreatedAt": "2024-08-09T08:27:55.495Z"
   },
   {
     "UserId": {
-      "$oid": "fbdef29530df5c28770d7787"
+      "$oid": "a6b607272352947c02049ce3"
     },
     "type": "ReportAdded",
     "Payload": {
-      "message": "ReportAdded notification for Lisa King",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "ReportAdded notification for William Lewis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
-    "isRead": false,
-    "CreatedAt": "2024-03-26T22:41:08.422Z"
+    "isRead": true,
+    "CreatedAt": "2024-03-03T17:34:10.012Z"
   },
   {
     "UserId": {
-      "$oid": "f9c57c4a172199b872a5d38f"
+      "$oid": "a55491961e63f7b3819f9d72"
+    },
+    "type": "InventoryItemAdded",
+    "Payload": {
+      "message": "InventoryItemAdded notification for Paul Hill",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-07-15T20:08:50.564Z"
+  },
+  {
+    "UserId": {
+      "$oid": "2e7b2da568d04dfa186f5edc"
+    },
+    "type": "AppointmentChanged",
+    "Payload": {
+      "message": "AppointmentChanged notification for Michelle Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-04-17T14:11:48.778Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e67bd956246681aabd498caf"
+    },
+    "type": "PatientRemoved",
+    "Payload": {
+      "message": "PatientRemoved notification for David Davis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-24T02:25:11.157Z"
+  },
+  {
+    "UserId": {
+      "$oid": "98e884ac7d9ed8fa0de1dd68"
+    },
+    "type": "StaffAdded",
+    "Payload": {
+      "message": "StaffAdded notification for Kevin Scott",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-04-28T20:27:40.989Z"
+  },
+  {
+    "UserId": {
+      "$oid": "2e7b2da568d04dfa186f5edc"
     },
     "type": "GeneralNotification",
     "Payload": {
-      "message": "GeneralNotification notification for Nancy Rodriguez",
-      "timestamp": "2025-06-24T21:42:36.837Z"
+      "message": "GeneralNotification notification for Michelle Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
     },
     "isRead": false,
-    "CreatedAt": "2024-06-13T14:17:16.643Z"
+    "CreatedAt": "2024-08-05T05:52:02.105Z"
+  },
+  {
+    "UserId": {
+      "$oid": "4ce0e909a908cc883345c827"
+    },
+    "type": "ReportAdded",
+    "Payload": {
+      "message": "ReportAdded notification for Ruth Torres",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-07-12T18:41:40.111Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a6f3bf86c91f3034c239803d"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Nancy Green",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-11-11T21:23:09.570Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59d22841e01aab7eb5814128"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Dorothy Thomas",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-01-17T09:20:08.023Z"
+  },
+  {
+    "UserId": {
+      "$oid": "517016f3cf2a0561a6f4fdf8"
+    },
+    "type": "AdmissionUpdated",
+    "Payload": {
+      "message": "AdmissionUpdated notification for Michael Turner",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-18T21:22:16.978Z"
+  },
+  {
+    "UserId": {
+      "$oid": "d40a07ba6d925e99f1f2eb99"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for Susan Thomas",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-12-24T12:08:04.682Z"
+  },
+  {
+    "UserId": {
+      "$oid": "517016f3cf2a0561a6f4fdf8"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Michael Turner",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-03-17T15:01:39.377Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e67bd956246681aabd498caf"
+    },
+    "type": "AdmissionCancelled",
+    "Payload": {
+      "message": "AdmissionCancelled notification for David Davis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-12-15T17:44:36.773Z"
+  },
+  {
+    "UserId": {
+      "$oid": "517016f3cf2a0561a6f4fdf8"
+    },
+    "type": "BedAssigned",
+    "Payload": {
+      "message": "BedAssigned notification for Michael Turner",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-01-22T06:06:17.770Z"
+  },
+  {
+    "UserId": {
+      "$oid": "eac75a277157e4a50c9963c6"
+    },
+    "type": "StaffRemoved",
+    "Payload": {
+      "message": "StaffRemoved notification for Paul Moore",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-07-09T09:18:25.080Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a55491961e63f7b3819f9d72"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for Paul Hill",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-08-24T23:49:11.376Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9d1844b9bcffef016ac409ce"
+    },
+    "type": "AppointmentCreated",
+    "Payload": {
+      "message": "AppointmentCreated notification for John Young",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2025-02-26T10:39:41.727Z"
+  },
+  {
+    "UserId": {
+      "$oid": "98e884ac7d9ed8fa0de1dd68"
+    },
+    "type": "BedAssigned",
+    "Payload": {
+      "message": "BedAssigned notification for Kevin Scott",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-02-23T11:19:56.428Z"
+  },
+  {
+    "UserId": {
+      "$oid": "2e7b2da568d04dfa186f5edc"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for Michelle Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-07-04T07:03:37.806Z"
+  },
+  {
+    "UserId": {
+      "$oid": "59d22841e01aab7eb5814128"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for Dorothy Thomas",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-04-07T06:54:50.057Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a55491961e63f7b3819f9d72"
+    },
+    "type": "VitalSignsUpdated",
+    "Payload": {
+      "message": "VitalSignsUpdated notification for Paul Hill",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-29T07:16:45.871Z"
+  },
+  {
+    "UserId": {
+      "$oid": "df08c2fbe8eda63b26575528"
+    },
+    "type": "InventoryItemRemoved",
+    "Payload": {
+      "message": "InventoryItemRemoved notification for Patricia Scott",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-03-16T06:24:06.205Z"
+  },
+  {
+    "UserId": {
+      "$oid": "9d1844b9bcffef016ac409ce"
+    },
+    "type": "GeneralNotification",
+    "Payload": {
+      "message": "GeneralNotification notification for John Young",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-01-23T21:50:54.259Z"
+  },
+  {
+    "UserId": {
+      "$oid": "98e884ac7d9ed8fa0de1dd68"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Kevin Scott",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2025-05-09T19:17:56.371Z"
+  },
+  {
+    "UserId": {
+      "$oid": "98972b4e43cc6905a5a57cec"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for Joseph Rodriguez",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-20T07:38:40.708Z"
+  },
+  {
+    "UserId": {
+      "$oid": "fe82c5d169228474cd11a90c"
+    },
+    "type": "AppointmentCancelled",
+    "Payload": {
+      "message": "AppointmentCancelled notification for Paul Robinson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-06-20T05:15:42.559Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a6b607272352947c02049ce3"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for William Lewis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-09-21T18:24:25.943Z"
+  },
+  {
+    "UserId": {
+      "$oid": "2e7b2da568d04dfa186f5edc"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for Michelle Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-08-07T22:44:11.465Z"
+  },
+  {
+    "UserId": {
+      "$oid": "4ce0e909a908cc883345c827"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for Ruth Torres",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-10-02T00:45:04.802Z"
+  },
+  {
+    "UserId": {
+      "$oid": "fbd348a17352f5202be028f4"
+    },
+    "type": "PatientUpdated",
+    "Payload": {
+      "message": "PatientUpdated notification for Elizabeth Young",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-02-05T07:35:08.795Z"
+  },
+  {
+    "UserId": {
+      "$oid": "2e7b2da568d04dfa186f5edc"
+    },
+    "type": "Message",
+    "Payload": {
+      "message": "Message notification for Michelle Wilson",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-05-29T11:53:34.254Z"
+  },
+  {
+    "UserId": {
+      "$oid": "e67bd956246681aabd498caf"
+    },
+    "type": "AdmissionCreated",
+    "Payload": {
+      "message": "AdmissionCreated notification for David Davis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": false,
+    "CreatedAt": "2024-01-21T00:26:01.656Z"
+  },
+  {
+    "UserId": {
+      "$oid": "a6b607272352947c02049ce3"
+    },
+    "type": "ReportUpdated",
+    "Payload": {
+      "message": "ReportUpdated notification for William Lewis",
+      "timestamp": "2025-06-25T20:24:42.141Z"
+    },
+    "isRead": true,
+    "CreatedAt": "2024-03-14T03:21:29.711Z"
   }
 ]
