@@ -252,7 +252,6 @@
     <Compile Include="Models\CarePlans.cs" />
     <Compile Include="Models\CarePlanUpdates.cs" />
     <Compile Include="Models\Patient.cs" />
-    <Compile Include="MongoDbService.cs" />
     <Compile Include="MedicalHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
