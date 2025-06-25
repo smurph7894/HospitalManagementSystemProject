@@ -281,6 +281,12 @@
     </Compile>
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\Vitals.cs" />
+    <Compile Include="ScheduleAppointmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScheduleAppointmentsForm.Designer.cs">
+      <DependentUpon>ScheduleAppointmentsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DashBoardForm.resx">
       <DependentUpon>DashBoardForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -313,6 +319,9 @@
     </Compile>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScheduleAppointmentsForm.resx">
+      <DependentUpon>ScheduleAppointmentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="HospitalManagementDBDataSet.xsc">
       <DependentUpon>HospitalManagementDBDataSet.xsd</DependentUpon>

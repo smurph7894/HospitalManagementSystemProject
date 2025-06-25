@@ -366,7 +366,7 @@
             // 
             this.btn_medicalHistoryNav.Location = new System.Drawing.Point(198, 12);
             this.btn_medicalHistoryNav.Name = "btn_medicalHistoryNav";
-            this.btn_medicalHistoryNav.Size = new System.Drawing.Size(100, 23);
+            this.btn_medicalHistoryNav.Size = new System.Drawing.Size(149, 23);
             this.btn_medicalHistoryNav.TabIndex = 42;
             this.btn_medicalHistoryNav.Text = "My Medical History";
             this.btn_medicalHistoryNav.UseVisualStyleBackColor = true;

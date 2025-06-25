@@ -90,8 +90,8 @@ namespace HospitalManagementSystemClient
 
         private void btn_ScheduleAppointments_Click(object sender, EventArgs e)
         {
-            //var form = new ScheduleAppointmentsForm(_loggedInUser);
-            //form.Show();
+            var form = new ScheduleAppointmentsForm(_loggedInUser);
+            form.Show();
 
         }
 
