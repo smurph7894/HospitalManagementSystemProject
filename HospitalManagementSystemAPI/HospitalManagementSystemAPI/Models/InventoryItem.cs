@@ -24,6 +24,12 @@ public class InventoryItem
     [Required]
     public int ReorderLevel { get; set; } = 0;
 
+    [Required]
+    public bool isMedicine { get; set; } = false; //BIT of  0-False, 1-True in SQL
+
+    [Required]
+    public int TotalHospitalUsage { get; set; } = 0;
+
     [StringLength(100)]
     public string Location { get; set; }
 

@@ -512,35 +512,86 @@ class DataPopulator {
         const deptResult = await this.pool.request().query('SELECT DepartmentID FROM dbo.Departments');
         const departmentIds = deptResult.recordset.map(row => row.DepartmentID);
         
-        for (let i = 0; i < count; i++) {
-            const firstName = this.generator.getRandomElement(this.generator.firstNames);
-            const lastName = this.generator.getRandomElement(this.generator.lastNames);
-            const staffType = this.generator.getRandomElement(this.generator.staffTypes);
+        // Load user data to get userRef values for staff
+        const userData = this.loadJSON('UserData.json');
+        // Filter users who should be staff (exclude Patient role)
+        const staffUsers = userData.filter(user => 
+            user.Roles.some(role => ['Doctor', 'Nurse', 'Administrator', 'AdministrativeStaff'].includes(role))
+        );
+        
+        // Use the minimum of requested count and available staff users
+        const actualCount = Math.min(count, staffUsers.length);
+        console.log(`Creating ${actualCount} staff members from ${staffUsers.length} available staff users`);
+        
+        for (let i = 0; i < actualCount; i++) {
+            const user = staffUsers[i];
+            const userRef = user._id.$oid;
+            const fullName = user.Profile.FullName.split(' ');
+            const firstName = fullName.shift();
+            const lastName = fullName.join(' ') || '';
+            
+            // Use the user's role as staff type, defaulting to first role
+            const staffType = user.Roles[0];
             const specialization = this.generator.getRandomElement(this.generator.specializations);
             const departmentId = this.generator.getRandomElement(departmentIds);
             const hireDate = this.generator.getRandomDate(new Date('2010-01-01'), new Date());
             
             const query = `
                 INSERT INTO dbo.Staff (
-                    Name, StaffType, Specialization, DepartmentId, HireDate, Phone, Email
+                    UserRef, Name, StaffType, Specialization, DepartmentId, HireDate, Phone, Email
                 )
                 VALUES (
-                    @name, @staffType, @specialization, @departmentId, @hireDate, @phone, @email
+                    @userRef, @name, @staffType, @specialization, @departmentId, @hireDate, @phone, @email
                 )
             `;
             
             await this.pool.request()
-                .input('name', sql.VarChar(100), `${firstName} ${lastName}`)
+                .input('userRef', sql.VarChar(24), userRef)
+                .input('name', sql.VarChar(100), user.Profile.FullName)
                 .input('staffType', sql.VarChar(50), staffType)
                 .input('specialization', sql.VarChar(100), specialization)
                 .input('departmentId', sql.Int, departmentId)
                 .input('hireDate', sql.Date, hireDate)
-                .input('phone', sql.VarChar(20), this.generator.generatePhoneNumber())
-                .input('email', sql.VarChar(255), this.generator.generateEmail(firstName, lastName))
+                .input('phone', sql.VarChar(20), user.Profile.Phone)
+                .input('email', sql.VarChar(255), user.Email)
                 .query(query);
         }
         
-        console.log(`Inserted ${count} staff members`);
+        // If we need more staff than available users, create additional random staff
+        if (count > staffUsers.length) {
+            const remainingCount = count - staffUsers.length;
+            console.log(`Creating ${remainingCount} additional random staff members without userRef`);
+            
+            for (let i = 0; i < remainingCount; i++) {
+                const firstName = this.generator.getRandomElement(this.generator.firstNames);
+                const lastName = this.generator.getRandomElement(this.generator.lastNames);
+                const staffType = this.generator.getRandomElement(this.generator.staffTypes.filter(type => type !== 'Patient'));
+                const specialization = this.generator.getRandomElement(this.generator.specializations);
+                const departmentId = this.generator.getRandomElement(departmentIds);
+                const hireDate = this.generator.getRandomDate(new Date('2010-01-01'), new Date());
+                
+                const query = `
+                    INSERT INTO dbo.Staff (
+                        Name, StaffType, Specialization, DepartmentId, HireDate, Phone, Email
+                    )
+                    VALUES (
+                        @name, @staffType, @specialization, @departmentId, @hireDate, @phone, @email
+                    )
+                `;
+                
+                await this.pool.request()
+                    .input('name', sql.VarChar(100), `${firstName} ${lastName}`)
+                    .input('staffType', sql.VarChar(50), staffType)
+                    .input('specialization', sql.VarChar(100), specialization)
+                    .input('departmentId', sql.Int, departmentId)
+                    .input('hireDate', sql.Date, hireDate)
+                    .input('phone', sql.VarChar(20), this.generator.generatePhoneNumber())
+                    .input('email', sql.VarChar(255), this.generator.generateEmail(firstName, lastName))
+                    .query(query);
+            }
+        }
+        
+        console.log(`Inserted ${count} staff members (${actualCount} with userRef, ${Math.max(0, count - staffUsers.length)} without)`);
     }
 
     async populateBeds(count = 100) {
@@ -572,13 +623,15 @@ class DataPopulator {
         for (const item of this.generator.inventoryItems) {
             const quantity = this.generator.getRandomInt(10, 500);
             const reorderLevel = Math.floor(quantity * 0.2);
+            const isMedicine = Math.random() < 0.35; // 35% chance of being medicine
+            const totalHospitalUsage = this.generator.getRandomInt(0, 1000);
             
             const query = `
                 INSERT INTO dbo.InventoryItems (
-                    Name, Description, QuantityInStock, UnitOfMeasure, ReorderLevel, Location
+                    Name, Description, QuantityInStock, UnitOfMeasure, ReorderLevel, Location, isMedicine, TotalHospitalUsage
                 )
                 VALUES (
-                    @name, @description, @quantityInStock, @unitOfMeasure, @reorderLevel, @location
+                    @name, @description, @quantityInStock, @unitOfMeasure, @reorderLevel, @location, @isMedicine, @totalHospitalUsage
                 )
             `;
             
@@ -589,6 +642,8 @@ class DataPopulator {
                 .input('unitOfMeasure', sql.NVarChar(50), item.unit)
                 .input('reorderLevel', sql.Int, reorderLevel)
                 .input('location', sql.NVarChar(100), item.location)
+                .input('isMedicine', sql.Bit, isMedicine)
+                .input('totalHospitalUsage', sql.Int, totalHospitalUsage)
                 .query(query);
         }
         

@@ -129,11 +129,35 @@ namespace HospitalManagementSystemClient
                                 {
                                     // Display appointment and patient details
                                     lbl_patientId.Text = selectedPatient.PatientId.ToString();
-                                    lbl_patientName.Text = selectedPatient.FirstName + " " + selectedPatient.LastName;
+                                    lbl_patientName.Text = $"{selectedPatient.FirstName} {selectedPatient.LastName}";
                                     dateTimePicker1.Value = selectedAppointment.ScheduledAt;
-                                    comboBox_appointmentStatus.SelectedItem = selectedAppointment.Status.ToString();
                                     numericUpDown_duration.Value = selectedAppointment.DurationMinutes;
                                     richTextBox1.Text = selectedAppointment.Reason;
+                                    //if(Enum.TryParse(selectedAppointment.Status, out Status parsedStatus))
+                                    //{
+                                    //    comboBox_appointmentStatus.SelectedIndex = 0; // Scheduled
+                                    //}
+                                    var statusString = selectedAppointment.Status.ToString();
+                                    if (Enum.TryParse(statusString, out Status parsedStatus))
+                                    {
+                                        comboBox_appointmentStatus.SelectedIndex = (int)parsedStatus;
+                                    }
+                                    //else if (selectedAppointment.Status == "InProgress")
+                                    //{
+                                    //    comboBox_appointmentStatus.SelectedIndex = 1; // InProgress
+                                    //}
+                                    //else if (selectedAppointment.Status == "Completed")
+                                    //{
+                                    //    comboBox_appointmentStatus.SelectedIndex = 2; // Completed
+                                    //}
+                                    //else if (selectedAppointment.Status == "Cancelled")
+                                    //{
+                                    //    comboBox_appointmentStatus.SelectedIndex = 3; // Cancelled
+                                    //}
+                                    //else if (selectedAppointment.Status == "NoShow")
+                                    //{
+                                    //    comboBox_appointmentStatus.SelectedIndex = 4; // NoShow
+                                    //}
                                 }
                             }
                             else
@@ -147,6 +171,7 @@ namespace HospitalManagementSystemClient
                         }
                     }
                 }
+                txtB_patientSearch.Clear(); // Clear the search box after searching
             }
             catch (Exception ex)
             {

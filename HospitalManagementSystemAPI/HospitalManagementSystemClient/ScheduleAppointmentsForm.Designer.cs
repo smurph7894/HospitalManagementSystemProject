@@ -127,10 +127,8 @@ namespace HospitalManagementSystemClient
             this.lbl_patientName.AutoSize = true;
             this.lbl_patientName.Location = new System.Drawing.Point(132, 145);
             this.lbl_patientName.Name = "lbl_patientName";
-            this.lbl_patientName.Size = new System.Drawing.Size(44, 16);
+            this.lbl_patientName.Size = new System.Drawing.Size(0, 16);
             this.lbl_patientName.TabIndex = 14;
-            this.lbl_patientName.Text = "label2";
-            this.lbl_patientName.Visible = false;
             // 
             // label9
             // 
@@ -156,9 +154,8 @@ namespace HospitalManagementSystemClient
             this.lbl_patientId.AutoSize = true;
             this.lbl_patientId.Location = new System.Drawing.Point(132, 117);
             this.lbl_patientId.Name = "lbl_patientId";
-            this.lbl_patientId.Size = new System.Drawing.Size(44, 16);
+            this.lbl_patientId.Size = new System.Drawing.Size(0, 16);
             this.lbl_patientId.TabIndex = 16;
-            this.lbl_patientId.Text = "label5";
             this.lbl_patientId.Visible = false;
             // 
             // btn_update

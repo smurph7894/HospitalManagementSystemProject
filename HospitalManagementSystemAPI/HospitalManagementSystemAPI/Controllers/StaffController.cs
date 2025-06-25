@@ -16,16 +16,18 @@ namespace HospitalManagementSystemAPI.Controllers
             _context = context;
         }
 
-        // Get: api/staff/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetStaffById(int id)
+        // Get: api/staff/{userRef} - gets staff by userId from login
+        [HttpGet("{userRef}")]
+        public async Task<ActionResult> GetStaffById(int userRef)
         {
             try
             {
-                var staff = await _context.Staff.FindAsync(id);
+                var staff = await _context.Staff
+                    .Where(s => s.UserRef == userRef.ToString())
+                    .FirstOrDefaultAsync();
                 if (staff == null)
                 {
-                    return NotFound($"Staff with ID {id} not found.");
+                    return NotFound($"Staff with ID {userRef} not found.");
                 }
                 return Ok(staff);
             }

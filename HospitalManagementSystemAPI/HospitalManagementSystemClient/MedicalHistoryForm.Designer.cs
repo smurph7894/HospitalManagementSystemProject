@@ -118,11 +118,11 @@
             // dgv_carePlans
             // 
             this.dgv_carePlans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_carePlans.Location = new System.Drawing.Point(785, 340);
+            this.dgv_carePlans.Location = new System.Drawing.Point(790, 340);
             this.dgv_carePlans.Name = "dgv_carePlans";
             this.dgv_carePlans.RowHeadersWidth = 51;
             this.dgv_carePlans.RowTemplate.Height = 24;
-            this.dgv_carePlans.Size = new System.Drawing.Size(700, 254);
+            this.dgv_carePlans.Size = new System.Drawing.Size(756, 254);
             this.dgv_carePlans.TabIndex = 9;
             this.dgv_carePlans.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_carePlans_CellContentClick);
             this.dgv_carePlans.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_carePlans_CellContentClick);
@@ -134,7 +134,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(782, 318);
+            this.label4.Location = new System.Drawing.Point(794, 318);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 16);
             this.label4.TabIndex = 13;
@@ -152,7 +152,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(282, 18);
+            this.label6.Location = new System.Drawing.Point(409, 20);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 16);
             this.label6.TabIndex = 17;
@@ -161,7 +161,7 @@
             // dgv_admissions
             // 
             this.dgv_admissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_admissions.Location = new System.Drawing.Point(285, 37);
+            this.dgv_admissions.Location = new System.Drawing.Point(405, 39);
             this.dgv_admissions.Name = "dgv_admissions";
             this.dgv_admissions.RowHeadersWidth = 51;
             this.dgv_admissions.RowTemplate.Height = 24;
@@ -196,7 +196,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1040, 18);
+            this.label7.Location = new System.Drawing.Point(1167, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 16);
             this.label7.TabIndex = 21;
@@ -205,7 +205,7 @@
             // dgv_beds
             // 
             this.dgv_beds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_beds.Location = new System.Drawing.Point(1043, 37);
+            this.dgv_beds.Location = new System.Drawing.Point(1170, 39);
             this.dgv_beds.Name = "dgv_beds";
             this.dgv_beds.RowHeadersWidth = 51;
             this.dgv_beds.RowTemplate.Height = 24;
@@ -215,7 +215,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(782, 628);
+            this.label8.Location = new System.Drawing.Point(794, 628);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(115, 16);
             this.label8.TabIndex = 23;
@@ -224,17 +224,17 @@
             // dgv_carePlanUpdates
             // 
             this.dgv_carePlanUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_carePlanUpdates.Location = new System.Drawing.Point(785, 647);
+            this.dgv_carePlanUpdates.Location = new System.Drawing.Point(790, 647);
             this.dgv_carePlanUpdates.Name = "dgv_carePlanUpdates";
             this.dgv_carePlanUpdates.RowHeadersWidth = 51;
             this.dgv_carePlanUpdates.RowTemplate.Height = 24;
-            this.dgv_carePlanUpdates.Size = new System.Drawing.Size(700, 254);
+            this.dgv_carePlanUpdates.Size = new System.Drawing.Size(756, 254);
             this.dgv_carePlanUpdates.TabIndex = 22;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1098, 18);
+            this.label2.Location = new System.Drawing.Point(1225, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(275, 16);
             this.label2.TabIndex = 25;
@@ -243,7 +243,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(903, 628);
+            this.label9.Location = new System.Drawing.Point(908, 628);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(439, 16);
             this.label9.TabIndex = 26;

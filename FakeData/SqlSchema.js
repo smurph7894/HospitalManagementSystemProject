@@ -125,6 +125,8 @@ CREATE TABLE dbo.InventoryItems (
     UnitOfMeasure      NVARCHAR(50)    NULL,
     ReorderLevel       INT             NOT NULL DEFAULT 0,
     Location           NVARCHAR(100)   NULL,
+    isMedicine		   BIT			   NOT NULL, --0 is false, 1 is true
+	TotalHospitalUsage INT			   NOT NULL DEFAULT 0,
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE()
 );

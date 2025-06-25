@@ -50,7 +50,7 @@ namespace HospitalManagementSystemClient
         private void btn_back_Click(object sender, EventArgs e)
         {
             // If the logged-in user is the patient, go back to their info
-            if (_loggedInUser.UserId == this.selectedPatient.PatientOrgId)
+            if (_loggedInUser.Roles.Contains(Role.Patient))
             {
                 this.Close();
                 var patientForm = new PatientUserInfo(_loggedInUser, selectedPatient);
