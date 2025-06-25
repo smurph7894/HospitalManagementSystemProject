@@ -20,7 +20,6 @@ namespace HospitalManagementSystemClient
         public int DurationMinutes { get; set; } = 30; // Default duration is 30 minutes
         public string Reason { get; set; }
         public Status Status { get; set; }
-        public int CreatedBy { get; set; } // ID of the staff member who created the appointment
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

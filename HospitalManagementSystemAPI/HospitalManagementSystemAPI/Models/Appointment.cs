@@ -18,7 +18,6 @@ namespace HospitalManagementSystemAPI.Models
         [Required]
         public int PatientId { get; set; } // Foreign key to Patient
 
-        [Required]
         public int StaffId { get; set; } // Foreign key to Staff
 
         [Required]
@@ -31,9 +30,6 @@ namespace HospitalManagementSystemAPI.Models
 
         [Required]
         public Status Status { get; set; }
-
-        [Required]
-        public int CreatedBy { get; set; } // ID of the staff member who created the appointment
 
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
