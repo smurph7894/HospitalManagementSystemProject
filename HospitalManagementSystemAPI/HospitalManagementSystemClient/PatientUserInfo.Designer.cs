@@ -62,6 +62,7 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.dtp_DOB = new System.Windows.Forms.DateTimePicker();
             this.comboBox_gender = new System.Windows.Forms.ComboBox();
+            this.btn_medicalHistoryNav = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_Dashboard
@@ -361,11 +362,22 @@
             this.comboBox_gender.Size = new System.Drawing.Size(121, 24);
             this.comboBox_gender.TabIndex = 41;
             // 
+            // btn_medicalHistoryNav
+            // 
+            this.btn_medicalHistoryNav.Location = new System.Drawing.Point(198, 12);
+            this.btn_medicalHistoryNav.Name = "btn_medicalHistoryNav";
+            this.btn_medicalHistoryNav.Size = new System.Drawing.Size(100, 23);
+            this.btn_medicalHistoryNav.TabIndex = 42;
+            this.btn_medicalHistoryNav.Text = "My Medical History";
+            this.btn_medicalHistoryNav.UseVisualStyleBackColor = true;
+            this.btn_medicalHistoryNav.Click += new System.EventHandler(this.btn_medicalHistoryNav_Click);
+            // 
             // PatientUserInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1305, 567);
+            this.Controls.Add(this.btn_medicalHistoryNav);
             this.Controls.Add(this.comboBox_gender);
             this.Controls.Add(this.dtp_DOB);
             this.Controls.Add(this.btn_delete);
@@ -443,5 +455,6 @@
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.DateTimePicker dtp_DOB;
         private System.Windows.Forms.ComboBox comboBox_gender;
+        private System.Windows.Forms.Button btn_medicalHistoryNav;
     }
 }

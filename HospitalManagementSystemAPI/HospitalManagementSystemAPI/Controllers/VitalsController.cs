@@ -17,8 +17,8 @@ namespace HospitalManagementSystemAPI.Controllers
             _context = context;
         }
 
-        // GET: api/vitals/{patientId}
-        [HttpGet("{patientId}")]
+        // GET: api/vitals/patient/{patientId}
+        [HttpGet("/patient/{patientId}")]
         public async Task<ActionResult> GetVitalsByPatientId(int patientId)
         {
             try

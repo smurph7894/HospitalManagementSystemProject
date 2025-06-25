@@ -199,5 +199,13 @@ namespace HospitalManagementSystemClient
                 Console.WriteLine($"Delete error: {ex.Message}");
             }
         }
+
+        private void btn_medicalHistoryNav_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            // Navigate to the Medical History form, passing the selected patient information and logged in user
+            var medicalHistoryForm = new MedicalHistoryForm(_loggedInUser, selectedPatient);
+            medicalHistoryForm.Show();
+        }
     }
 }
