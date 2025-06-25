@@ -43,6 +43,7 @@
             this.btn_myInfo = new System.Windows.Forms.Button();
             this.btn_patientSearch = new System.Windows.Forms.Button();
             this.btn_SignOut = new System.Windows.Forms.Button();
+            this.btn_DataAnalytics = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ScheduleAppointments
@@ -187,11 +188,22 @@
             this.btn_SignOut.UseVisualStyleBackColor = true;
             this.btn_SignOut.Click += new System.EventHandler(this.btn_SignOut_Click);
             // 
+            // btn_DataAnalytics
+            // 
+            this.btn_DataAnalytics.Location = new System.Drawing.Point(592, 237);
+            this.btn_DataAnalytics.Name = "btn_DataAnalytics";
+            this.btn_DataAnalytics.Size = new System.Drawing.Size(109, 51);
+            this.btn_DataAnalytics.TabIndex = 8;
+            this.btn_DataAnalytics.Text = "Data Analytics";
+            this.btn_DataAnalytics.UseVisualStyleBackColor = true;
+            this.btn_DataAnalytics.Click += new System.EventHandler(this.btn_DataAnalytics_Click);
+            // 
             // DashBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_DataAnalytics);
             this.Controls.Add(this.btn_SignOut);
             this.Controls.Add(this.btn_patientSearch);
             this.Controls.Add(this.btn_myInfo);
@@ -232,5 +244,6 @@
         private System.Windows.Forms.Button btn_myInfo;
         private System.Windows.Forms.Button btn_patientSearch;
         private System.Windows.Forms.Button btn_SignOut;
+        private System.Windows.Forms.Button btn_DataAnalytics;
     }
 }

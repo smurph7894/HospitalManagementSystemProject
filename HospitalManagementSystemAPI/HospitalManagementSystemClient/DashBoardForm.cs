@@ -140,5 +140,12 @@ namespace HospitalManagementSystemClient
             this.Close();
 
         }
+
+        private void btn_DataAnalytics_Click(object sender, EventArgs e)
+        {
+            var form = new DataAnalyticsForm(_loggedInUser);
+            form.Show();
+
+        }
     }
 }

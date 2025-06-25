@@ -26,10 +26,12 @@ public class InventoryItem
 
     [StringLength(100)]
     public string Location { get; set; }
+    public bool IsMedication { get; set; }
 
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     [Required]
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public int TotalHospitalUsage { get; internal set; }
 }
