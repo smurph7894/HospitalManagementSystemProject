@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.Logging;
+using static System.Net.WebRequestMethods;
 
 namespace HospitalManagementSystemClient
 {
@@ -63,10 +64,9 @@ namespace HospitalManagementSystemClient
             }
          }
 
-        //Placeholder: Will load patient visit analytics (to be implemented later)
-        private void btn_PatientVisits_Click(object sender, EventArgs e)
+        private async void btn_PatientVisits_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming Soon: Patient Visits Analytics.");
+           var response = _httpClient.GetAsync("http://localhost:5277/api/")
 
         }
 

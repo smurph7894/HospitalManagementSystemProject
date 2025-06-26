@@ -101,6 +101,59 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
+        //GET: api/appointments/daterange Appointments by dates
+        [HttpGet("daterange")]
+        public async Task<ActionResult> GetAppointmentsWithinDateRange([FromBody] AppointmentAnalytics appointmentAnalytics)
+        {
+            try
+            {
+                var connectionString = "Data Source=Little_Juicy\\sqlexpress;Initial Catalog=HospitalManagementDB;Integrated Security" +
+                    "=True;TrustServerCertificate=True";
+                var appointments = new List<Appointment>();
+
+                string selectQuery = @"
+                    SELECT AppointmentId, PatientId, StaffId, ScheduledAt, Status, Reason
+                    FROM Appointments
+                    WHERE ScheduledAt BETWEEN @StartDate AND @EndDate
+                    ORDER BY ScheduledAt";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand selectCmd = new SqlCommand(selectQuery, conn))
+                {
+
+                    selectCmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = startDate;
+                    selectCmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endDate;
+
+                    conn.Open();
+
+                    // Get appointment list
+                    using (SqlDataReader reader = selectCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            appointments.Add(new Appointment
+                            {
+                                AppointmentId = reader.GetInt32(0),
+                                PatientId = reader.GetInt32(1),
+                                StaffId = reader.GetInt32(2),
+                                ScheduledAt = reader.GetDateTime(3),
+                                Status = reader.GetString(4),
+                                Reason = reader.IsDBNull(5) ? null : reader.GetString(5)
+                            });
+                        }
+                    }
+                }
+
+                return Ok(appointments);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating appointment: {ex.Message}");
+            }
+            
+        }
+    }
+
         // POST: api/appointment - creates a new appointment
         [HttpPost]
         public async Task<ActionResult> CreateAppointment([FromBody] Appointment appointment)
@@ -193,5 +246,11 @@ namespace HospitalManagementSystemAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting appointment: {ex.Message}");
             }
         }
+    }
+
+    public class AppointmentAnalytics
+    {
+        DateTime start { get; set; }
+        DateTime end { get; set; }
     }
 }
