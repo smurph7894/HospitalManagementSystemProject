@@ -25,7 +25,7 @@ namespace HospitalManagementSystemAPI.Controllers
         {
             // Query only items marked as medications
             var medicationItems = await _context.InventoryItems
-                .Where(i => i.IsMedication)
+                .Where(i => i.isMedication)
                 .Select(i => new
                 {
                     i.Name,

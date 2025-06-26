@@ -56,7 +56,7 @@ namespace HospitalManagementSystemAPI.Controllers
             item.UnitOfMeasure = updatedItem.UnitOfMeasure;
             item.ReorderLevel = updatedItem.ReorderLevel;
             item.Location = updatedItem.Location;
-            item.IsMedication = updatedItem.IsMedication;
+            item.isMedication = updatedItem.isMedication;
             item.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
