@@ -48,10 +48,10 @@ namespace HospitalManagementSystemClient
         private async Task InitializeSignalR()
         {
             AppointmentConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5277/AppointmentHub") // Ensure this URL matches your API's SignalR hub endpoint
+                .WithUrl("http://localhost:5277/appointmenthub") // Ensure this URL matches your API's SignalR hub endpoint
                 .Build();
 
-            AppointmentConnection.On<string, DateTime>("ReceiveNewAppointmentNotification", (patientId, message) =>
+            AppointmentConnection.On<string, string>("ReceiveAppointmentNotification", (patientId, message) =>
             {
                 Invoke((Action)(() =>
                 {
@@ -61,9 +61,9 @@ namespace HospitalManagementSystemClient
 
             AppointmentConnection.On<string, string>("ReceiveAppointmentUpdatedNotification", (patientId, message) =>
             {
-                Invoke((Action)(async () =>
+                Invoke((Action)(() =>
                 {
-                MessageBox.Show($"Appointment updated for {patientId}: {message}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Appointment updated for {patientId}: {message}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }));
             });
 
@@ -300,6 +300,11 @@ namespace HospitalManagementSystemClient
                         comboBox_appointmentStatus.SelectedIndex = -1;
                         numericUpDown_duration.Value = 30;
                         richTextBox1.Clear();
+                        if (_loggedInUser.Roles.Contains(Role.Patient))
+                        {
+                            // Load the patient's information
+                            lbl_patientName.Text = _loggedInUser.Username;
+                        }
                     }
                     else
                     {
@@ -307,7 +312,7 @@ namespace HospitalManagementSystemClient
                     }
                 }
                 // Notify SignalR hub about the new appointment
-                AppointmentConnection.InvokeAsync("SendNewAppointmentNotification", appointmentPatientId, appointmentUpdated.Reason);
+                await AppointmentConnection.InvokeAsync("SendNewAppointmentNotification", appointmentPatientId.ToString(), appointmentUpdated.Reason);
             }
             catch (Exception ex)
             {

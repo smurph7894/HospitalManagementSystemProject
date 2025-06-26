@@ -15,11 +15,9 @@ namespace HospitalManagementSystemAPI.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly IHubContext<AppointmentHub> _hubContext;
-        public AppointmentController(AppDbContext context, IHubContext<AppointmentHub> hubContext)
+        public AppointmentController(AppDbContext context)
         {
             _context = context;
-            _hubContext = hubContext;
         }
 
         // GET: api/appointment/patient/{patientId} - gets all appointments for a specific patient
