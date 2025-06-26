@@ -37,7 +37,7 @@ namespace HospitalManagementSystemAPI.Models
         Nurse,
         AdministrativeStaff,
         Patient,
-        Administrator
+        Staff
     }
 
     [Serializable]
@@ -83,5 +83,11 @@ namespace HospitalManagementSystemAPI.Models
 
         [BsonElement("Address"), BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public string Address { get; set; }
+
+        [BsonElement("DOB"), BsonRepresentation(BsonType.DateTime)]
+        public DateTime DOB { get; set; }
+
+        [BsonElement("Gender"), BsonRepresentation(BsonType.String)]
+        public char Gender { get; set; }  // Use string here for flexibility, e.g. "M", "F", "O"
     }
 }
