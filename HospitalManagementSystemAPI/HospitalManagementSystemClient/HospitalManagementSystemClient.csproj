@@ -217,6 +217,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarePlanForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarePlanForms.Designer.cs">
+      <DependentUpon>CarePlanForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataAnalyticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +300,9 @@
     <Compile Include="ScheduleAppointmentsForm.Designer.cs">
       <DependentUpon>ScheduleAppointmentsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CarePlanForms.resx">
+      <DependentUpon>CarePlanForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DashBoardForm.resx">
       <DependentUpon>DashBoardForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -110,7 +110,7 @@ CREATE TABLE dbo.Appointments (
         FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
         ON DELETE CASCADE,
     CONSTRAINT FK_Appointments_Staff
-        FOREIGN KEY(StaffId) REFERENCES dbo.Staff(StaffId),
+        FOREIGN KEY ([StaffId]) REFERENCES [dbo].[Staff]([StaffId]),
 );
 END
 GO

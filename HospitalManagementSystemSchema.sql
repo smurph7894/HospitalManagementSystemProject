@@ -93,19 +93,18 @@ GO
 CREATE TABLE dbo.Appointments (
     AppointmentId      INT             IDENTITY PRIMARY KEY,
     PatientId          INT             NOT NULL,
-    StaffId            INT             NOT NULL,
+    StaffId            INT             NULL,
     ScheduledAt        DATETIME        NOT NULL,
     DurationMinutes    INT             NULL,
     Status             NVARCHAR(50)    NOT NULL,  -- e.g. 'Scheduled','Completed','Cancelled'
     Reason             NVARCHAR(500)   NULL,
-    CreatedBy          INT             NOT NULL,  -- who created the appt
     CreatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     UpdatedAt          DATETIME        NOT NULL DEFAULT GETDATE(),
     CONSTRAINT FK_Appointments_Patients
         FOREIGN KEY(PatientId) REFERENCES dbo.Patients(PatientId)
 		ON DELETE CASCADE,
     CONSTRAINT FK_Appointments_Staff
-        FOREIGN KEY(StaffId) REFERENCES dbo.Staff(StaffId),
+        FOREIGN KEY ([StaffId]) REFERENCES [dbo].[Staff]([StaffId]),
     CONSTRAINT FK_Appointments_CreatedBy
         FOREIGN KEY(CreatedBy) REFERENCES dbo.Staff(StaffId)
 );

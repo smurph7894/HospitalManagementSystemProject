@@ -18,7 +18,7 @@ namespace HospitalManagementSystemAPI.Controllers
 
         // Get: api/staff/{userRef} - gets staff by userId from login
         [HttpGet("{userRef}")]
-        public async Task<ActionResult> GetStaffById(int userRef)
+        public async Task<ActionResult> GetStaffById(string userRef)
         {
             try
             {

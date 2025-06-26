@@ -192,5 +192,21 @@ namespace HospitalManagementSystemClient
                 medicalHistoryForm.Show();
             }
         }
+
+        private void btn_patientCarePlans_Click(object sender, EventArgs e)
+        {
+            if (selectedPatient == null)
+            {
+                MessageBox.Show("Please select a patient to view their medical history.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                this.Close();
+                // Pass the full Users object to the Dashboard form (or Form1)
+                var patientCarePlans = new CarePlanForms(_loggedInUser, selectedPatient);
+                patientCarePlans.Show();
+            }
+        }
     }
 }
