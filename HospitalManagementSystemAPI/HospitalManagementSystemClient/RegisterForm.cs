@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,6 +38,11 @@ namespace HospitalManagementSystemClient
             var fullName = txb_fullname.Text;
             var email = txb_email.Text;
             var phone = txb_phone.Text;
+            if (phone.Length != 10 || !phone.All(char.IsDigit))
+            {
+                MessageBox.Show("Phone number must be exactly 10 digits.", "Invalid Phone Number", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var address = txb_address.Text;
             var roleStr = comboBox_role.SelectedItem?.ToString();
 
@@ -76,38 +83,33 @@ namespace HospitalManagementSystemClient
 
             using (var client = new HttpClient())
             {
-                // Creates HTTP content with JSON payload and proper content-type header
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 try
                 {
-                    // This Sends POST request asynchronously to the API register endpoint
                     var response = await client.PostAsync($"{apiBaseUrl}/register", content);
-                    // If registration succeeds (HTTP 200-299)
+
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close(); // Closes the register form after success
+                        this.Close(); // Only close after registration succeeds
                     }
                     else
                     {
-                        // If registration fails, read and display error message from API response
-                        string error = response.Content.ReadAsStringAsync().Result;
+                        // Read and show API error messages
+                        string error = await response.Content.ReadAsStringAsync();
                         MessageBox.Show("Registration failed: " + error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Shows any network or unexpected exceptions and notify the user
-                    MessageBox.Show("Error: " + ex.Message.ToString());
+                    MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
-
-            this.Close(); //closes registration form
+                this.Close(); //closes registration form
         }
-       
 
+       
     }
     
 }

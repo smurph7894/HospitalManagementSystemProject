@@ -30,7 +30,7 @@ namespace HospitalManagementSystemAPI
                     permissions.Add(Permission.ManageDepartments);
                     break;
 
-                case Role.Administrator:
+                case Role.Staff:
                     permissions.Add(Permission.ManageUsers);
                     permissions.Add(Permission.ManageStaff);
                     permissions.Add(Permission.AccessReports);

@@ -1,5 +1,6 @@
 ﻿using HospitalManagementSystemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -11,19 +12,23 @@ namespace HospitalManagementSystemAPI.Controllers
     {
         // MongoDB collection to store Users documents
         private readonly IMongoCollection<Users> _userCollection;
+        // Entity Framework database context for SQL Server
+        private readonly AppDbContext _context;
 
-        // Constructor initializes MongoDB connection and selects database/collection
-        public UsersController()
+        // Constructor sets up MongoDB collection and injects EF DbContext for SQL operations
+        public UsersController(IMongoClient mongoClient, AppDbContext context)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("HospitalManagementDB");
+            // Use injected Mongo client to access the HospitalManagementDB and 'userData' collection
+            var database = mongoClient.GetDatabase("HospitalManagementDB");
 
             // Use correct collection name matching your DB (example: mine is "userData")
-            _userCollection = database.GetCollection<Users>("userData"); 
+            _userCollection = database.GetCollection<Users>("userData");
+            _context = context; // EF DbContext for SQL DB
         }
 
 
-        // Endpoint to check if a username already exists in DB (GET /api/users/check-username?username=foo)
+        // GET api/users/check-username?username=foo
+        // Checks if a username already exists in MongoDB to prevent duplicate registrations
         [HttpGet("check-username")]
         public async Task<IActionResult> UsernameExists([FromQuery] string username)
         {
@@ -31,8 +36,8 @@ namespace HospitalManagementSystemAPI.Controllers
             return Ok(exists);
         }
 
-        // Endpoint for user login (POST /api/users/login)
-        // Receives username and password, returns user info if valid or 401 Unauthorized
+        // POST api/users/login
+        // Authenticates user by username and password; returns user info if valid or 401 Unauthorized if invalid
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
@@ -61,25 +66,23 @@ namespace HospitalManagementSystemAPI.Controllers
             return Ok(userResponse);
         }
 
-        // Endpoint for user registration (POST /api/users/register)
-        // Accepts RegisterUserDto with username, password, email, roles as strings, and profile
+        // POST api/users/register
+        // Registers a new user, inserting into MongoDB, then creates matching SQL records (Staff or Patient) accordingly
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto dto)
         {
-            // Checks if username already exists in the database
+            // Check if username is already taken
             var exists = await _userCollection.Find(u => u.Username == dto.Username).AnyAsync();
             if (exists)
                 return BadRequest("Username already exists.");
 
-            // Converts string roles from client to Role enum list
-            var rolesEnum = dto.Roles
-                .Select(r => Enum.TryParse<Role>(r, out var parsed) ? parsed : Role.Patient)
-                .ToList();
+            // Parse string roles to enum; default to Patient if parsing fails
+            var rolesEnum = dto.Roles.Select(r => Enum.TryParse<Role>(r, out var parsed) ? parsed : Role.Patient).ToList();
 
-            // Gets permissions based on roles using helper class
+            // Generate permissions based on roles
             var permissions = PermissionHelper.GetPermissionsForRoles(rolesEnum);
 
-            // Creates new Users document with generated ObjectId and current timestamps
+            // Create MongoDB user document
             var newUser = new Users
             {
                 UserId = ObjectId.GenerateNewId(),
@@ -88,19 +91,92 @@ namespace HospitalManagementSystemAPI.Controllers
                 Email = dto.Email,
                 Roles = rolesEnum,
                 Permissions = permissions,
-                Profile = dto.Profile,
+                Profile = dto.Profile, //Includes FullName, Phone, Address, DOB, Gender
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
 
-            // Inserts new user into the MongoDB collection
+            // Insert new user document in MongoDB
             await _userCollection.InsertOneAsync(newUser);
 
-            //success message returned
+            try
+            {
+                // For staff roles, check or create default Department and insert Staff record in SQL DB
+                if (rolesEnum.Any(r => r == Role.Doctor ||r == Role.Nurse ||r == Role.AdministrativeStaff ||r == Role.Staff))
+                {
+                    int departmentId;
+                    var departmentExists = await _context.Departments.AnyAsync(d => d.DepartmentId == 1);
+                    if (!departmentExists)
+                    {
+                        // Create default department if not present
+                        var defaultDept = new Department { Name = "Default", Description = "Default department" };
+                        _context.Departments.Add(defaultDept);
+                        await _context.SaveChangesAsync();
+                        departmentId = defaultDept.DepartmentId;
+                    }
+                    else
+                    {
+                        departmentId = 1; //// Use default department id
+                    }
+
+                    // Create Staff SQL entity linked to Mongo user ID
+                    var staff = new Staff
+                    {
+                        UserRef = newUser.UserId.ToString(),
+                        Name = dto.Profile.FullName,
+                        StaffType = "General",
+                        DepartmentId = departmentId,
+                        Phone = dto.Profile.Phone,
+                        Email = dto.Email,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    _context.Staff.Add(staff);
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        var sqlException = ex.InnerException;
+                        // Log or inspect sqlException.Message or ex.Message to get details
+                        return StatusCode(500, "Database update error: " + sqlException?.Message ?? ex.Message);
+                    }
+
+                }
+                else if (rolesEnum.Count == 1 && rolesEnum[0] == Role.Patient)
+                {
+                    // For patient role only, insert Patient record in SQL DB
+                    var patient = new Patient
+                    {
+                        PatientOrgId = newUser.UserId.ToString(),
+                        FirstName = dto.Profile.FullName.Split(' ')[0],
+                        LastName = dto.Profile.FullName.Split(' ').Length > 1 ? dto.Profile.FullName.Split(' ')[1] : "",
+                        Email = dto.Email,
+                        Phone = dto.Profile.Phone,
+                        Address = dto.Profile.Address,
+                        Gender = dto.Profile.Gender, // Assign a valid char here, e.g., 'M', 'F', 'O'
+                        DOB = DateTime.UtcNow.AddYears(-25), // Example DOB, adjust or get from DTO
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    _context.Patients.Add(patient);
+                    await _context.SaveChangesAsync(); // Save any pending changes
+                }
+
+                await _context.SaveChangesAsync(); // async save changes!
+            }
+            catch (Exception ex)
+            {
+                // Handle failure in SQL insertion; might consider rolling back Mongo insert for later time
+                return StatusCode(500, "MongoDB registration succeeded but SQL insertion failed: " + ex.Message);
+            }
+
             return Ok("User registered.");
         }
 
-        // Endpoint to find a user by username (GET /api/users/find?username=foo)
+        // GET api/users/find?username=foo
+        // Finds a user document by username in MongoDB
         [HttpGet("find")]
         public async Task<IActionResult> FindUser([FromQuery] string username)
         {
@@ -109,7 +185,8 @@ namespace HospitalManagementSystemAPI.Controllers
             return Ok(user);
         }
 
-        // Endpoint to delete a user by ObjectId string (DELETE /api/users/{id})
+        // DELETE api/users/{id}
+        // Deletes a user document from MongoDB by ObjectId string
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {

@@ -22,7 +22,7 @@ namespace HospitalManagementSystemAPI.Models
         [StringLength(50)]
         public string Specialization{ get; set; }
 
-        [Required]
+        
         public int DepartmentId { get; set; }
 
         public DateTime HireDate { get; set; }

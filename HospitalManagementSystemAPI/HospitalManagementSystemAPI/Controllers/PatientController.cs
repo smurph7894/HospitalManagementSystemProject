@@ -149,8 +149,15 @@ namespace HospitalManagementSystemAPI.Controllers
         private static bool StringMatches(Patient patient, string searchInput, string category)
         {
             var propertyInfo = patient.GetType().GetProperty(category);
+            if (propertyInfo == null) return false; // property doesn't exist
+
             var prop = propertyInfo.GetValue(patient);
-            return ((string)prop).Contains(searchInput);
+
+            if (prop == null) return false;
+
+            string propString = prop.ToString();
+
+            return propString.Contains(searchInput, StringComparison.OrdinalIgnoreCase);
         }
 
         // Get: api/patient - gets all patients
