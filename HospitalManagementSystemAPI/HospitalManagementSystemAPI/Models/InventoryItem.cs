@@ -26,7 +26,7 @@ public class InventoryItem
 
     [StringLength(100)]
     public string Location { get; set; }
-    public bool IsMedication { get; set; }
+    public bool IsMedication { get; set; } //commnent example
 
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
