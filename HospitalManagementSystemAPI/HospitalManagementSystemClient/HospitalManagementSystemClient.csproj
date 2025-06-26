@@ -294,7 +294,6 @@
     <Compile Include="ScheduleAppointmentsForm.Designer.cs">
       <DependentUpon>ScheduleAppointmentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignalRManager.cs" />
     <EmbeddedResource Include="DashBoardForm.resx">
       <DependentUpon>DashBoardForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -4,11 +4,14 @@ namespace HospitalManagementSystemAPI
 {
     public class AppointmentHub : Hub
     {
-        public async Task SendNotification(string message, string user)
+        public async Task SendNotification(string user, string message)
         {
             // Broadcasts a notification to all connected clients.
-            // This is for appointment reminders, updates, or cancellations.
-            await Clients.All.SendAsync("ReceiveAppointmentNotification", message, user);
+            await Clients.All.SendAsync("ReceiveAppointmentNotification", user, message);
+
+            await Clients.All.SendAsync("ReceiveAppointmentUpdatedNotification", user, message);
+
+            await Clients.All.SendAsync("ReceiveAppointmentDeletedNotification", user, message);
         }
     }
 }
