@@ -37,6 +37,7 @@
             this.comboBox_searchCategories = new System.Windows.Forms.ComboBox();
             this.btn_getAllPatients = new System.Windows.Forms.Button();
             this.btn_viewPatientHistory = new System.Windows.Forms.Button();
+            this.btn_patientCarePlans = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_PatientList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,7 +135,7 @@
             // 
             // btn_viewPatientHistory
             // 
-            this.btn_viewPatientHistory.Location = new System.Drawing.Point(806, 63);
+            this.btn_viewPatientHistory.Location = new System.Drawing.Point(716, 61);
             this.btn_viewPatientHistory.Name = "btn_viewPatientHistory";
             this.btn_viewPatientHistory.Size = new System.Drawing.Size(210, 23);
             this.btn_viewPatientHistory.TabIndex = 8;
@@ -142,11 +143,22 @@
             this.btn_viewPatientHistory.UseVisualStyleBackColor = true;
             this.btn_viewPatientHistory.Click += new System.EventHandler(this.btn_viewPatientHistory_Click);
             // 
+            // btn_patientCarePlans
+            // 
+            this.btn_patientCarePlans.Location = new System.Drawing.Point(932, 61);
+            this.btn_patientCarePlans.Name = "btn_patientCarePlans";
+            this.btn_patientCarePlans.Size = new System.Drawing.Size(130, 23);
+            this.btn_patientCarePlans.TabIndex = 9;
+            this.btn_patientCarePlans.Text = "Patient CarePlans";
+            this.btn_patientCarePlans.UseVisualStyleBackColor = true;
+            this.btn_patientCarePlans.Click += new System.EventHandler(this.btn_patientCarePlans_Click);
+            // 
             // PatientSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1410, 817);
+            this.Controls.Add(this.btn_patientCarePlans);
             this.Controls.Add(this.btn_viewPatientHistory);
             this.Controls.Add(this.btn_getAllPatients);
             this.Controls.Add(this.comboBox_searchCategories);
@@ -175,5 +187,6 @@
         private System.Windows.Forms.ComboBox comboBox_searchCategories;
         private System.Windows.Forms.Button btn_getAllPatients;
         private System.Windows.Forms.Button btn_viewPatientHistory;
+        private System.Windows.Forms.Button btn_patientCarePlans;
     }
 }

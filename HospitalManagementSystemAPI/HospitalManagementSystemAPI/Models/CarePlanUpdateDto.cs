@@ -10,8 +10,6 @@ namespace HospitalManagementSystemAPI.Models
 
         public string? Description { get; set; }
 
-        public List<CarePlanUpdates> CarePlanUpdates { get; set; }
-
         public DateTime? DiagnosisDate { get; set; }
 
         public DateTime? DateResolved { get; set; }
