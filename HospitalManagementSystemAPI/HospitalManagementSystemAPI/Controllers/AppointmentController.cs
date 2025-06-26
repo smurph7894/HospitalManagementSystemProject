@@ -99,32 +99,37 @@ namespace HospitalManagementSystemAPI.Controllers
             }
         }
 
-        //GET: api/appointments/daterange Appointments by dates
+        //GET: api/appointment/daterange Appointments by dates  
         [HttpGet("daterange")]
-        public async Task<ActionResult> GetAppointmentsWithinDateRange([FromBody] AppointmentAnalytics appointmentAnalytics)
+        public async Task<ActionResult> GetAppointmentsWithinDateRange([FromQuery] string startDate, [FromQuery] string endDate)
         {
+            //startDate = ConvertStringToDateTime(startDate)?.ToString("yyyy-MM-dd HH:mm:ss") ?? "";
+            //endDate = ConvertStringToDateTime(endDate)?.ToString("yyyy-MM-dd HH:mm:ss") ?? "";
             try
             {
-                var connectionString = "Data Source=Little_Juicy\\sqlexpress;Initial Catalog=HospitalManagementDB;Integrated Security" +
-                    "=True;TrustServerCertificate=True";
+                if (startDate == "" || endDate == "")
+                {
+                    return BadRequest("Invalid date range provided.");
+                }
+
+                var connectionString = "Data Source=Little_Juicy\\sqlexpress;Initial Catalog=HospitalManagementDB;Integrated Security=True;TrustServerCertificate=True";
                 var appointments = new List<Appointment>();
 
-                string selectQuery = @"
-                    SELECT AppointmentId, PatientId, StaffId, ScheduledAt, Status, Reason
-                    FROM Appointments
-                    WHERE ScheduledAt BETWEEN @StartDate AND @EndDate
-                    ORDER BY ScheduledAt";
+                string selectQuery = @"  
+                   SELECT AppointmentId, PatientId, StaffId, ScheduledAt, Status, Reason  
+                   FROM Appointments  
+                   WHERE ScheduledAt BETWEEN @StartDate AND @EndDate  
+                   ORDER BY ScheduledAt";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand selectCmd = new SqlCommand(selectQuery, conn))
                 {
-
                     selectCmd.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = startDate;
                     selectCmd.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endDate;
 
                     conn.Open();
 
-                    // Get appointment list
+                    // Get appointment list  
                     using (SqlDataReader reader = selectCmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -135,8 +140,8 @@ namespace HospitalManagementSystemAPI.Controllers
                                 PatientId = reader.GetInt32(1),
                                 StaffId = reader.GetInt32(2),
                                 ScheduledAt = reader.GetDateTime(3),
-                                Status = reader.GetString(4),
-                                Reason = reader.IsDBNull(5) ? null : reader.GetString(5)
+                                Status = Enum.TryParse<Status>(reader.GetString(4), out var parsedStatus) ? parsedStatus : Status.Scheduled,
+                                Reason = reader.IsDBNull(5) ? string.Empty : reader.GetString(5) 
                             });
                         }
                     }
@@ -146,11 +151,9 @@ namespace HospitalManagementSystemAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating appointment: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving appointments: {ex.Message}");
             }
-            
-        }
-    }
+        }  
 
         // POST: api/appointment - creates a new appointment
         [HttpPost]
@@ -166,7 +169,7 @@ namespace HospitalManagementSystemAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(appointment);
             }
-catch (Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating appointment: {ex.Message}");
             }
@@ -244,11 +247,16 @@ catch (Exception ex)
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting appointment: {ex.Message}");
             }
         }
+
+        [NonAction]
+        public DateTime? ConvertStringToDateTime(string dateString)
+        {
+            if (DateTime.TryParse(dateString, out DateTime parsedDate))
+            {
+                return parsedDate;
+            }
+            return null; // Return null if conversion fails  
+        }
     }
 
-    public class AppointmentAnalytics
-    {
-        DateTime start { get; set; }
-        DateTime end { get; set; }
-    }
 }

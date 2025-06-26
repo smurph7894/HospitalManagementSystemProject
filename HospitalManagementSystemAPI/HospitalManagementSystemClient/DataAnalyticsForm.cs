@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HospitalManagementSystemClient.Models;
 using Microsoft.Extensions.Logging;
 using static System.Net.WebRequestMethods;
 
@@ -66,8 +67,39 @@ namespace HospitalManagementSystemClient
 
         private async void btn_PatientVisits_Click(object sender, EventArgs e)
         {
-           var response = _httpClient.GetAsync("http://localhost:5277/api/")
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    // Prepare query parameters for GET request  
+                    var startDate = dateTimePicker_start.Value;
+                    var endDate = dateTimePicker_end.Value;
+                    var url = $"http://localhost:5277/api/appointment/daterange?startDate={startDate}&endDate={endDate}";
 
+                    // Send GET request with query parameters  
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var json = await response.Content.ReadAsStringAsync();
+                        var visitList = JsonSerializer.Deserialize<List<Patient>>(json, new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
+
+                        // Bind the result to the DataGridView on the form  
+                        dgv_Report.DataSource = visitList;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to load patient visits data.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching appointment analytics: {ex.Message}");
+            }
         }
 
         /// Placeholder: Will load common ailments analytics (to be implemented later)
@@ -112,5 +144,11 @@ namespace HospitalManagementSystemClient
         public int ReorderLevel { get; set; }
         public bool NeedsRestock { get; set; }
         public int TotalHospitalUsage { get; set; }
+    }
+
+    public class AppointmentAnalytics
+    {
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
     }
 }
