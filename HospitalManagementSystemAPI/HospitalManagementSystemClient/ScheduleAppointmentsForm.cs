@@ -1,23 +1,19 @@
 ﻿using HospitalManagementSystemClient.Models;
 using Microsoft.AspNetCore.SignalR.Client;
+using MongoDB.Bson.IO;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace HospitalManagementSystemClient
 {
     public partial class ScheduleAppointmentsForm : Form
     {
-        private HubConnection _hubConnection;
+        public static HubConnection AppointmentConnection;
         private Users _loggedInUser;
         private readonly string apiBaseUrl = "http://localhost:5277/api";
         private Appointment selectedAppointment;
@@ -28,6 +24,7 @@ namespace HospitalManagementSystemClient
             InitializeComponent();
             _loggedInUser = user;
             loadDataIfPatient(); // Load patient name if the user is a patient
+            InitializeSignalR(); 
         }
 
         private void loadDataIfPatient()
@@ -49,27 +46,66 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        
-
-        public static class NotificationHandler
+        private static async Task InitializeSignalR()
         {
-            public static void ShowNotification(string message, string user)
-            {
-                Form form = Form.ActiveForm;
+            AppointmentConnection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5277/AppointmentHub") // Ensure this URL matches your API's SignalR hub endpoint
+                .Build();
 
-                if (form != null)
+            AppointmentConnection.On<string, DateTime, string>("ReceiveNewAppointmentNotification", (dateTime, reason) =>
+            {
+                Invoke((Action)(() =>
                 {
-                    if (form.InvokeRequired)
-                    {
-                        form.Invoke(new Action(() => MessageBox.Show($"Notification: {message} from {user}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information));
-                    }
-                    else
-                    {
-                        MessageBox.Show(form, message, "Appointment Notification");
-                    }
-                }
+                    MessageBox.Show($"New appointment scheduled for: {reason} at {dateTime}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }));
+            });
+
+            AppointmentConnection.On<string, string>("ReceiveAppointmentUpdatedNotification", (message, patientId) =>
+            {
+                Invoke((Action)(async () =>
+                {
+                MessageBox.Show($"Appointment updated for {patientId}: {message}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }));
+            });
+
+            AppointmentConnection.On<string, string>("ReceiveAppointmentDeletedNotification", (message, patientId) =>
+            {
+                Invoke((Action)(() =>
+                {
+                    MessageBox.Show($"Appointment deleted for {patientId}: {message}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }));
+            });
+
+            try
+            {
+                await AppointmentConnection.StartAsync();
+                MessageBox.Show("Connected to Appointment SignalR successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error connecting to Appointment SignalR hub: {ex.Message}");
             }
         }
+
+        //public static class NotificationHandler
+        //{
+        //    public static void ShowNotification(string message, string user)
+        //    {
+        //        Form form = Form.ActiveForm;
+
+        //        if (form != null)
+        //        {
+        //            if (form.InvokeRequired)
+        //            {
+        //                form.Invoke(new Action(() => MessageBox.Show($"Notification: {message} from {user}", "Appointment Notification", MessageBoxButtons.OK, MessageBoxIcon.Information));
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(form, message, "Appointment Notification");
+        //            }
+        //        }
+        //    }
+        //}
 
         private async void getStaffID()
         {
@@ -291,6 +327,11 @@ namespace HospitalManagementSystemClient
                         MessageBox.Show("Error adding appointment. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                // Notify SignalR hub about the new appointment
+                if (AppointmentConnection != null && AppointmentConnection.State == HubConnectionState.Connected)
+                {
+                    await AppointmentConnection.InvokeAsync("SendNewAppointmentNotification", appointmentUpdated.Reason, appointmentUpdated.ScheduledAt);
+                }
             }
             catch (Exception ex)
             {
@@ -332,6 +373,11 @@ namespace HospitalManagementSystemClient
                     {
                         MessageBox.Show("Error updating appointment. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                // Notify SignalR hub about the updated appointment
+                if (AppointmentConnection != null && AppointmentConnection.State == HubConnectionState.Connected)
+                {
+                    AppointmentConnection.InvokeAsync("SendAppointmentUpdatedNotification", "An Appointment has been updated.", selectedPatient.PatientId.ToString());
                 }
             }
             catch (Exception ex)
@@ -386,6 +432,11 @@ namespace HospitalManagementSystemClient
                     {
                         MessageBox.Show("Error deleting appointment. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                // Notify SignalR hub about the deleted appointment
+                if (AppointmentConnection != null && AppointmentConnection.State == HubConnectionState.Connected)
+                {
+                    AppointmentConnection.InvokeAsync("SendAppointmentDeletedNotification", "Appointment deleted successfully.", selectedPatient.PatientId.ToString());
                 }
             }
             catch (Exception ex)

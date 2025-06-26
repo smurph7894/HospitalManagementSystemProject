@@ -27,7 +27,7 @@ namespace HospitalManagementSystemClient
         {
             InitializeComponent();
             InitializeGrid();
-            //InitializeSignalR();
+            InitializeSignalR();
             LoadInventory();
             _loggedInUser = user;
 
@@ -141,58 +141,52 @@ namespace HospitalManagementSystemClient
             }
         }
 
-        //moving to central manager-Sarah
+        //set up signalR listeners for real time updates
+        private async void InitializeSignalR()
+        {
+            connection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5277/inventoryHub")
+                .WithAutomaticReconnect()
+                .Build();
+            //item that is added or updated (on)
+            connection.On<InventoryItem>("ReceiveInventoryUpdate", (updatedItem) =>
+            {
+                Invoke((Action)(() =>
+                {
+                    UpdateInventoryRow(updatedItem);
+                    MessageBox.Show($"Item updated or added: Id: {updatedItem.ItemId}, Name:{updatedItem.Name} (Qty: {updatedItem.QuantityInStock})");
+                }));
+            });
 
-        ////set up signalR listeners for real time updates
-        //private async void InitializeSignalR()
-        //{
-        //    connection = new HubConnectionBuilder()
-        //        .WithUrl("http://localhost:5277/inventoryHub") 
-        //        .WithAutomaticReconnect()
-        //        .Build();
-        //    //item that is added or updated (on)
-        //    connection.On<InventoryItem>("ReceiveInventoryUpdate", (updatedItem) =>
-        //    {
-        //        Invoke((Action)(() =>
-        //        {
-        //            UpdateInventoryRow(updatedItem);
-        //            MessageBox.Show($"Item updated or added: Id: {updatedItem.ItemId}, Name:{updatedItem.Name} (Qty: {updatedItem.QuantityInStock})");
-        //        }));
-        //    });    
+            //Item that is deleted (on)
+            connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
+            {
+                Invoke((Action)(() =>
+                {
+                    foreach (DataGridViewRow row in dgv_Inventory.Rows)
+                    {
+                        if (row.Cells["ItemId"].Value != null && (int)row.Cells["ItemId"].Value == deletedItemId)
+                        {
+                            dgv_Inventory.Rows.Remove(row);
+                            MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
+                            break;
+                        }
+                    }
+                }));
+            });
 
-        //Item that is deleted (on)
-        //connection.On<int>("ReceiveInventoryDelete", (deletedItemId) =>
-    //    {
-    //        Invoke((Action)(() =>
-    //        {
-    //            foreach (DataGridViewRow row in dgv_Inventory.Rows)
-    //            {
-    //                if (row.Cells["Id"].Value != null && (int)row.Cells["Id"].Value == deletedItemId)
-    //                {
-    //                    dgv_Inventory.Rows.Remove(row);
-    //                    MessageBox.Show($"Deleted item with ID: {deletedItemId} Name: {deletedItemId}");
-    //                    break;
-    //                }
-    //            }
-    //        }));
-    //    });
-
-        //    try
-        //    {
-        //        await connection.StartAsync();
-        //        MessageBox.Show("Connected to SignalR successfully.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error connecting to SignalR: " + ex.Message);
-        //    }
-        //}
+            try
+            {
+                await connection.StartAsync();
+                MessageBox.Show("Connected to SignalR successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error connecting to SignalR: " + ex.Message);
+            }
+        }
 
 
-
-
-      
-        
         //Adding Item via API
         private async void btn_addItem_Click(object sender, EventArgs e)
         {
