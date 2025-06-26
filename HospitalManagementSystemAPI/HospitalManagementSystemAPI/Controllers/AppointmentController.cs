@@ -15,11 +15,9 @@ namespace HospitalManagementSystemAPI.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly IHubContext<AppointmentHub> _hubContext;
-        public AppointmentController(AppDbContext context, IHubContext<AppointmentHub> hubContext)
+        public AppointmentController(AppDbContext context)
         {
             _context = context;
-            _hubContext = hubContext;
         }
 
         // GET: api/appointment/patient/{patientId} - gets all appointments for a specific patient
@@ -107,7 +105,7 @@ namespace HospitalManagementSystemAPI.Controllers
         {
             try
             {
-                if (appointment == null || appointment.PatientId <= 0 || appointment.StaffId <= 0)
+                if (appointment == null || appointment.PatientId <= 0 )
                 {
                     return BadRequest("Invalid appointment data.");
                 }
@@ -115,7 +113,7 @@ namespace HospitalManagementSystemAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(appointment);
             }
-            catch (Exception ex)
+catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating appointment: {ex.Message}");
             }

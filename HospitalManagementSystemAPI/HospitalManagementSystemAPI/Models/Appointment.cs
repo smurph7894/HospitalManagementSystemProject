@@ -18,7 +18,7 @@ namespace HospitalManagementSystemAPI.Models
         [Required]
         public int PatientId { get; set; } // Foreign key to Patient
 
-        public int StaffId { get; set; } // Foreign key to Staff
+        public int? StaffId { get; set; } // Foreign key to Staff
 
         [Required]
         public DateTime ScheduledAt { get; set; }

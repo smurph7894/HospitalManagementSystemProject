@@ -4,23 +4,25 @@ namespace HospitalManagementSystemAPI
 {
     public class AppointmentHub : Hub
     {
-        // This hub can be used to manage real-time appointment scheduling and updates.
-        // Currently, it does not implement any specific methods, but can be extended as needed.
-
-        // Example methods could include:
-        // - Notify clients of new appointments
-        // - Update existing appointments
-        // - Cancel appointments
-
-        public override Task OnConnectedAsync()
+        public async Task SendNewAppointmentNotification(string user, string message)
         {
-            Console.WriteLine($"Client connected: {Context.ConnectionId}");
-            return base.OnConnectedAsync();
+            try
+            {
+                await Clients.All.SendAsync("ReceiveAppointmentNotification", user, message);
+            } catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
         }
-        public override Task OnDisconnectedAsync(Exception exception)
+
+        public async Task SendAppointmentUpdatedNotification(string user, string message)
         {
-            Console.WriteLine($"Client disconnected: {Context.ConnectionId}");
-            return base.OnDisconnectedAsync(exception);
+            await Clients.All.SendAsync("ReceiveAppointmentUpdatedNotification", user, message);
+        }
+
+        public async Task SendAppointmentDeletedNotification(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveAppointmentDeletedNotification", user, message);
         }
     }
 }

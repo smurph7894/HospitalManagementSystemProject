@@ -145,7 +145,7 @@ namespace HospitalManagementSystemClient
         private async void InitializeSignalR()
         {
             connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5277/inventoryHub") 
+                .WithUrl("http://localhost:5277/inventoryHub")
                 .WithAutomaticReconnect()
                 .Build();
             //item that is added or updated (on)
@@ -187,10 +187,6 @@ namespace HospitalManagementSystemClient
         }
 
 
-
-
-      
-        
         //Adding Item via API
         private async void btn_addItem_Click(object sender, EventArgs e)
         {
@@ -203,6 +199,7 @@ namespace HospitalManagementSystemClient
                 ReorderLevel = (int)nup_reorderLevel.Value,
                 IsMedication = cmb_IsMedication.SelectedItem.ToString() == "Yes",// Set IsMedication based on the selected dropdown option ("Yes" = true, "No" = false)
                 MedicationName = cmb_IsMedication.SelectedItem.ToString() == "Yes" ? cmb_MedicationName.SelectedItem?.ToString() : null, // Save the selected medication name only if IsMedication is true
+                //Location = txb_location.Text, was deleted in merge -unsure if it was still needed since it's kept elsewhere -Sarah
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
 

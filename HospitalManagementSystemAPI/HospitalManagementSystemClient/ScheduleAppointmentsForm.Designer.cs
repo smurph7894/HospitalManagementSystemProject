@@ -40,7 +40,6 @@ namespace HospitalManagementSystemClient
             this.lbl_patientName = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lbl_patientIdTitle = new System.Windows.Forms.Label();
-            this.lbl_patientId = new System.Windows.Forms.Label();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.numericUpDown_duration = new System.Windows.Forms.NumericUpDown();
@@ -49,6 +48,7 @@ namespace HospitalManagementSystemClient
             this.label7 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lbl_searchTypeNote = new System.Windows.Forms.Label();
+            this.txtB_patientId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_duration)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,10 +66,10 @@ namespace HospitalManagementSystemClient
             // 
             this.comboBox_appointmentStatus.FormattingEnabled = true;
             this.comboBox_appointmentStatus.Items.AddRange(new object[] {
-            "Scheduled,",
-            "InProgress,",
-            "Completed,",
-            "Cancelled,",
+            "Scheduled",
+            "InProgress",
+            "Completed",
+            "Cancelled",
             "NoShow"});
             this.comboBox_appointmentStatus.Location = new System.Drawing.Point(192, 437);
             this.comboBox_appointmentStatus.Name = "comboBox_appointmentStatus";
@@ -125,7 +125,7 @@ namespace HospitalManagementSystemClient
             // lbl_patientName
             // 
             this.lbl_patientName.AutoSize = true;
-            this.lbl_patientName.Location = new System.Drawing.Point(132, 145);
+            this.lbl_patientName.Location = new System.Drawing.Point(133, 122);
             this.lbl_patientName.Name = "lbl_patientName";
             this.lbl_patientName.Size = new System.Drawing.Size(0, 16);
             this.lbl_patientName.TabIndex = 14;
@@ -133,7 +133,7 @@ namespace HospitalManagementSystemClient
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(24, 145);
+            this.label9.Location = new System.Drawing.Point(25, 122);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 16);
             this.label9.TabIndex = 15;
@@ -142,21 +142,12 @@ namespace HospitalManagementSystemClient
             // lbl_patientIdTitle
             // 
             this.lbl_patientIdTitle.AutoSize = true;
-            this.lbl_patientIdTitle.Location = new System.Drawing.Point(25, 117);
+            this.lbl_patientIdTitle.Location = new System.Drawing.Point(26, 152);
             this.lbl_patientIdTitle.Name = "lbl_patientIdTitle";
             this.lbl_patientIdTitle.Size = new System.Drawing.Size(62, 16);
             this.lbl_patientIdTitle.TabIndex = 17;
             this.lbl_patientIdTitle.Text = "Patient Id";
             this.lbl_patientIdTitle.Visible = false;
-            // 
-            // lbl_patientId
-            // 
-            this.lbl_patientId.AutoSize = true;
-            this.lbl_patientId.Location = new System.Drawing.Point(132, 117);
-            this.lbl_patientId.Name = "lbl_patientId";
-            this.lbl_patientId.Size = new System.Drawing.Size(0, 16);
-            this.lbl_patientId.TabIndex = 16;
-            this.lbl_patientId.Visible = false;
             // 
             // btn_update
             // 
@@ -250,11 +241,20 @@ namespace HospitalManagementSystemClient
             this.lbl_searchTypeNote.TabIndex = 28;
             this.lbl_searchTypeNote.Text = "Search by Appointment Id";
             // 
+            // txtB_patientId
+            // 
+            this.txtB_patientId.Location = new System.Drawing.Point(136, 152);
+            this.txtB_patientId.Name = "txtB_patientId";
+            this.txtB_patientId.Size = new System.Drawing.Size(104, 22);
+            this.txtB_patientId.TabIndex = 29;
+            this.txtB_patientId.Visible = false;
+            // 
             // ScheduleAppointmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 491);
+            this.Controls.Add(this.txtB_patientId);
             this.Controls.Add(this.lbl_searchTypeNote);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lbl_status);
@@ -264,7 +264,6 @@ namespace HospitalManagementSystemClient
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.lbl_patientIdTitle);
-            this.Controls.Add(this.lbl_patientId);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lbl_patientName);
             this.Controls.Add(this.btn_Add);
@@ -294,7 +293,6 @@ namespace HospitalManagementSystemClient
         private System.Windows.Forms.Label lbl_patientName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbl_patientIdTitle;
-        private System.Windows.Forms.Label lbl_patientId;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.NumericUpDown numericUpDown_duration;
@@ -303,5 +301,6 @@ namespace HospitalManagementSystemClient
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lbl_searchTypeNote;
+        private System.Windows.Forms.TextBox txtB_patientId;
     }
 }

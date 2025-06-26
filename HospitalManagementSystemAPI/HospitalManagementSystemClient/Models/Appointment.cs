@@ -15,7 +15,7 @@ namespace HospitalManagementSystemClient
     {
         public int AppointmentId { get; set; }
         public int PatientId { get; set; } // Foreign key to Patient
-        public int StaffId { get; set; } // Foreign key to Staff
+        public int? StaffId { get; set; } // Foreign key to Staff
         public DateTime ScheduledAt { get; set; }
         public int DurationMinutes { get; set; } = 30; // Default duration is 30 minutes
         public string Reason { get; set; }
